@@ -1,9 +1,16 @@
 import { Router } from 'express';
 
 
-export const defaultRoute = Router();
+const router = Router();
 
 
-defaultRoute.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.send("What's up doc ?!");
-}); 
+});
+
+
+router.get('/:id', (req, res) => {
+    res.send(`User ${req.params.id} route!`);
+});
+
+export default router;
