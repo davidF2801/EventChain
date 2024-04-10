@@ -8,4 +8,14 @@ background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 11
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
 }
+/* Estilos para el footer */
 
+/* Estilos para el footer */
+footer {
+  color: rgb(16, 103, 235);
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center; /* Centrar horizontalmente el contenido del footer */
+}

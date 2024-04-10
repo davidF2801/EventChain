@@ -55,14 +55,10 @@ function Login() {
       {!login &&
         <p className="text">¿No tienes una cuenta? <Link to="/registro" className="link">Crear cuenta</Link></p>} { }
 
-
-
       <footer>
-        <p>© 2024 Iyoudo. Todos los derechos reservados.</p>
+        <p>© 2024 Eventchain. Todos los derechos reservados.</p>
       </footer>
-
-
-
+      
     </div>
   );
 }
