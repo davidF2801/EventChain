@@ -1,11 +1,11 @@
+// Initialize Connection
 import mongoose from 'mongoose';
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/eventChainDB', {
+    const conn = await mongoose.connect(process.env.DB_CONN_STRING || "mongodb://localhost:27017/eventChainDB", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true,
     });
 
     console.log(`MongoDB Connected: ${conn.connection.host}`);
