@@ -1,34 +1,30 @@
-import * as mongoDB from "mongodb";
-import * as dotenv from "dotenv";
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import UserModel from '../models/userModel';
+import EventModel from '../models/eventModel';
+dotenv.config();
 
-// Extend the collections object to include users
-export const collections: { 
-    events?: mongoDB.Collection,
-    users?: mongoDB.Collection  // Added users collection
-} = {};
+const dbConnString = process.env.DB_CONN_STRING!;
+const dbName = process.env.DB_NAME;
 
-export async function connectToDatabase() {
-    dotenv.config();
+// Establish connection to the database
+const connectToDatabase = async () => {
+  try {
+    await mongoose.connect(dbConnString, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      dbName: dbName,
+    });
+    console.log(`Successfully connected to database: ${dbName}`);
+  } catch (error) {
+    console.error("Failed to connect to the database!", error);
+    process.exit(1);
+  }
+};
 
-    const client: mongoDB.MongoClient = new mongoDB.MongoClient(process.env.DB_CONN_STRING!);
-    console.log(process.env.DB_CONN_STRING!);
+export const collections = {
+  events: EventModel,  // These are not collections but Mongoose models
+  users: UserModel
+};
 
-    try {
-        await client.connect();
-        const db: mongoDB.Db = client.db(process.env.DB_NAME);
-
-        // Fetch the events collection
-        const eventsCollection: mongoDB.Collection = db.collection(process.env.EVENTS_COLLECTION_NAME!);
-        collections.events = eventsCollection;
-        console.log(`Successfully connected to database: ${db.databaseName} and events collection: ${eventsCollection.collectionName}`);
-
-        // Fetch the users collection
-        const usersCollection: mongoDB.Collection = db.collection(process.env.USERS_COLLECTION_NAME!);
-        collections.users = usersCollection;
-        console.log(`Successfully connected to database: ${db.databaseName} and users collection: ${usersCollection.collectionName}`);
-
-    } catch (error) {
-        console.error("Failed to connect to the database!", error);
-        process.exit(1);
-    }
-}
+export { connectToDatabase };

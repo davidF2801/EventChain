@@ -2,13 +2,12 @@ import express from 'express';
 import dotenv from 'dotenv';
 import router from './api/routes';
 import { connectToDatabase } from './services/databaseService';
-import connectDB from './config/db';
 // Initialize dotenv to use .env file variables
 dotenv.config();
 console.log("Connecting to MongoDB URI:", process.env.DB_CONN_STRING);
 //Connect to MongoDB
-// connectToDatabase();
-connectDB();
+connectToDatabase();
+//connectDB();
 
 const app = express();
 

@@ -8,7 +8,7 @@ interface IEvent extends Document {
   endDate: Date;
   location: string;
   image: string; // Base64 encoded image
-  // Add other properties as needed
+  uid: number;  // Here we use number to represent double values
 }
 
 // Schema to define the structure of the document in MongoDB
@@ -19,7 +19,7 @@ const EventSchema: Schema = new Schema({
   endDate: { type: Date, required: true },
   location: { type: String, required: true },
   image: { type: String, required: false }, // Optional field for Base64 encoded image
-  // Define other fields as needed
+  uid: { type: Number, required: true } // Define uid as a number (double)
 }, {
   timestamps: true // Adds createdAt and updatedAt timestamps
 });
