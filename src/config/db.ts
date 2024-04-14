@@ -1,9 +1,9 @@
 // Initialize Connection
-import mongoose from 'mongoose';
+import { Schema, model, connect } from 'mongoose';
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.DB_CONN_STRING || "mongodb://localhost:27017/eventChainDB", {
+    const conn = await connect("mongodb+srv://eventChainTest:eventChain@eventchain.7hnonqr.mongodb.net/"|| "mongodb://localhost:27017/eventChainDB", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

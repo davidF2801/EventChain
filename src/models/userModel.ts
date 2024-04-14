@@ -1,5 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
-import bcrypt from 'bcryptjs';
+// import bcrypt from 'bcryptjs';
 
 // Interface to describe the properties that a User Document has
 interface IUser extends Document {
@@ -8,7 +8,7 @@ interface IUser extends Document {
   password: string;
   roles: string[];
   profilePictureUrl: string; // URL or relative path to the profile picture stored locally or externally
-  //comparePassword(candidatePassword: string): Promise<boolean>;
+  // comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
 // Schema to define the structure of the document in MongoDB

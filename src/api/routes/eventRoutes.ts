@@ -3,18 +3,21 @@ import { collections } from '../../services/databaseService';
 import EventModel from '../../models/eventModel';
 
 
-export const router = Router();
+const router = Router();
 
 
 router.get('/', async (req, res) => {
     try {
-        const events = (await collections.events?.find({}).toArray()) as Event[];
+        const events = (await EventModel.find({}));
         res.status(200).send(events);
     } catch (error) {
         console.error(error);
     }
-}); 
+});
 
+router.get('/:id', (req, res) => {
+    res.send(`User ${req.params.id} route!`);
+});
 
 //TODO: Test with frontend
 router.post('/', async (req, res) => {
