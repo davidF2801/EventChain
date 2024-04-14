@@ -1,7 +1,7 @@
 import * as mongoDB from "mongodb";
 import * as dotenv from "dotenv";
 import EventModel from "../models/eventModel";
-export const collections: { EventModel?: mongoDB.Collection } = {};
+export const collections: { events?: mongoDB.Collection } = {};
 
 export async function connectToDatabase() {
     dotenv.config();
@@ -13,7 +13,7 @@ export async function connectToDatabase() {
         const db: mongoDB.Db = client.db(process.env.DB_NAME);
         const eventsCollection: mongoDB.Collection = db.collection(process.env.EVENTS_COLLECTION_NAME!);
 
-        collections.EventModel = eventsCollection;
+        collections.events = eventsCollection;
 
         console.log(`Successfully connected to database: ${db.databaseName} and collection: ${eventsCollection.collectionName}`);
     } catch (error) {
