@@ -15,6 +15,8 @@ router.get('/', async (req, res) => {
     }
 }); 
 
+
+//TODO: Test with frontend
 router.post('/', async (req, res) => {
     try {
         const event = req.body as Event;
