@@ -1,11 +1,17 @@
 import { Router } from 'express';
+import { collections } from '../../services/databaseService';
 
 
 const router = Router();
 
 
-router.get('/', (req, res) => {
-    res.send("What's up doc ?!");
+router.get('/', async (req, res) => {
+    try {
+        // const users = await collections.userModel.find({}).toArray();
+    } catch (error) {
+        console.error(error);
+    }
+
 });
 
 
