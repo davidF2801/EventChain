@@ -25,9 +25,11 @@
     "express": "^4.17.1",
     "gridfs-stream": "^1.1.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.22"
+    "mongoose": "^5.13.22",
+    "tronweb": "^5.3.2"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/express": "^4.17.21",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^20.11.30",
