@@ -47,4 +47,23 @@ router.post('/', async (req, res) => {
     }
 }); 
 
+router.post('/removeEvent', async (req, res) => {
+  try {
+      const { eventname } = req.body;
+
+      EventModel.deleteOne({event: eventname})
+        .then(result => {
+          // Envía una respuesta de éxito al cliente
+          res.status(201).json({ message: 'Event removed', user: result });
+        })
+        .catch(error => {
+          // Envía una respuesta de error al cliente
+          res.status(500).json({ error: 'Error when removing event', message: error.message });
+        });
+
+  } catch (error) {
+      console.error(error);
+  }
+}); 
+
 export default router;

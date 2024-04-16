@@ -21,7 +21,6 @@ router.get('/:id', (req, res) => {
     res.send(`User ${req.params.id} route!`);
 });
 
-//TODO: Test with frontend
 router.post('/', async (req, res) => {
     try {
         const { username, email, password, roles, profilePictureUrl} = req.body;
@@ -46,6 +45,26 @@ router.post('/', async (req, res) => {
     } catch (error) {
         console.error(error);
     }
+}); 
+
+
+router.post('/removeUser', async (req, res) => {
+  try {
+      const { username } = req.body;
+
+      UserModel.deleteOne({username: username})
+        .then(result => {
+          // Envía una respuesta de éxito al cliente
+          res.status(201).json({ message: 'User removed', user: result });
+        })
+        .catch(error => {
+          // Envía una respuesta de error al cliente
+          res.status(500).json({ error: 'Error when removing user', message: error.message });
+        });
+
+  } catch (error) {
+      console.error(error);
+  }
 }); 
 
 export default router;
