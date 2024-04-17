@@ -1,11 +1,12 @@
 module.exports = {
   networks: {
     development: {
-      privateKey: 'ba50872b00adfc64a6a6269af01afbe33cf7d0eb61c4ac66e7379a2a9e96d6bd',
+      privateKey: '5b7998dd1021dd7ec3789757e3dacc0b00c1d3e1aa3ae83ee10004645272bac0',
       userFeePercentage: 100, // The percentage of resource consumption ratio.
       feeLimit: 100000000, // The TRX consumption limit for the deployment and trigger, unit is SUN
       fullNode: 'http://127.0.0.1:9090',
       solidityNode: 'http://127.0.0.1:9090',
+      eventServer: 'http://127.0.0.1:9090',
       network_id: '*'
     },
     compilers: {
