@@ -1,7 +1,7 @@
 module.exports = {
   networks: {
     development: {
-      privateKey: '5b7998dd1021dd7ec3789757e3dacc0b00c1d3e1aa3ae83ee10004645272bac0',
+      privateKey: '208ca9e8b6b1b133ad0e6ec55373620edc42e36d7c6f5a0fe1e67f654f31d71d',
       userFeePercentage: 100, // The percentage of resource consumption ratio.
       feeLimit: 100000000, // The TRX consumption limit for the deployment and trigger, unit is SUN
       fullNode: 'http://127.0.0.1:9090',
