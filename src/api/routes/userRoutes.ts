@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 }); 
 
 
-router.post('/removeUser', async (req, res) => {
+router.delete('/removeUser', async (req, res) => {
   try {
       const { username } = req.body;
 

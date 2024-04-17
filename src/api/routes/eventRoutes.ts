@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
     }
 }); 
 
-router.post('/removeEvent', async (req, res) => {
+router.delete('/removeEvent', async (req, res) => {
   try {
       const { eventname } = req.body;
 
