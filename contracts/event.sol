@@ -23,7 +23,7 @@ contract Event {
     event TicketListedForResale(uint ticketId, uint price);
     event EventUpdated(string eventName, uint eventDate, string location);
     event TicketOwnershipTransferred(uint ticketId, address from, address to);
-    
+    event LogTicket(uint ticketId, address owner, uint price, bool forSale);    
     modifier onlyHost() {
         require(msg.sender == host, "Action restricted to event host.");
         _;
@@ -37,7 +37,12 @@ contract Event {
         host = _host;
     }
     
-    function createTicket(uint _price) public onlyHost {
+    function checkTickets() public{
+        Ticket memory ticket = tickets[0];
+        emit LogTicket(ticket.ticketId, ticket.owner, ticket.price, ticket.forSale);
+    }
+
+    function createTicket(uint _price) public onlyHost{
         require(tickets.length < totalTickets, "All tickets have already been created.");
         tickets.push(Ticket({
             ticketId: tickets.length,
