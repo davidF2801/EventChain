@@ -10,20 +10,20 @@ contract Event {
     
     struct Ticket {
         uint ticketId;
-        address owner;
         uint price;
         bool forSale;
     }
     
     Ticket[] public tickets;
-    mapping(address => uint[]) public ownedTickets;
+    mapping(address => mapping(uint => uint)) public ownedTickets;
     
     event TicketCreated(uint ticketId, uint price);
     event TicketPurchased(address buyer, uint ticketId);
     event TicketListedForResale(uint ticketId, uint price);
     event EventUpdated(string eventName, uint eventDate, string location);
     event TicketOwnershipTransferred(uint ticketId, address from, address to);
-    event LogTicket(uint ticketId, address owner, uint price, bool forSale);    
+    event LogTicket(uint ticketId, uint price, bool forSale);
+    
     modifier onlyHost() {
         require(msg.sender == host, "Action restricted to event host.");
         _;
@@ -39,17 +39,23 @@ contract Event {
     
     function checkTickets() public{
         Ticket memory ticket = tickets[0];
-        emit LogTicket(ticket.ticketId, ticket.owner, ticket.price, ticket.forSale);
+        emit LogTicket(ticket.ticketId, ticket.price, ticket.forSale);
+    }
+
+    function getTicketOwnership(address account, uint ticketId) public view returns(uint){
+        return ownedTickets[account][ticketId];
     }
 
     function createTicket(uint _price) public onlyHost{
         require(tickets.length < totalTickets, "All tickets have already been created.");
         tickets.push(Ticket({
             ticketId: tickets.length,
-            owner: address(this),
             price: _price,
             forSale: false
         }));
+
+        ownedTickets[host][tickets.length-1] = 1;
+
         emit TicketCreated(tickets.length - 1, _price);
     }
     
@@ -60,19 +66,17 @@ contract Event {
         require(msg.value == ticket.price, "Incorrect payment amount.");
         
         // Transfer ownership and funds
-        ticket.owner = msg.sender;
         ticket.forSale = false;
         ticketsSold++;
         payable(host).transfer(msg.value);
         
-        ownedTickets[msg.sender].push(_ticketId);
+        ownedTickets[msg.sender][_ticketId] = 1;
         emit TicketPurchased(msg.sender, _ticketId);
     }
     
     function listTicketForResale(uint _ticketId, uint _price) public {
         require(_ticketId < tickets.length, "Ticket does not exist.");
         Ticket storage ticket = tickets[_ticketId];
-        require(ticket.owner == msg.sender, "You do not own this ticket.");
         
         ticket.forSale = true;
         ticket.price = _price;
@@ -82,9 +86,7 @@ contract Event {
     function transferTicket(uint _ticketId, address _to) public {
         require(_ticketId < tickets.length, "Ticket does not exist.");
         Ticket storage ticket = tickets[_ticketId];
-        require(ticket.owner == msg.sender, "You do not own this ticket.");
         
-        ticket.owner = _to;
         emit TicketOwnershipTransferred(_ticketId, msg.sender, _to);
     }
     
