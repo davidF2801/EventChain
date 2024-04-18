@@ -46,7 +46,7 @@ contract Event {
         return ownedTickets[account][ticketId];
     }
 
-    function createTicket(uint _price) public onlyHost{
+    function createTicket(uint _price) public{
         require(tickets.length < totalTickets, "All tickets have already been created.");
         tickets.push(Ticket({
             ticketId: tickets.length,
@@ -54,25 +54,35 @@ contract Event {
             forSale: false
         }));
 
-        ownedTickets[host][tickets.length-1] = 1;
-
         emit TicketCreated(tickets.length - 1, _price);
     }
     
     function buyTicket(uint _ticketId) public payable {
-        require(_ticketId < tickets.length, "Ticket does not exist.");
-        Ticket storage ticket = tickets[_ticketId];
-        require(ticket.forSale, "Ticket not for sale.");
+        Ticket storage ticket;
+        
+        // Check if the ticket exists
+        if (_ticketId >= tickets.length) {
+            // Ticket does not exist, so create a new one
+            createTicket(10); // Assuming createTicket sets the ticket price to 10
+            ticket = tickets[tickets.length - 1]; // The newly created ticket will be the last in the array
+        } else {
+            // Ticket exists, ensure it's for sale
+            ticket = tickets[_ticketId];
+            require(ticket.forSale, "Ticket not for sale.");
+        }
+
+        // Check if the sent value is equal to the ticket price
         require(msg.value == ticket.price, "Incorrect payment amount.");
-        
+
         // Transfer ownership and funds
-        ticket.forSale = false;
+        ticket.forSale = false; // The ticket is no longer for sale after purchase
         ticketsSold++;
-        payable(host).transfer(msg.value);
+        payable(host).transfer(msg.value); // Transfer the funds to the host
         
-        ownedTickets[msg.sender][_ticketId] = 1;
-        emit TicketPurchased(msg.sender, _ticketId);
+        ownedTickets[msg.sender][_ticketId] = 1; // Record the ownership
+        emit TicketPurchased(msg.sender, _ticketId); // Emit the event
     }
+
     
     function listTicketForResale(uint _ticketId, uint _price) public {
         require(_ticketId < tickets.length, "Ticket does not exist.");
@@ -85,8 +95,7 @@ contract Event {
     
     function transferTicket(uint _ticketId, address _to) public {
         require(_ticketId < tickets.length, "Ticket does not exist.");
-        Ticket storage ticket = tickets[_ticketId];
-        
+        ownedTickets[_to][_ticketId] = 1; // Record the ownership
         emit TicketOwnershipTransferred(_ticketId, msg.sender, _to);
     }
     
