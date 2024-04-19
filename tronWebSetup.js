@@ -8,10 +8,20 @@ const TronWeb = require('tronweb');
 
 const fullNode = 'http://127.0.0.1:9090';
 const eventServer = 'http://127.0.0.1:9090';
-const privateKey = '27288f7b37be771bf99ab963659d917a8d911ff056f85c39b2deaf3a1002c76e';
+const privateKey = 'f628b8278399357c746404b88ca46f84900e2bbc749e32dc398043da7c2d4ec9';
+const contractAddress = '41b1215486a0fcbd0501ddfeac1bcaee05721c3b2e';
+const testAccount = "TWXndSfgARhAxihFTzAgKxKqYTdYXqVi4E";
+
 
 //const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
-const tronWebInst = new TronWeb.TronWeb({'fullHost': fullNode,'headers': { "TRON-PRO-API-KEY": privateKey }});
+const tronWebInst = new TronWeb.TronWeb({
+  
+    fullNode: fullNode,
+    solidityNode: fullNode,
+    eventServer: eventServer,
+    privateKey: privateKey,
+  
+});
 tronWebInst.isConnected().then(isConnected => {
    if(isConnected) {
      console.log("Connected successfully to Tron network");
@@ -25,6 +35,12 @@ tronWebInst.isConnected().then(isConnected => {
  }).catch(error => {
    console.error("Error getting current block:", error);
  });
+ 
+// const contractAbi = require('./build/Event.json').abi;
+// const contractAddress = 'YOUR_CONTRACT_ADDRESS';
+
+
+
 
 //To get contract address
 // Event.deployed().then(instance => {
@@ -32,23 +48,28 @@ tronWebInst.isConnected().then(isConnected => {
 //    console.log("Contract ABI:", JSON.stringify(instance.abi));
 //  });
 
-//  const contractAddress = '418cdd87b68caa494aa026e6be1051c0864cb263d0';
-//  tronWebInst.contract().at(contractAddress).then(contractInstance => {
-//    // Now you have the contract instance
-//    const ticketId = 0; // Example ticket ID
-//    const ticketPrice = 10; // Ticket price in TRX
+ tronWebInst.contract().at(contractAddress).then(contractInstance => {
+   // Now you have the contract instance
+   const ticketId = 0; // Example ticket ID
+   const ticketPrice = 10; // Ticket price in TRX
 
-//    // Buying a ticket
-//    contractInstance.buyTicket(ticketId).send({
-//        from:'TDJuT9YGwG6jbdTZi8zypaucguFTtA5wq4',
-//        feeLimit: 100000000,
-//        callValue: tronWebInst.toSun(ticketPrice), // Convert TRX to Sun
-//        shouldPollResponse: true
-//    }).then(result => {
-//        console.log('Transaction successful:', result);
-//    }).catch(error => {
-//        console.error('Failed to buy ticket:', error);
-//    });
-// }).catch(error => {
-//    console.error('Failed to get contract instance:', error);
-// });
+
+  contractInstance.getTicketOwnership(testAccount, ticketId).call().then(result => {
+      console.log('Transaction successful:', result);
+  }).catch(error => {
+      console.error('Failed to buy ticket:', error);
+  });
+   // Buying a ticket
+   contractInstance.buyTicket(ticketId).send({
+       from: testAccount,
+       feeLimit: 100000000,
+       callValue: ticketPrice, // Convert TRX to Sun
+       shouldPollResponse: true
+   }).then(result => {
+       console.log('Transaction successful:', result);
+   }).catch(error => {
+       console.error('Failed to buy ticket:', error);
+   });
+}).catch(error => {
+   console.error('Failed to get contract instance:', error);
+});
