@@ -5,13 +5,13 @@
 //  });
 //import TronWeb from 'tronweb';
 const TronWeb = require('tronweb');
+require('dotenv').config();
 
-const fullNode = 'http://127.0.0.1:9090';
-const eventServer = 'http://127.0.0.1:9090';
-const privateKey = 'f628b8278399357c746404b88ca46f84900e2bbc749e32dc398043da7c2d4ec9';
-const contractAddress = '41b1215486a0fcbd0501ddfeac1bcaee05721c3b2e';
-const testAccount = "TWXndSfgARhAxihFTzAgKxKqYTdYXqVi4E";
-
+const fullNode = process.env.FULL_NODE;
+const eventServer = process.env.EVENT_SERVER;
+const privateKey = process.env.PRIVATE_KEY;
+const contractAddress = process.env.CONTRACT_ADDRESS;
+const testAccount = process.env.TEST_ACCOUNT;
 
 //const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
 const tronWebInst = new TronWeb.TronWeb({
@@ -38,10 +38,6 @@ tronWebInst.isConnected().then(isConnected => {
  
 // const contractAbi = require('./build/Event.json').abi;
 // const contractAddress = 'YOUR_CONTRACT_ADDRESS';
-
-
-
-
 //To get contract address
 // Event.deployed().then(instance => {
 //    console.log("Contract address:", instance.address);
@@ -52,13 +48,6 @@ tronWebInst.isConnected().then(isConnected => {
    // Now you have the contract instance
    const ticketId = 0; // Example ticket ID
    const ticketPrice = 10; // Ticket price in TRX
-
-
-  contractInstance.getTicketOwnership(testAccount, ticketId).call().then(result => {
-      console.log('Transaction successful:', result);
-  }).catch(error => {
-      console.error('Failed to buy ticket:', error);
-  });
    // Buying a ticket
    contractInstance.buyTicket(ticketId).send({
        from: testAccount,
@@ -70,6 +59,11 @@ tronWebInst.isConnected().then(isConnected => {
    }).catch(error => {
        console.error('Failed to buy ticket:', error);
    });
+   contractInstance.getTicketOwnership(testAccount, ticketId).call().then(result => {
+      console.log('Transaction successful:', result);
+  }).catch(error => {
+      console.error('Failed to buy ticket:', error);
+  });
 }).catch(error => {
    console.error('Failed to get contract instance:', error);
 });
