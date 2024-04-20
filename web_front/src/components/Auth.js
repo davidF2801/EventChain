@@ -12,9 +12,21 @@ const Auth = () => {
 
   return (
     <div>
-      <h1>Autenticación</h1>
+      <style>
+        {`
+          .input-group {
+            margin-bottom: 20px; /* Agrega un margen inferior entre los grupos de entrada */
+          }
+
+          /* Estilo personalizado para hacer que las checkbox sean más grandes */
+          input[type="checkbox"] {
+            transform: scale(1.5); /* Ajusta el tamaño de las checkbox */
+          }
+        `}
+      </style>
+      <h1>Autentication</h1>
       <form onSubmit={handleLogin}>
-        <div>
+        <div className="input-group">
           <label htmlFor="publicKey">Account:</label>
           <input
             type="text"
@@ -23,8 +35,8 @@ const Auth = () => {
             onChange={(e) => setPublicKey(e.target.value)}
           />
         </div>
-        <div>
-          <label htmlFor="privateKey">private privada:</label>
+        <div className="input-group">
+          <label htmlFor="privateKey">Private key:</label>
           <input
             type="text"
             id="privateKey"
