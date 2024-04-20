@@ -14,7 +14,7 @@ contract Event {
     
     mapping(uint => Ticket) public tickets;
     mapping(address => mapping(uint => uint)) public ownedTickets;
-    
+    mapping(uint => address) ticketOwners;
     event TicketCreated(uint ticketId);
     event TicketPurchased(address buyer);
     event TicketListedForResale(uint ticketId, uint price);
@@ -69,11 +69,30 @@ contract Event {
 
             payable(host).transfer(msg.value);
 
-            ownedTickets[msg.sender][ticketsSold - 1] = 1; 
+            ownedTickets[msg.sender][ticketsSold - 1] = 1;
+            ticketOwners[ticketsSold - 1] = msg.sender;
             emit TicketPurchased(msg.sender); 
         }
+    function rebuyTicket(uint _ticketId) public payable {
+        require(_ticketId < ticketsSold, "Ticket does not exist."); // Ensures the ticket exists
+        Ticket storage ticket = tickets[_ticketId];
+        
+        require(ticket.forSale, "This ticket is not for sale."); // Check if the ticket is available for sale
+        require(msg.value == ticket.price, "Incorrect payment amount."); // Ensures the payment is correct
 
-    
+        // The original owner gets the payment
+        address payable originalOwner = payable(ticketOwners[_ticketId]);
+        originalOwner.transfer(msg.value);
+
+        // Update ownership mapping and mark the ticket as not for sale
+        ownedTickets[originalOwner][_ticketId] = 0;
+        ownedTickets[msg.sender][_ticketId] = 1;
+        ticketOwners[_ticketId] = msg.sender;
+        ticket.forSale = false;
+
+        emit TicketPurchased(msg.sender); // Emit an event that the ticket has been purchased
+    }
+
     function listTicketForResale(uint _ticketId, uint _price) public {
         require(_ticketId < ticketsSold, "Ticket does not exist.");
         Ticket storage ticket = tickets[_ticketId];

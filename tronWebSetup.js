@@ -12,6 +12,8 @@ const eventServer = process.env.EVENT_SERVER;
 const privateKey = process.env.PRIVATE_KEY;
 const contractAddress = process.env.CONTRACT_ADDRESS;
 const testAccount = process.env.TEST_ACCOUNT;
+const secondBuyerAccount = process.env.SECOND_BUYER_ACCOUNT;
+const privateKey2 = process.env.PRIVATE_KEY2;
 
 
 //const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
@@ -59,11 +61,11 @@ tronWebInst.isConnected().then(isConnected => {
   //  }).catch(error => {
   //      console.error('Failed to buy ticket:', error);
   //  });
-  // contractInstance.getTicketOwnership(testAccount, 0).call().then(result => {
-  //     console.log('Transaction successful:', result);
-  // }).catch(error => {
-  //     console.error('Failed to buy ticket:', error);
-  // });
+  contractInstance.getTicketOwnership(secondBuyerAccount, 0).call().then(result => {
+      console.log('Transaction successful for ownership:', result);
+  }).catch(error => {
+      console.error('Failed to buy ticket:', error);
+  });
 
   // contractInstance.listTicketForResale(0, 100).send().then(result => {
   //     console.log('Transaction successful:', result);
@@ -75,15 +77,35 @@ tronWebInst.isConnected().then(isConnected => {
   // }).catch(error => {
   //     console.error('Failed to buy ticket:', error);
   // });
-  contractInstance.checkPrice(0).call().then(result => {
-    console.log('Transaction successful:', result);
+  // contractInstance.checkPrice(0).call().then(result => {
+  //   console.log('Transaction successful:', result);
   }).catch(error => {
       console.error('Failed to buy ticket:', error);
   });
 
 
 
+// const tronWebInst2 = new TronWeb.TronWeb({
+  
+//   fullNode: fullNode,
+//   solidityNode: fullNode,
+//   eventServer: eventServer,
+//   privateKey: privateKey2,
 
-}).catch(error => {
-   console.error('Failed to get contract instance:', error);
-});
+// });
+
+// tronWebInst2.contract().at(contractAddress).then(contractInstance => {
+//  contractInstance.rebuyTicket(0).send({
+//    from: secondBuyerAccount,
+//    feeLimit: 100000000,
+//    callValue: 100,
+//    shouldPollResponse: true
+// }).then(result => {
+//    console.log('Transaction successful for rebuying:', result);
+// }).catch(error => {
+//    console.error('Failed to rebuy ticket:', error);
+// });
+
+// }).catch(error => {
+//   console.error('Failed to get contract instance:', error);
+// });
