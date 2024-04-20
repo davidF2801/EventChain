@@ -18,7 +18,7 @@ contract Event {
     mapping(address => mapping(uint => uint)) public ownedTickets;
     
     event TicketCreated(uint ticketId, uint price);
-    event TicketPurchased(address buyer, uint ticketId);
+    event TicketPurchased(address buyer);
     event TicketListedForResale(uint ticketId, uint price);
     event EventUpdated(string eventName, uint eventDate, string location);
     event TicketOwnershipTransferred(uint ticketId, address from, address to);
@@ -77,8 +77,8 @@ contract Event {
         ticketsSold++;
         payable(host).transfer(msg.value);
         
-        ownedTickets[msg.sender][_ticketId] = 1; 
-        emit TicketPurchased(msg.sender, _ticketId); 
+        ownedTickets[msg.sender][ticketsSold - 1] = 1; 
+        emit TicketPurchased(msg.sender); 
     }
 
     
