@@ -23,30 +23,40 @@ function Registro() {
   };
 
   const handleRegister = (e) => {
-    e.preventDefault(); // Evitar el envío del formulario por defecto
-
-    // Validar que todos los campos estén llenos
+    e.preventDefault();
+  
     if (!username || !surname || !password || !phone || !mail) {
       setErrorRegistro(true);
       return;
     }
-    localStorage.setItem('username', username);
-    localStorage.setItem('surName', surname);
-    localStorage.setItem('password', password);
-    localStorage.setItem('phone', phone);
-    localStorage.setItem('mail', mail);
-
-    setRegistro(true);
-    setErrorRegistro(false);
-    setUsername('');
-    setSurname('');
-    setPassword('');
-    setPhone('');
-    setMail('');
-
-    setTimeout(() => {
+  
+    // Object to be sent to the backend
+    const userData = {
+      username,
+      email: mail,
+      password,
+      roles: [],  // assuming roles or other necessary fields
+      profilePictureUrl: ''  // assuming a URL or handling files separately
+    };
+  
+    fetch('http://localhost:8888/users/', {  // Adjust URL if needed
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      setRegistro(true);
+      setErrorRegistro(false);
       navigate('/login');
-    }, 1500);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      setErrorRegistro(true);
+    });
   };
 
   return (
