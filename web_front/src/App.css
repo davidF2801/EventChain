@@ -1,0 +1,232 @@
+/* App.css */
+.App {
+  text-align: center;
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between; /* Para colocar el título y la barra de navegación a los extremos */
+  align-items: center; /* Para alinear verticalmente el contenido */
+  background-color: rgb(2, 6, 241);
+  padding: 10px;
+  color: white;
+  text-decoration: blink; /* Subrayar al pasar el ratón */
+
+}
+
+.Header-title {
+  font-size: 30px; /* Tamaño del título muy grande */
+  font-style: bold;
+  margin-right: 20px;
+  text-decoration: blink; /* Subrayar al pasar el ratón */
+
+}
+
+.Navbar {
+  display: flex;
+}
+
+.Navbar-links {
+  list-style-type: none;
+  margin: 10;
+  padding: 0;
+  display: flex;
+
+}
+
+.Navbar-links li {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.Navbar-links li a {
+  color: white;
+  text-decoration: none;
+  font-size: 17px; /* Tamaño de los enlaces */
+}
+
+.Navbar-links a:hover {
+  text-decoration: blink; /* Subrayar al pasar el ratón */
+  color: rgb(67, 67, 196);
+}
+
+.content-wrapper{
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-row{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.content{
+  width: 20%;
+  margin: 1%;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.picture{
+  width: 100%;
+  height: auto;
+}
+
+.Header-title {
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.Header-title:hover {
+  text-decoration: blink;
+  color: rgb(67, 67, 196);
+
+
+}
+
+.Header-title h1 {
+  margin: 0;
+}
+.quienes-somos {
+  background-color: #e9fce9; /* Verde claro */
+  padding: 20px;
+  border-radius: 1000px;
+  color: black;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+
+.App {
+  text-align: center;
+  background-color: #ececec;
+  color:#333333
+}
+
+
+.content-wrapper{
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-row{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.content{
+  width: 25%;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align:center;
+  justify-content: center;
+  font-size: 25px;
+  font-family: Arial, sans-serif;
+  line-height: 1.75;
+}
+
+.iconspan{
+  display: inline-block;
+}
+
+.picture{
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.icon{
+  margin-right: 10px;
+  width: 7%;
+  height: auto;
+  vertical-align: middle;
+}
+
+.star{
+  width: 5%;
+  height: auto;
+}
+
+.hstar{
+  width: 2.5%;
+  height: auto;
+}
+
+.bluebox{
+  width: 75%;
+  margin-top: 15px;
+  background-color:#9fd3c7 ;
+  color:black;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  display: inline-block;
+  max-width: 75%;
+}
+
+.overtext{
+  margin: 0;
+  font-size: 16px;
+}
+
+.searchbox {
+  padding: 10px 30px 10px 10px; /* Ajusta el padding para dejar espacio para el ícono */
+  box-sizing: border-box;
+  font-size: 0.9em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 20px;
+  background-position: right 10px center; /* Ajusta la posición del ícono */
+}
+
+
+.login-link{
+  text-decoration: none;
+  color: #dbe0ff;
+  font-size: 1.2em;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin-left: 14px;
+  margin-right: 14px;
+}
+
+.about-link{
+  margin-left: 14px;
+  margin-right: 10px;
+  text-decoration: white;
+  text-decoration-color: #dbe0ff;
+  color: #c1c3d3;
+  font-size: 1.2em;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+
+.language-selector {
+  padding: 1px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-left: 14px;
+  margin-right: 10px;
+}
+
+/* Estilos opcionales para el selector de idioma */
+.language-selector:hover,
+.language-selector:focus {
+  border-color: #0056b3; /* Cambia el color del borde al pasar el ratón o enfocar */
+}
+
+.language-selector option {
+  background-color: #f8f9fa; /* Cambia el color de fondo de las opciones */
+}

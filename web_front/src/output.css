@@ -1,0 +1,48 @@
+/* App.css */
+
+.App {
+  text-align: center;
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  /* Para colocar el título y la barra de navegación a los extremos */
+  align-items: center;
+  /* Para alinear verticalmente el contenido */
+  background-color: #333;
+  padding: 10px 20px;
+  color: white;
+}
+
+.Header-title {
+  font-size: 48px;
+  /* Tamaño del título muy grande */
+}
+
+.Navbar {
+  display: flex;
+}
+
+.Navbar-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.Navbar-links li {
+  margin-left: 10px;
+}
+
+.Navbar-links li a {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  /* Tamaño de los enlaces */
+}
+
+.Navbar-links a:hover {
+  text-decoration: underline;
+  /* Subrayar al pasar el ratón */
+}

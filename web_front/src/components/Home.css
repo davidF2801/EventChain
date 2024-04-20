@@ -1,0 +1,36 @@
+.Home {
+  text-align: center;
+  padding: 20px;
+}
+
+.Home-header {
+  color: rgb(14, 56, 241);
+  padding: 20px;
+}
+
+.subtitulo {
+  font-size: 1.2em;
+}
+
+/* Estilos para el contenido */
+.Home-content {
+  margin-top: 10px;
+  margin-bottom: 120px; /* Agregar un margen inferior para dejar espacio para el footer */
+}
+
+/* Establecer un ancho máximo para las imágenes */
+.Home-content img {
+  max-width: 70vw; /* 90% del ancho de la ventana */
+  max-height: 60vh; /* 80% del alto de la ventana */
+  display: block; /* Asegura que las imágenes se comporten como bloques */
+  margin: 0 auto; /* Centra horizontalmente */
+}
+
+/* Estilos para el footer */
+footer {
+  color: rgb(16, 103, 235);
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
