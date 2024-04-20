@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import buyTicket from './buyTicket.js';
+
 
 const Auth = () => {
   const [publicKey, setPublicKey] = useState('');
@@ -8,7 +11,9 @@ const Auth = () => {
     e.preventDefault();
     console.log('Clave pública:', publicKey);
     console.log('Clave privada:', privateKey);
+    buyTicket(privateKey, publicKey)
   };
+  
 
   return (
     <div>
@@ -44,7 +49,9 @@ const Auth = () => {
             onChange={(e) => setPrivateKey(e.target.value)}
           />
         </div>
-        <button type="submit">Ingresar</button>
+        <Link to="/buyTicket">
+              <button>Ingresar</button>
+        </Link>
       </form>
     </div>
   );

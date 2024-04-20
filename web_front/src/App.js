@@ -12,6 +12,7 @@ import Teatro from './components/Teatro.js';
 import Musica from './components/Musica.js';
 import Festivales from './components/Festivales.js';
 import Auth from './components/Auth.js';
+import buyTicket from "./components/buyTicket.js";
 import './App.css';
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
           <Route path="/teatro" element={<Teatro />} />
           <Route path="/festivales" element={<Festivales />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/buyTicket" element={<buyTicket/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
