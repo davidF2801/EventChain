@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import buyTicket from './buyTicket.js';
 
 
+
 const Auth = () => {
   const [publicKey, setPublicKey] = useState('');
   const [privateKey, setPrivateKey] = useState('');
@@ -11,7 +12,7 @@ const Auth = () => {
     e.preventDefault();
     console.log('Clave pública:', publicKey);
     console.log('Clave privada:', privateKey);
-    buyTicket(privateKey, publicKey)
+    buyTicket(privateKey, publicKey);
   };
   
 
@@ -49,9 +50,7 @@ const Auth = () => {
             onChange={(e) => setPrivateKey(e.target.value)}
           />
         </div>
-        <Link to="/buyTicket">
               <button>Ingresar</button>
-        </Link>
       </form>
     </div>
   );

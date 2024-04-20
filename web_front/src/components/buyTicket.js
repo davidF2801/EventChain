@@ -1,19 +1,18 @@
 const TronWeb = require('tronweb');
 
+function buyTicket(pk, buyerAccount) {
 
-function buyTicket(privateKey, buyerAccount) {
-
-    const fullNode = "http://127.0.0.1:9090";
-    const eventServer = "http://127.0.0.1:9090";
-    const contractAddress = "1";
+    console.log('Buying ticket...');
+    const fullNode = "http://127.0.0.1:9090/";
+    const eventServer = "http://127.0.0.1:9090/";
+    const contractAddress = "41d7def177daf34a5057867658cec51e5762c7cd80";
 
     const tronWebInst = new TronWeb.TronWeb({
     
         fullNode: fullNode,
         solidityNode: fullNode,
         eventServer: eventServer,
-        privateKey: privateKey,
-    
+        privateKey: pk    
     });
 
     tronWebInst.contract().at(contractAddress).then(contractInstance => {
