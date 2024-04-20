@@ -1,7 +1,11 @@
 .env
 node_modules/*
+<<<<<<< HEAD
 .json
 package-lock.json
 package.json
 ./Event.json
 ./build/*
+=======
+.json
+>>>>>>> backend
