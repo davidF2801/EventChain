@@ -13,6 +13,7 @@ const privateKey = process.env.PRIVATE_KEY;
 const contractAddress = process.env.CONTRACT_ADDRESS;
 const testAccount = process.env.TEST_ACCOUNT;
 
+
 //const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
 const tronWebInst = new TronWeb.TronWeb({
   
@@ -46,24 +47,43 @@ tronWebInst.isConnected().then(isConnected => {
 
  tronWebInst.contract().at(contractAddress).then(contractInstance => {
    // Now you have the contract instance
-   const ticketId = 0; // Example ticket ID
    const ticketPrice = 10; // Ticket price in TRX
    // Buying a ticket
-   contractInstance.buyTicket(ticketId).send({
-       from: testAccount,
-       feeLimit: 100000000,
-       callValue: ticketPrice, // Convert TRX to Sun
-       shouldPollResponse: true
-   }).then(result => {
-       console.log('Transaction successful:', result);
-   }).catch(error => {
-       console.error('Failed to buy ticket:', error);
-   });
-   contractInstance.getTicketOwnership(testAccount, ticketId).call().then(result => {
-      console.log('Transaction successful:', result);
+  //  contractInstance.buyTicket().send({
+  //      from: testAccount,
+  //      feeLimit: 100000000,
+  //      callValue: ticketPrice, // Convert TRX to Sun
+  //      shouldPollResponse: true
+  //  }).then(result => {
+  //      console.log('Transaction successful:', result);
+  //  }).catch(error => {
+  //      console.error('Failed to buy ticket:', error);
+  //  });
+  // contractInstance.getTicketOwnership(testAccount, 0).call().then(result => {
+  //     console.log('Transaction successful:', result);
+  // }).catch(error => {
+  //     console.error('Failed to buy ticket:', error);
+  // });
+
+  // contractInstance.listTicketForResale(0, 100).send().then(result => {
+  //     console.log('Transaction successful:', result);
+  // }).catch(error => {
+  //     console.error('Failed to buy ticket:', error);
+  // });
+  // contractInstance.checkTicketForSale(0).call().then(result => {
+  //   console.log('Transaction successful:', result);
+  // }).catch(error => {
+  //     console.error('Failed to buy ticket:', error);
+  // });
+  contractInstance.checkPrice(0).call().then(result => {
+    console.log('Transaction successful:', result);
   }).catch(error => {
       console.error('Failed to buy ticket:', error);
   });
+
+
+
+
 }).catch(error => {
    console.error('Failed to get contract instance:', error);
 });

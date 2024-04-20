@@ -1,10 +1,8 @@
 pragma solidity ^0.8.0;
 
 contract Event {
-    string public eventName;
-    uint public eventDate;
-    string public location;
     uint public totalTickets;
+    uint public ticketPrice;
     uint public ticketsSold = 0;
     address public host;
     
@@ -17,10 +15,9 @@ contract Event {
     mapping(uint => Ticket) public tickets;
     mapping(address => mapping(uint => uint)) public ownedTickets;
     
-    event TicketCreated(uint ticketId, uint price);
+    event TicketCreated(uint ticketId);
     event TicketPurchased(address buyer);
     event TicketListedForResale(uint ticketId, uint price);
-    event EventUpdated(string eventName, uint eventDate, string location);
     event TicketOwnershipTransferred(uint ticketId, address from, address to);
     event LogTicket(uint ticketId, uint price, bool forSale);
     
@@ -59,7 +56,7 @@ contract Event {
         //     forSale: false
         // }));
 
-        emit TicketCreated(ticketsSold, _price);
+        emit TicketCreated(ticketsSold);
     }
     
     function buyTicket() public payable {
@@ -70,7 +67,6 @@ contract Event {
 
             require(msg.value == ticket.price, "Incorrect payment amount.");
 
-            ticket.forSale = false;
             payable(host).transfer(msg.value);
 
             ownedTickets[msg.sender][ticketsSold - 1] = 1; 
@@ -90,6 +86,10 @@ contract Event {
     function checkTicketForSale(uint ticketId) public view returns(bool){
         return tickets[ticketId].forSale;
     }
+
+    function checkPrice(uint ticketId) public view returns(uint){
+        return tickets[ticketId].price;
+    }
     
     function transferTicket(uint _ticketId, address _to) public {
         require(_ticketId < ticketsSold, "Ticket does not exist.");
@@ -97,10 +97,8 @@ contract Event {
         emit TicketOwnershipTransferred(_ticketId, msg.sender, _to);
     }
     
-    function updateEventDetails(string memory _eventName, uint _eventDate, string memory _location) public onlyHost {
-        eventName = _eventName;
-        eventDate = _eventDate;
-        location = _location;
-        emit EventUpdated(_eventName, _eventDate, _location);
-    }
+    // function updateEventDetails(string memory _eventName, uint _eventDate, string memory _location) public onlyHost {
+    //     location = _location;
+    //     emit EventUpdated(_eventName, _eventDate, _location);
+    // }
 }
