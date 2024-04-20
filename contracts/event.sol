@@ -29,12 +29,10 @@ contract Event {
         _;
     }
     
-    constructor(string memory _eventName, uint _eventDate, string memory _location, uint _totalTickets, address _host) {
-        eventName = _eventName;
-        eventDate = _eventDate;
-        location = _location;
+    constructor(uint _totalTickets, address _host, uint _price) {
         totalTickets = _totalTickets;
         host = _host;
+        ticketPrice = _price; // Set the ticket price
     }
     
     function checkTickets() public{
@@ -46,11 +44,11 @@ contract Event {
         return ownedTickets[account][ticketId];
     }
 
-    function createTicket(uint _price) public{
+    function createTicket() public{
         require(ticketsSold < totalTickets, "All tickets have already been created.");
         tickets[ticketsSold] = Ticket({
             ticketId: ticketsSold,
-            price: _price,
+            price: ticketPrice,
             forSale: false
         });
 
@@ -65,21 +63,19 @@ contract Event {
     }
     
     function buyTicket() public payable {
-        Ticket storage ticket;
-        //TODO: Fix ticketID (remove)
-        
-        createTicket(10);
-        ticket = tickets[ticketsSold - 1];
+            Ticket storage ticket;
 
-        require(msg.value == ticket.price, "Incorrect payment amount.");
+            createTicket();
+            ticket = tickets[ticketsSold - 1];
 
-        ticket.forSale = false;
-        ticketsSold++;
-        payable(host).transfer(msg.value);
-        
-        ownedTickets[msg.sender][ticketsSold - 1] = 1; 
-        emit TicketPurchased(msg.sender); 
-    }
+            require(msg.value == ticket.price, "Incorrect payment amount.");
+
+            ticket.forSale = false;
+            payable(host).transfer(msg.value);
+
+            ownedTickets[msg.sender][ticketsSold - 1] = 1; 
+            emit TicketPurchased(msg.sender); 
+        }
 
     
     function listTicketForResale(uint _ticketId, uint _price) public {
