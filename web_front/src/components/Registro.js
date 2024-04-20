@@ -7,10 +7,12 @@ function Registro() {
   const [username, setUsername] = useState('');
   const [surname, setSurname] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [mail, setMail] = useState('');
   const [registro, setRegistro] = useState(false); // Declarar loginError y setLoginError
   const [errorregistro, setErrorRegistro] = useState(false); // Declarar loginError y setLoginError
+  const [passwordMismatchError, setPasswordMismatchError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -24,11 +26,18 @@ function Registro() {
 
   const handleRegister = (e) => {
     e.preventDefault();
-  
-    if (!username || !surname || !password || !phone || !mail) {
-      setErrorRegistro(true);
+
+    if (password !== confirmPassword) {
+      setPasswordMismatchError(true);
       return;
     }
+  
+    if (!username || !surname || !password || !phone || !mail) {
+        setErrorRegistro(true);
+        return;
+    }
+
+    
   
     // Object to be sent to the backend
     const userData = {
@@ -114,6 +123,17 @@ function Registro() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          <div className="form-group">
+          <input
+            className="input"
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          </div>
+          {errorregistro && <p style={{ color: 'red' }}>Error: Required fields are missing</p>}
+          {passwordMismatchError && <p style={{ color: 'red' }}>Error: Passwords do not match</p>}
           <button className="button" type="submit" onClick={handleRegister}>
             Registro
           </button>
