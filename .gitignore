@@ -1,3 +1,8 @@
 .env
 node_modules/*
 .json
+package-lock.json
+package.json
+./Event.json
+./build/contracts/Migrations.json
+migrations/4_example_migration.js
