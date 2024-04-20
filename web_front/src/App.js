@@ -1,16 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
-import Login from './components/Login';
 import NotFound from './components/NotFound';
 import About from './components/About.js';
+import Login from './components/Login';
 import Registro from './components/Registro.js';
 import Recover from './components/Recover.js';
-import Image from  './components/images/mcloving.jpg';
+import Image from './components/images/mcloving.jpg';
 import Deportes from './components/Deportes.js';
 import Teatro from './components/Teatro.js';
 import Musica from './components/Musica.js';
 import Festivales from './components/Festivales.js';
+import Auth from './components/Auth.js';
 import './App.css';
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
                 <li><Link to="/musica">Música</Link></li>
                 <li><Link to="/teatro">Teatro</Link></li>
                 <li><Link to="/festivales">Festivales</Link></li>
-                <li><Link to="/deportes">Deportes</Link></li> {/* Añadido enlace para Deportes */}
+                <li><Link to="/deportes">Deportes</Link></li> 
               </ul>
             </nav>
           </div>
@@ -54,6 +55,7 @@ function App() {
           <Route path="/musica" element={<Musica />} />
           <Route path="/teatro" element={<Teatro />} />
           <Route path="/festivales" element={<Festivales />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Musica = () => {
-  // Array de objetos con información sobre los eventos musicales
   const eventosMusicales = [
     {
       nombre: "Concierto de Justin Bieber",
@@ -22,11 +22,12 @@ const Musica = () => {
             <h2>{evento.nombre}</h2>
             <p>Fecha: {evento.fecha}</p>
             <p>Lugar: {evento.lugar}</p>
-            <button>Comprar entradas</button>
+            <Link to="/auth">
+              <button>Comprar entradas</button>
+            </Link>
           </div>
         ))}
       </div>
-       
       <footer>
         <p>© 2024 EventChain. All rights reserved.</p>
       </footer>

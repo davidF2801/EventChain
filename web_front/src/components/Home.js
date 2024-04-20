@@ -31,8 +31,8 @@ function Home() {
   return (
     <div className="Home">
       <div className="Home-header">
-        <h2 className="subtitulo">perras</h2>
-        <h1 className="titulo">Bienvenido a Eventchain</h1>
+        <h2 className="subtitulo">EventChain</h2>
+        <h1 className="titulo">Menorcas & telecos memories</h1>
       </div>
       <div className="Home-content">
         <Slider ref={sliderRef} {...settings}>
