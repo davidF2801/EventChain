@@ -1,49 +1,50 @@
 {
-  "name": "hackforgood2024",
-  "version": "0.1.0",
+  "name": "tron-dapp-react",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@noble/hashes": "^1.4.0",
-    "@noble/secp256k1": "^2.1.0",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "assert": "^2.0.0",
-    "buffer": "^6.0.3",
-    "crypto": "npm:crypto-browserify",
-    "crypto-browserify": "^3.12.0",
-    "https-browserify": "^1.0.0",
-    "os-browserify": "^0.3.0",
-    "react": "^18.2.0",
-    "react-app-rewired": "^2.2.1",
-    "react-dom": "^18.2.0",
-    "react-leaflet": "^4.2.1",
+    "@ant-design/icons": "^4.7.0",
+    "antd": "^4.8.3",
+    "bignumber.js": "^9.0.1",
+    "cross-env": "^7.0.2",
+    "customize-cra": "^1.0.0",
+    "husky": "^4.3.0",
+    "ismobilejs": "^1.1.1",
+    "lint-staged": "^10.5.0",
+    "lodash": "^4.17.15",
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.2.2",
+    "prettier": "^2.1.2",
+    "qrcode.react": "^1.0.0",
+    "react": "^16.8.0 || 16.9.0-alpha.0",
+    "react-app-rewired": "^2.1.6",
+    "react-dom": "^16.0.1",
+    "react-intl-universal": "^2.2.5",
     "react-router-dom": "^6.22.3",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "4.0.1",
     "react-slick": "^0.30.2",
-    "rewire": "^7.0.0",
+    "sass": "^1.26.8",
     "slick-carousel": "^1.8.1",
-    "stream": "npm:stream-browserify",
-    "stream-browserify": "^3.0.0",
-    "stream-http": "^3.2.0",
-    "tronweb": "^5.3.2",
-    "url": "^0.11.0",
-    "vm": "npm:vm-browserify",
-    "vm-browserify": "^1.1.2",
-    "web-vitals": "^2.1.4",
-    "web3": "^1.6.1"
+    "styled-components": "^5.2.1",
+    "tronweb": "^4.1.0",
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "GENERATE_SOURCEMAP=false react-app-rewired start",
+    "start": "PORT=18113 cross-env REACT_APP_ENV=test react-app-rewired start",
+    "startPro": "PORT=18116 react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "test": "cross-env REACT_APP_ENV=test react-app-rewired build",
+    "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "browserslist": {
     "production": [
@@ -56,8 +57,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "webpack": "^5.91.0"
   }
 }
