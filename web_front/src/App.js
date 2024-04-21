@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import NotFound from './components/NotFound';
@@ -13,6 +13,9 @@ import Musica from './components/Musica.js';
 import Festivales from './components/Festivales.js';
 import Auth from './components/Auth.js';
 import buyTicket from "./components/buyTicket.js";
+import LoggedIn from './components/LoggedIn'; // Importa el componente LoggedIn
+import NewEvent from './components/Events/NewEvent.js';
+import OldEvents from './components/Events/OldEvents.js';
 import './App.css';
 
 function App() {
@@ -36,8 +39,9 @@ function App() {
           </div>
           <div className="Header-right">
             <input type="text" placeholder="Buscar..." className="searchbox" />
-            <Link to="/login" className="login-link">Login</Link>
-            <Link to="/about" className="about">About</Link>
+              <Link to="/login" className="login-link">Login</Link>
+              <Link to="/loggedIn" className="login-link">My Profile</Link>
+            <Link to="/about" className="login-link">About</Link>
             <select className="language-selector">
               <option value="es">Español</option>
               <option value="en">English</option>
@@ -58,11 +62,16 @@ function App() {
           <Route path="/festivales" element={<Festivales />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/buyTicket" element={<buyTicket/>} />
+          {/* Agrega la ruta para la página de perfil */}
+          <Route path="/loggedIn" element={<LoggedIn />} />
+          <Route path="/newevent" element={<NewEvent />} />
+          <Route path="/oldevents" element={<OldEvents />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </Router>
   );
 }
+
 
 export default App;

@@ -1,0 +1,24 @@
+/* OldEvents.css */
+.old-events-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.heading {
+  text-align: center;
+}
+
+.event-card {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.event-card h3 {
+  margin-bottom: 5px;
+}
+
+.event-card p {
+  margin: 5px 0;
+}
