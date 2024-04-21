@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { collections } from '../../services/databaseService';
 import UserModel from '../../models/userModel';
+import bcrypt from 'bcryptjs'; // Ensure bcryptjs is installed for password hashing
 
 
 
@@ -19,6 +20,25 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', (req, res) => {
     res.send(`User ${req.params.id} route!`);
+});
+
+router.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await UserModel.findOne({ username });
+    if (!user) {
+      return res.status(404).send({ error: 'User not found' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (isMatch) {
+      res.status(200).json({ message: 'Login successful' });
+    } else {
+      res.status(401).json({ error: 'Invalid credentials' });
+    }
+  } catch (error) {
+    console.error('Login error:', error);
+  }
 });
 
 router.post('/', async (req, res) => {
