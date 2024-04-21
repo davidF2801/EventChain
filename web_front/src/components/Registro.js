@@ -13,6 +13,7 @@ function Registro() {
   const [registro, setRegistro] = useState(false); // Declarar loginError y setLoginError
   const [errorregistro, setErrorRegistro] = useState(false); // Declarar loginError y setLoginError
   const [passwordMismatchError, setPasswordMismatchError] = useState(false);
+  const [passwordShortError, setTooShortPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -35,6 +36,11 @@ function Registro() {
     if (!username || !surname || !password || !phone || !mail) {
         setErrorRegistro(true);
         return;
+    }
+
+    if(password.length < 8){
+      setTooShortPassword(true);
+      return;
     }
 
     
@@ -71,8 +77,10 @@ function Registro() {
   return (
     <div className="container">
       {!registro && <h2 className="heading">Registro</h2>}
-      {errorregistro && <h3 className="failed">Complete todos los campos.</h3>}
       {registro && <h2 className="registro">Registro con éxito</h2>}
+      {errorregistro && <h3 className="failed">Complete all the fields</h3>}
+      {passwordMismatchError && <h3 className="failed">Passwords do not match</h3>}
+      {passwordShortError && <h3 className="failed">Password has to be at least 8 characters long</h3>}
       {!registro && (
         <form className="form">
           <div className="form-group">
@@ -132,8 +140,6 @@ function Registro() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
           </div>
-          {errorregistro && <p style={{ color: 'red' }}>Error: Required fields are missing</p>}
-          {passwordMismatchError && <p style={{ color: 'red' }}>Error: Passwords do not match</p>}
           <button className="button" type="submit" onClick={handleRegister}>
             Registro
           </button>
