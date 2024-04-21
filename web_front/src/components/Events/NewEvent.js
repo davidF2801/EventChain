@@ -9,6 +9,7 @@ function NewEvent() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [type, setEventType] = useState("");
+  const [address, setAddress] = useState("");
   const [eventSaved, setEventSaved] = useState(false);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -46,7 +47,8 @@ function NewEvent() {
       !description ||
       !startDate ||
       !endDate ||
-      !type
+      !type ||
+      !address
     ) {
       setError(true);
       return;
@@ -63,6 +65,7 @@ function NewEvent() {
       type,
       image: "",
       uid: "1",
+      address,
     };
 
     // Here you can send the data to the backend to save it
@@ -129,6 +132,15 @@ function NewEvent() {
               placeholder="Event type"
               value={type}
               onChange={(e) => setEventType(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              className="input"
+              type="text"
+              placeholder="Public blockchain address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
             />
           </div>
           <button className="button" type="submit" onClick={handleSaveEvent}>
