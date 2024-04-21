@@ -1,16 +1,17 @@
 // NewEvent.js
 import React, { useState } from "react";
 import "./NewEvent.css";
-
+import { useNavigate } from "react-router-dom";
 function NewEvent() {
-  const [eventName, setEventName] = useState("");
+  const [title, setEventName] = useState("");
   const [description, setEventDesc] = useState("");
   const [location, setLocation] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [eventType, setEventType] = useState("");
+  const [type, setEventType] = useState("");
   const [eventSaved, setEventSaved] = useState(false);
   const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
   async function createEvent(eventData) {
     try {
@@ -27,6 +28,7 @@ function NewEvent() {
         throw new Error("Create event failed");
       }
       console.log("Event created successfully:", eventData);
+      setEventSaved(true);
       navigate("/");
     } catch (error) {
       console.error("Error creating event:", error);
@@ -39,12 +41,12 @@ function NewEvent() {
 
     // Validation of fields
     if (
-      !eventName ||
+      !title ||
       !location ||
       !description ||
       !startDate ||
       !endDate ||
-      !eventType
+      !type
     ) {
       setError(true);
       return;
@@ -53,12 +55,12 @@ function NewEvent() {
     //TODO: Add real image + uid
     // Object with event data
     const eventData = {
-      eventName,
+      title,
       description,
       location,
       startDate,
       endDate,
-      eventType,
+      type,
       image: "",
       uid: "1",
     };
@@ -66,7 +68,6 @@ function NewEvent() {
     // Here you can send the data to the backend to save it
     createEvent(eventData);
     // Logic to simulate the event being saved
-    setEventSaved(true);
   };
 
   return (
@@ -81,7 +82,7 @@ function NewEvent() {
               className="input"
               type="text"
               placeholder="Event Name"
-              value={eventName}
+              value={title}
               onChange={(e) => setEventName(e.target.value)}
             />
           </div>
@@ -90,7 +91,7 @@ function NewEvent() {
               className="input"
               type="text"
               placeholder="Event Description"
-              value={eventName}
+              value={description}
               onChange={(e) => setEventDesc(e.target.value)}
             />
           </div>
@@ -126,7 +127,7 @@ function NewEvent() {
               className="input"
               type="text"
               placeholder="Event type"
-              value={eventType}
+              value={type}
               onChange={(e) => setEventType(e.target.value)}
             />
           </div>

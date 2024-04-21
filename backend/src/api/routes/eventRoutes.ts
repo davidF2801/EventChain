@@ -19,16 +19,17 @@ router.get('/:id', (req, res) => {
     res.send(`User ${req.params.id} route!`);
 });
 //TODO: Test with frontend
-router.post('/', async (req, res) => {
+router.post('/createEvent', async (req, res) => {
     try {
-        const { title, description, startDate, endDate, location, image, uid} = req.body;
+        const { title, description,location, startDate, endDate,type, image, uid} = req.body;
 
         const new_event = new EventModel({
             title,
             description,
+            location,
             startDate,
             endDate,
-            location,
+            type,
             image, 
             uid
           });

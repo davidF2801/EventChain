@@ -4,9 +4,10 @@ import mongoose, { Document, Schema } from 'mongoose';
 interface IEvent extends Document {
   title: string;
   description: string;
+  location: string;
   startDate: Date;
   endDate: Date;
-  location: string;
+  type: String;
   image: string; // Base64 encoded image
   uid: number;  // Here we use number to represent double values
 }
@@ -15,9 +16,10 @@ interface IEvent extends Document {
 const EventSchema: Schema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
+  location: { type: String, required: true },
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
-  location: { type: String, required: true },
+  type: { type: String, required: false },
   image: { type: String, required: false }, // Optional field for Base64 encoded image
   uid: { type: Number, required: true } // Define uid as a number (double)
 }, {
