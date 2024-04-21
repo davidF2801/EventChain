@@ -7,32 +7,31 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState(false);
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState('');
   const navigate = useNavigate();
 
   async function loginUser(credentials) {
-    return fetch('http://localhost:8888/login', {  // make sure the port matches your backend server
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(credentials)
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Login failed');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Login successful:', data);  // You can handle redirect or local storage updates here
-      navigate('/');  // Navigate to the dashboard or home page
-    })
-    .catch(error => {
+    try {
+        const response = await fetch('http://localhost:8888/login/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(credentials)
+        });
+        const data = await response.json();
+        console.log('Login response:', credentials);
+        if (!response.ok) {
+            throw new Error('Login failed');
+        }
+        console.log('Login successful:', credentials);
+        navigate('/');
+    } catch (error) {
       console.error('Login error:', error);
       setLoginError(true);
-    });
-  }
+    }
+}
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
