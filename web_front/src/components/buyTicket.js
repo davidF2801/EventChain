@@ -1,6 +1,6 @@
 export const buyTicket = async (pk, buyerAccount) => {
   console.log("Buying ticket...");
-  const contractAddress = "4100a6feefd395212d6abb14446ec3b140a936062c";
+  const contractAddress = "4120ea24d9eaad0e0604c06be45c12b66c7646d664";
   const tronWebInst = window.tronWeb;
   tronWebInst.setPrivateKey(pk);
   tronWebInst
