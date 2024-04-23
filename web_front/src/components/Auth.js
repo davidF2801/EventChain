@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { buyTicket } from "./buyTicket.js";
 
 const Auth = () => {
   const [publicKey, setPublicKey] = useState("");
   const [privateKey, setPrivateKey] = useState("");
-
+  const location = useLocation();
+  console.log("Location:", location);
+  const contractAddress = location.state || "";
   const handleLogin = (e) => {
     e.preventDefault();
     console.log("Clave pública:", publicKey);
     console.log("Clave privada:", privateKey);
-    buyTicket(privateKey, publicKey);
+    buyTicket(privateKey, publicKey, contractAddress);
   };
 
   return (

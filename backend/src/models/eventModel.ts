@@ -10,7 +10,7 @@ interface IEvent extends Document {
   type: String;
   image: string; // Base64 encoded image
   uid: number;  // Here we use number to represent double values
-  publicKey: string;
+  contractAddress: string;
 }
 
 // Schema to define the structure of the document in MongoDB
@@ -23,7 +23,7 @@ const EventSchema: Schema = new Schema({
   type: { type: String, required: false },
   image: { type: String, required: false }, // Optional field for Base64 encoded image
   uid: { type: Number, required: true }, // Define uid as a number (double)
-  publicKey: { type: String, required: true }, // Optional field for Base64 encoded image
+  contractAddress: { type: String, required: true }, // Optional field for Base64 encoded image
 }, {
   timestamps: true // Adds createdAt and updatedAt timestamps
 });

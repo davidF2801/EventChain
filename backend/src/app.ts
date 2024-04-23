@@ -17,7 +17,7 @@ const app = express();
 
 // Configure CORS to allow requests from the specified frontend
 app.use(cors({
-  origin: process.env.PORT_FRONTEND  // Adjust if your frontend is served from another port or domain
+  origin: process.env.PORT_FRONTEND // Adjust if your frontend is served from another port or domain
 }));
 
 // Middleware for parsing JSON bodies

@@ -22,7 +22,7 @@ router.get('/:id', (req, res) => {
 router.post('/createEvent', async (req, res) => {
     try {
         const { title, description,location, startDate, endDate,type, image, uid, address} = req.body;
-        const publicKey = await deployEvent(address)
+        const contractAddress = await deployEvent(address)
         .catch(error => {
           // Envía una respuesta de error al cliente
           res.status(500).json({ error: 'Error when creating event', message: error.message });
@@ -36,7 +36,7 @@ router.post('/createEvent', async (req, res) => {
             type,
             image, 
             uid,
-            publicKey
+            contractAddress
           });
         new_event.save()
           .then(result => {
@@ -50,7 +50,7 @@ router.post('/createEvent', async (req, res) => {
           res.status(201).json({
             message: 'Event created and contract deployed',
             event: new_event,
-            contractAddress: publicKey
+            contractAddress: contractAddress
         });     
 
 

@@ -15,6 +15,7 @@ const EventGeneric = (events) => {
           throw new Error("Failed to fetch data");
         }
         const jsonData = await response.json();
+        console.log("Events:", jsonData);
         setData(jsonData);
       } catch (error) {
         setError(error);
@@ -45,7 +46,7 @@ const EventGeneric = (events) => {
             <h2>{event.title}</h2>
             <p>Date: {event.date}</p>
             <p>Location: {event.location}</p>
-            <Link to="/auth">
+            <Link to={`/auth`} state={event.contractAddress}>
               <button>Buy tickets</button>
             </Link>
           </div>
