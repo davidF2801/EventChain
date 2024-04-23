@@ -11,6 +11,7 @@ import Deportes from "./components/Deportes.js";
 import Teatro from "./components/Teatro.js";
 import Musica from "./components/Musica.js";
 import Festivales from "./components/Festivales.js";
+import EventGeneric from "./components/Events/EventGeneric.js";
 import Auth from "./components/Auth.js";
 import buyTicket from "./components/buyTicket.js";
 import LoggedIn from "./components/LoggedIn"; // Importa el componente LoggedIn
@@ -61,6 +62,9 @@ function App() {
                 <li>
                   <Link to="/deportes">Deportes</Link>
                 </li>
+                <li>
+                  <Link to="/events">All events</Link>
+                </li>
               </ul>
             </nav>
           </div>
@@ -93,6 +97,7 @@ function App() {
           <Route path="/musica" element={<Musica />} />
           <Route path="/teatro" element={<Teatro />} />
           <Route path="/festivales" element={<Festivales />} />
+          <Route path="/events" element={<EventGeneric />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/buyTicket" element={<buyTicket />} />
           {/* Agrega la ruta para la página de perfil */}
