@@ -9,21 +9,29 @@ interface IEvent extends Document {
   endDate: Date;
   type: String;
   image: string; // Base64 encoded image
-  uid: number;  // Here we use number to represent double values
   contractAddress: string;
+  price: number;
+  nTickets: number;
+  allowResale: boolean;
+  resaleFee: number;
+  maxPrice: number;
 }
 
 // Schema to define the structure of the document in MongoDB
 const EventSchema: Schema = new Schema({
-  title: { type: String, required: true,unique:true },
+  title: { type: String, required: true},
   description: { type: String, required: true },
   location: { type: String, required: true },
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
   type: { type: String, required: false },
   image: { type: String, required: false }, // Optional field for Base64 encoded image
-  uid: { type: Number, required: true }, // Define uid as a number (double)
-  contractAddress: { type: String, required: true }, // Optional field for Base64 encoded image
+  contractAddress: { type: String, required: true, unique:true }, // Optional field for Base64 encoded image
+  price: { type: Number, required: true },
+  nTickets: { type: Number, required: true },
+  allowResale: { type: Boolean, required: true },
+  resaleFee: { type: Number, required: false },
+  maxPrice: { type: Number, required: false },
 }, {
   timestamps: true // Adds createdAt and updatedAt timestamps
 });

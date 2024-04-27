@@ -2,7 +2,7 @@ const fs = require('fs');
 const TronWeb = require('tronweb');
 require('dotenv').config();
 
-async function deployEvent(address) {
+async function deployEvent(address, nTickets, ticketPrice) {
   console.log(`Current working directory: ${process.cwd()}`);
 
   const rawdata = fs.readFileSync('build/contracts/Event.json');
@@ -26,7 +26,7 @@ async function deployEvent(address) {
       bytecode: bytecode,
       feeLimit: 100000000,
       callValue: 0,
-      parameters: [100, address, 10],
+      parameters: [nTickets, address, ticketPrice],
     });
   
     console.log('Contract deployed successfully at address:', contract.address);

@@ -2,7 +2,6 @@ import { Router } from 'express';
 import { collections } from '../../services/databaseService';
 import EventModel from '../../models/eventModel';
 import deployEvent from '../../services/eventService';
-
 const router = Router();
 
 
@@ -21,8 +20,8 @@ router.get('/:id', (req, res) => {
 //TODO: Test with frontend
 router.post('/createEvent', async (req, res) => {
     try {
-        const { title, description,location, startDate, endDate,type, image, uid, address} = req.body;
-        const contractAddress = await deployEvent(address)
+        const { title, description,location, startDate, endDate,type, image, address, price, nTickets, allowResale,resaleFee,maxPrice} = req.body;
+        const contractAddress = await deployEvent(address,nTickets,price)
         .catch(error => {
           // Envía una respuesta de error al cliente
           res.status(500).json({ error: 'Error when creating event', message: error.message });
@@ -35,8 +34,12 @@ router.post('/createEvent', async (req, res) => {
             endDate,
             type,
             image, 
-            uid,
-            contractAddress
+            contractAddress,
+            price,
+            nTickets,
+            allowResale,
+            resaleFee,
+            maxPrice
           });
         new_event.save()
           .then(result => {

@@ -12,6 +12,11 @@ function NewEvent() {
   const [address, setAddress] = useState("");
   const [eventSaved, setEventSaved] = useState(false);
   const [error, setError] = useState(false);
+  const [price, setPrice] = useState("");
+  const [nTickets, setNtickets] = useState("");
+  const [allowResale, setAllowResale] = useState(false);
+  const [resaleFee, setResaleFee] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
   const navigate = useNavigate();
 
   async function createEvent(eventData) {
@@ -48,8 +53,16 @@ function NewEvent() {
       !startDate ||
       !endDate ||
       !type ||
-      !address
+      !address ||
+      !price ||
+      !nTickets
     ) {
+      setError(true);
+      return;
+    }
+
+    // Check for the resale fields only if resale is allowed
+    if (allowResale && (!resaleFee || !maxPrice)) {
       setError(true);
       return;
     }
@@ -58,14 +71,17 @@ function NewEvent() {
     // Object with event data
     const eventData = {
       title,
-      description,
       location,
+      description,
       startDate,
       endDate,
       type,
-      image: "",
-      uid: "1",
       address,
+      price,
+      nTickets,
+      allowResale,
+      resaleFee: allowResale ? resaleFee : undefined,
+      maxPrice: allowResale ? maxPrice : undefined,
     };
 
     // Here you can send the data to the backend to save it
@@ -90,23 +106,25 @@ function NewEvent() {
             />
           </div>
           <div className="form-group">
-            <input
+            <textarea
               className="input"
-              type="text"
               placeholder="Event Description"
               value={description}
               onChange={(e) => setEventDesc(e.target.value)}
-            />
+              rows="4" // Adjust the number of rows as needed
+              style={{ resize: "vertical" }} // Allows the user to resize the textarea vertically
+            ></textarea>
           </div>
           <div className="form-group">
             <input
               className="input"
               type="text"
-              placeholder="Location"
+              placeholder="Location (Address, City, Zip code, Country)"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />
           </div>
+
           <div className="form-group">
             <input
               className="input"
@@ -143,6 +161,56 @@ function NewEvent() {
               onChange={(e) => setAddress(e.target.value)}
             />
           </div>
+          <div className="form-group">
+            <input
+              className="input"
+              type="text"
+              placeholder="Ticket Price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              className="input"
+              type="text"
+              placeholder="Number of tickets for sale"
+              value={nTickets}
+              onChange={(e) => setNtickets(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label>
+              <input
+                type="checkbox"
+                checked={allowResale}
+                onChange={(e) => setAllowResale(e.target.checked)}
+              />{" "}
+              Allow Ticket Resale
+            </label>
+          </div>
+          {allowResale && (
+            <>
+              <div className="form-group">
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Resale Fee (%)"
+                  value={resaleFee}
+                  onChange={(e) => setResaleFee(e.target.value)}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Maximum Price Allowed"
+                  value={maxPrice}
+                  onChange={(e) => setMaxPrice(e.target.value)}
+                />
+              </div>
+            </>
+          )}
           <button className="button" type="submit" onClick={handleSaveEvent}>
             Save Event
           </button>
