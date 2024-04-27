@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { buyTicket } from "./buyTicket.js";
+import { resellTicket } from "./resellTicket.js";
 
 const Auth = () => {
   const [publicKey, setPublicKey] = useState("");
@@ -14,39 +15,51 @@ const Auth = () => {
     console.log("Private Key:", privateKey);
 
     try {
-      // Simulate a buy ticket process (adjust as necessary)
-      const ticketInfo = await buyTicket(
-        privateKey,
-        publicKey,
-        eventInfo.contractAddress
-      );
-      console.log("Ticket Info:", ticketInfo);
-      const ticketData = {
-        eventName: eventInfo.title,
-        user: "gorketas",
-        forSale: true,
-        ticketId: ticketInfo.ticketId._hex,
-        price: ticketInfo.ticketPrice._hex,
-      };
-      // Check if response is properly structured and contains success
-      fetch("http://localhost:8888/tickets/createTicket", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(ticketData),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.success) {
-            console.log("Ticket created successfully:", data);
-          } else {
-            throw new Error(data.error || "Failed to create ticket");
-          }
+      if (!eventInfo.startDate) {
+        const ticketInfo = await resellTicket(
+          privateKey,
+          publicKey,
+          eventInfo.contractAddress,
+          eventInfo.ticketId
+        );
+      } else {
+        const ticketInfo = await buyTicket(
+          privateKey,
+          publicKey,
+          eventInfo.contractAddress
+        );
+        console.log("Ticket Info:", ticketInfo);
+        const ticketData = {
+          eventName: eventInfo.title,
+          user: "gorketas",
+          forSale: true,
+          ticketId: ticketInfo.ticketId._hex,
+          price: ticketInfo.ticketPrice._hex,
+          contractAddress: eventInfo.contractAddress,
+        };
+
+        fetch("http://localhost:8888/tickets/createTicket", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(ticketData),
         })
-        .catch((error) => {
-          console.error("Error when creating ticket:", error.message || error);
-        });
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              console.log("Ticket created successfully:", data);
+            } else {
+              throw new Error(data.error || "Failed to create ticket");
+            }
+          })
+          .catch((error) => {
+            console.error(
+              "Error when creating ticket:",
+              error.message || error
+            );
+          });
+      }
     } catch (error) {
       console.error("Error buying ticket:", error.message || error);
     }

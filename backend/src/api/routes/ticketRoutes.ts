@@ -43,7 +43,7 @@ router.get('/resale', async (req, res) => {
 
 router.post('/createTicket', async (req, res) => {
     try {
-        const { eventName, user, forSale, ticketId, price } = req.body;
+        const { eventName, user, forSale, ticketId, price, contractAddress } = req.body;
 
         const new_ticket = new TicketModel({
             eventName,
@@ -51,6 +51,7 @@ router.post('/createTicket', async (req, res) => {
             forSale,
             ticketId,
             price,
+            contractAddress
         });
 
         const result = await new_ticket.save()

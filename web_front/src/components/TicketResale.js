@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const TicketResale = () => {
   const [data, setData] = useState(null);
+  const [eventData, setEventData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -17,6 +18,8 @@ const TicketResale = () => {
         const jsonData = await response.json();
         console.log("Tickets:", jsonData);
         setData(jsonData);
+        setLoading(true);
+        setEventData(event);
       } catch (error) {
         setError(error);
       } finally {
@@ -44,7 +47,7 @@ const TicketResale = () => {
           <div key={index} className="ticket">
             <h2>{ticket.title}</h2>
             <p>Price: {ticket.price}</p>
-            <Link to={`/auth`}>
+            <Link to={`/auth`} state={ticket}>
               <button>Buy ticket</button>
             </Link>
           </div>

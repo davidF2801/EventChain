@@ -23,12 +23,12 @@ const Navbar = () => {
             <ul className="Navbar-links">
               <li>
                 <Link to="/events" className="login-link">
-                  All events
+                  All Events
                 </Link>
               </li>
               <li>
                 <Link to="/resale" className="login-link">
-                  Resale markeplace
+                  Resale Markeplace
                 </Link>
               </li>
               <li>
