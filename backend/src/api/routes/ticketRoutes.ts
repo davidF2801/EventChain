@@ -13,9 +13,23 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+// router.get('/:id', async (req, res) => {
+//     try {
+//         const ticket = await TicketModel.findById(req.params.id);
+//         if (ticket) {
+//             res.send(ticket);
+//         } else {
+//             res.status(404).send('Ticket not found');
+//         }
+//     } catch (error) {
+//         console.error(error);
+//         //res.status(500).json({ error: 'Error finding ticket', message: error.message });
+//     }
+// });
+
+router.get('/resale', async (req, res) => {
     try {
-        const ticket = await TicketModel.findById(req.params.id);
+        const ticket = await TicketModel.find({forSale: true}).exec();
         if (ticket) {
             res.send(ticket);
         } else {

@@ -24,7 +24,7 @@ const Auth = () => {
       const ticketData = {
         eventName: eventInfo.title,
         user: "gorketas",
-        forSale: false,
+        forSale: true,
         ticketId: ticketInfo.ticketId._hex,
         price: ticketInfo.ticketPrice._hex,
       };

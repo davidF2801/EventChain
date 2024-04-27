@@ -10,12 +10,12 @@ const TicketResale = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:8888/ticketresale");
+        const response = await fetch("http://localhost:8888/tickets/resale");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
         const jsonData = await response.json();
-        console.log("Events:", jsonData);
+        console.log("Tickets:", jsonData);
         setData(jsonData);
       } catch (error) {
         setError(error);
@@ -38,14 +38,13 @@ const TicketResale = () => {
   }
   return (
     <div>
-      <h1>All tickets for resale</h1>
+      <h1>Tickets for resale</h1>
       <div className="ticket-resale-container">
         {data.map((ticket, index) => (
           <div key={index} className="ticket">
-            <img src={ticket.image} alt={ticket.eventName} />
-            <h2>{ticket.eventName}</h2>
+            <h2>{ticket.title}</h2>
             <p>Price: {ticket.price}</p>
-            <Link to={`/auth`} state={ticket.event.contractAddress}>
+            <Link to={`/auth`}>
               <button>Buy ticket</button>
             </Link>
           </div>
