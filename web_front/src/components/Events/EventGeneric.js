@@ -77,7 +77,7 @@ const EventGeneric = () => {
               <h2 className="text-lg font-semibold">{event.title}</h2>
               <p>Date: {event.date}</p>
               <p>Location: {event.location}</p>
-              <Link to={`/auth`} state={event.contractAddress}>
+              <Link to={`/auth`} state={event}>
                 <button className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   Buy tickets
                 </button>

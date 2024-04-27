@@ -23,6 +23,7 @@ const tronWebInst = new TronWeb.TronWeb({
   
 });
 
+//TODO: Change ticket number an price as needed
 const contract = tronWebInst.contract().new({
    abi: abi,
    bytecode: bytecode,

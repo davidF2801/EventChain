@@ -43,13 +43,13 @@ contract Event {
 
     function createTicket() public{
         require(ticketsSold < totalTickets, "All tickets have already been created.");
+        ticketsSold++;
         tickets[ticketsSold] = Ticket({
             ticketId: ticketsSold,
             price: ticketPrice,
             forSale: false
         });
 
-        ticketsSold++;
         // tickets.push(Ticket({
         //     ticketId: tickets.length,
         //     price: _price,

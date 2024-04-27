@@ -7,7 +7,7 @@ const Auth = () => {
   const [privateKey, setPrivateKey] = useState("");
   const location = useLocation();
   console.log("Location:", location);
-  const contractAddress = location.state || "";
+  const eventInfo = location.state || "";
   const handleLogin = async (e) => {
     e.preventDefault();
     console.log("Public Key:", publicKey);
@@ -15,13 +15,18 @@ const Auth = () => {
 
     try {
       // Simulate a buy ticket process (adjust as necessary)
-      const response = await buyTicket(privateKey, publicKey, contractAddress);
+      const ticketInfo = await buyTicket(
+        privateKey,
+        publicKey,
+        eventInfo.contractAddress
+      );
+      console.log("Ticket Info:", ticketInfo);
       const ticketData = {
-        eventName: "Cumple Joel 2024",
+        eventName: eventInfo.title,
         user: "gorketas",
         forSale: false,
-        ticketId: 0,
-        price: 100,
+        ticketId: ticketInfo.ticketId._hex,
+        price: ticketInfo.ticketPrice._hex,
       };
       // Check if response is properly structured and contains success
       fetch("http://localhost:8888/tickets/createTicket", {
