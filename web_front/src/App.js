@@ -17,8 +17,10 @@ import buyTicket from "./components/buyTicket.js";
 import LoggedIn from "./components/LoggedIn"; // Importa el componente LoggedIn
 import NewEvent from "./components/Events/NewEvent.js";
 import OldEvents from "./components/Events/OldEvents.js";
+import NavBar from "./components/NavBar.js";
+import Footer from "./components/Footer.js";
+import Contact from "./components/Contact.js";
 import "./App.css";
-
 import TronWeb from "tronweb";
 
 const mainOptions = {
@@ -41,52 +43,8 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-        <header className="Header">
-          <div className="Header-left">
-            <Link to="/" className="Header-title">
-              <img src={Image} className="Header-logo" alt="Logo" />
-              EventChain
-            </Link>
-            <nav className="Navbar">
-              <ul className="Navbar-links">
-                <li>
-                  <Link to="/musica">Música</Link>
-                </li>
-                <li>
-                  <Link to="/teatro">Teatro</Link>
-                </li>
-                <li>
-                  <Link to="/festivales">Festivales</Link>
-                </li>
-                <li>
-                  <Link to="/deportes">Deportes</Link>
-                </li>
-                <li>
-                  <Link to="/events">All events</Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div className="Header-right">
-            <input type="text" placeholder="Buscar..." className="searchbox" />
-            <Link to="/login" className="login-link">
-              Login
-            </Link>
-            <Link to="/loggedIn" className="login-link">
-              My Profile
-            </Link>
-            <Link to="/about" className="login-link">
-              About
-            </Link>
-            <select className="language-selector">
-              <option value="es">Español</option>
-              <option value="en">English</option>
-              <option value="de">Deutsch</option>
-              <option value="zh">中文</option>
-            </select>
-          </div>
-        </header>
+      <NavBar />
+      <div className="app-container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -104,6 +62,9 @@ function App() {
           <Route path="/loggedIn" element={<LoggedIn />} />
           <Route path="/newevent" element={<NewEvent />} />
           <Route path="/oldevents" element={<OldEvents />} />
+          <Route path="/Footer" element={<Footer />} />
+          <Route path="/NavBar" element={<NavBar />} />
+          <Route path="/Contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

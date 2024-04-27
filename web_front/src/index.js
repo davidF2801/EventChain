@@ -1,15 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
+// Agregar el script de FontAwesome al documento HTML
+const fontAwesomeScript = document.createElement("script");
+fontAwesomeScript.src = "https://kit.fontawesome.com/a076d05399.js";
+document.head.appendChild(fontAwesomeScript);
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
+    <footer>
+      <p>© 2024 EventChain. All rights reserved.</p>
+    </footer>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

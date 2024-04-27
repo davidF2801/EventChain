@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Teatro = () => {
   // Array de objetos con información sobre los espectáculos de teatro
@@ -7,7 +7,7 @@ const Teatro = () => {
       nombre: "Show de Jose Mota",
       imagen: "url_del_espectaculo.jpg",
       fecha: "10 de Mayo, 2024",
-      lugar: "Teatro Real, Madrid"
+      lugar: "Teatro Real, Madrid",
     },
     // Puedes agregar más objetos para representar más espectáculos de teatro
   ];
@@ -26,12 +26,8 @@ const Teatro = () => {
           </div>
         ))}
       </div>
-       
-      <footer>
-        <p>© 2024 EventChain. All rights reserved.</p>
-      </footer>
     </div>
   );
-}
+};
 
 export default Teatro;

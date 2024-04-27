@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Musica = () => {
   const eventosMusicales = [
@@ -7,7 +7,7 @@ const Musica = () => {
       nombre: "Concierto de Justin Bieber",
       imagen: "url_del_concierto.jpg",
       fecha: "5 de Agosto, 2024",
-      lugar: "Estadio Santiago Bernabéu, Madrid"
+      lugar: "Estadio Santiago Bernabéu, Madrid",
     },
     // Puedes agregar más objetos para representar más eventos musicales
   ];
@@ -28,11 +28,8 @@ const Musica = () => {
           </div>
         ))}
       </div>
-      <footer>
-        <p>© 2024 EventChain. All rights reserved.</p>
-      </footer>
     </div>
   );
-}
+};
 
 export default Musica;

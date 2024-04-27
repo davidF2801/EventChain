@@ -1,25 +1,43 @@
-/* App.css */
-.App {
+.app-container {
+  min-height: 100vh; /* El contenedor ocupará como mínimo toda la altura de la pantalla */
+  background-color: #151a50;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
   text-align: center;
+  background-image: url("./components/images/background.jpg");
+  background-size: 100% 100%; /* Ajusta el tamaño de la imagen al 100% del ancho y alto del contenedor */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  margin: 0; /* Elimina el margen predeterminado del cuerpo */
+  padding: 0; /* Elimina el relleno predeterminado del cuerpo */
 }
 
 .Header {
-  display: flex;
-  justify-content: space-between; /* Para colocar el título y la barra de navegación a los extremos */
-  align-items: center; /* Para alinear verticalmente el contenido */
-  background-color: rgb(2, 6, 241);
-  padding: 10px;
+  align-items: center;
+  background-color: #151a50;
+  border: #0e0a0a;
   color: white;
+  display: flex;
+  justify-content: space-between;
   text-decoration: blink; /* Subrayar al pasar el ratón */
-
 }
 
 .Header-title {
+  align-items: center;
+  color: inherit;
+  display: flex;
   font-size: 30px; /* Tamaño del título muy grande */
   font-style: bold;
   margin-right: 20px;
   text-decoration: blink; /* Subrayar al pasar el ratón */
+}
 
+.Header-title:hover {
+  color: rgb(255, 255, 255);
+  text-decoration: blink;
+}
+
+.Header-title h1 {
+  margin: 0;
 }
 
 .Navbar {
@@ -27,201 +45,62 @@
 }
 
 .Navbar-links {
-  list-style-type: none;
-  margin: 10;
-  padding: 0;
   display: flex;
-
-}
-
-.Navbar-links li {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.Navbar-links li a {
-  color: white;
-  text-decoration: none;
-  font-size: 17px; /* Tamaño de los enlaces */
+  list-style-type: none;
+  padding: 0;
 }
 
 .Navbar-links a:hover {
+  color: rgb(182, 182, 207);
   text-decoration: blink; /* Subrayar al pasar el ratón */
-  color: rgb(67, 67, 196);
 }
 
-.content-wrapper{
-  min-height: 600px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.content {
   align-items: center;
-}
-
-.content-row{
-  width: 100%;
+  box-sizing: border-box;
   display: flex;
+  font-family: Arial, sans-serif;
+  font-size: 25px;
   justify-content: center;
-}
-
-.content{
-  width: 20%;
+  line-height: 1.75;
   margin: 1%;
   padding: 10px;
-  box-sizing: border-box;
   text-align: center;
+  width: 25%;
 }
 
-.picture{
-  width: 100%;
-  height: auto;
-}
-
-.Header-title {
-  color: inherit;
-  display: flex;
-  align-items: center;
-}
-
-.Header-title:hover {
-  text-decoration: blink;
-  color: rgb(67, 67, 196);
-
-
-}
-
-.Header-title h1 {
-  margin: 0;
-}
-.quienes-somos {
-  background-color: #e9fce9; /* Verde claro */
-  padding: 20px;
-  border-radius: 1000px;
-  color: black;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
-
-.App {
-  text-align: center;
-  background-color: #ececec;
-  color:#333333
-}
-
-
-.content-wrapper{
-  min-height: 600px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.content-row{
-  width: 100%;
+.content-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.content{
-  width: 25%;
-  padding: 10px;
-  box-sizing: border-box;
-  text-align:center;
+.content-wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: 25px;
-  font-family: Arial, sans-serif;
-  line-height: 1.75;
 }
 
-.iconspan{
-  display: inline-block;
-}
-
-.picture{
-  width: 100%;
+.icon {
   height: auto;
-  border-radius: 50%;
-}
-
-.icon{
   margin-right: 10px;
-  width: 7%;
-  height: auto;
   vertical-align: middle;
+  width: 7%;
 }
 
-.star{
-  width: 5%;
-  height: auto;
-}
-
-.hstar{
-  width: 2.5%;
-  height: auto;
-}
-
-.bluebox{
-  width: 75%;
-  margin-top: 15px;
-  background-color:#9fd3c7 ;
-  color:black;
-  padding: 20px;
-  border-radius: 8px;
-  position: relative;
+.iconspan {
   display: inline-block;
-  max-width: 75%;
-}
-
-.overtext{
-  margin: 0;
-  font-size: 16px;
-}
-
-.searchbox {
-  padding: 10px 30px 10px 10px; /* Ajusta el padding para dejar espacio para el ícono */
-  box-sizing: border-box;
-  font-size: 0.9em;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  margin-right: 20px;
-  background-position: right 10px center; /* Ajusta la posición del ícono */
-}
-
-
-.login-link{
-  text-decoration: none;
-  color: #dbe0ff;
-  font-size: 1.2em;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-  margin-left: 14px;
-  margin-right: 14px;
-}
-
-.about-link{
-  margin-left: 14px;
-  margin-right: 10px;
-  text-decoration: white;
-  text-decoration-color: #dbe0ff;
-  color: #c1c3d3;
-  font-size: 1.2em;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
 }
 
 .language-selector {
-  padding: 1px;
-  border-radius: 8px;
   border: 1px solid #ccc;
+  border-radius: 8px;
   margin-left: 14px;
   margin-right: 10px;
+  padding: 1px;
 }
 
-/* Estilos opcionales para el selector de idioma */
 .language-selector:hover,
 .language-selector:focus {
   border-color: #0056b3; /* Cambia el color del borde al pasar el ratón o enfocar */
@@ -229,4 +108,85 @@
 
 .language-selector option {
   background-color: #f8f9fa; /* Cambia el color de fondo de las opciones */
+}
+
+.login-link {
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-left: 14px;
+  margin-right: 14px;
+  text-decoration: none;
+}
+
+.overtext {
+  font-size: 16px;
+  margin: 0;
+}
+
+.picture {
+  border-radius: 50%;
+  height: auto;
+  width: 100%;
+}
+
+.quienes-somos {
+  background-color: #e9fce9; /* Verde claro */
+  border-radius: 1000px;
+  color: black;
+  font-family: Arial, sans-serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.searchbox {
+  background-position: right 10px center; /* Ajusta la posición del ícono */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+  margin-right: 20px;
+  padding: 10px 30px 10px 10px; /* Ajusta el padding para dejar espacio para el ícono */
+}
+
+.star {
+  height: auto;
+  width: 5%;
+}
+
+.bluebox {
+  background-color: #9fd3c7;
+  border-radius: 8px;
+  color: black;
+  display: inline-block;
+  margin-top: 15px;
+  max-width: 75%;
+  padding: 20px;
+  position: relative;
+  width: 75%;
+}
+
+.hstar {
+  height: auto;
+  width: 2.5%;
+}
+
+.button {
+  border: 2px solid #4caf50; /* Borde sólido */
+  color: white; /* Color del texto */
+  padding: 10px 20px; /* Espaciado interno */
+  text-align: center; /* Alineación del texto */
+  text-decoration: none; /* Sin decoración de texto */
+  display: inline-block; /* Mostrar como bloque en línea */
+  font-size: 16px; /* Tamaño del texto */
+  margin: 0 5px; /* Margen exterior */
+  cursor: pointer; /* Cambiar cursor al pasar el ratón */
+  border-radius: 5px; /* Borde redondeado */
+}
+
+/* Estilos cuando se pasa el ratón por encima */
+.button:hover {
+  background-color: #45a049;
 }

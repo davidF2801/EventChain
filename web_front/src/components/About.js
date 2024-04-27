@@ -8,13 +8,11 @@ import davidImage from "./images/david.jpeg";
 
 function About() {
   return (
-    <div>
-      <h2 style={{ color: "navy" }}>About Us</h2>
-
+    <div className="container mx-auto p-8">
+      <h1>About Us</h1>
       <section>
         <p>Los jefes del blockchain</p>
       </section>
-
       <section>
         <h3>What we do</h3>
         <div style={{ maxWidth: "900px", margin: "0 auto" }}>
@@ -48,7 +46,7 @@ function About() {
               </a>
               <p>
                 {" "}
-                Brazzer
+                Network
                 <br />
                 Engineer
               </p>
@@ -71,7 +69,7 @@ function About() {
               </a>
               <p>
                 {" "}
-                Pornhub
+                Electrial
                 <br /> Engineer
               </p>
             </div>
@@ -101,7 +99,7 @@ function About() {
               </a>
               <p>
                 {" "}
-                Exotic
+                Network
                 <br /> Engineer
               </p>
             </div>
@@ -122,17 +120,13 @@ function About() {
                 </p>
               </a>
               <p>
-                LatinasLover
+                Electrial
                 <br /> Engineer
               </p>
             </div>
           </div>
         </div>
       </section>
-
-      <footer>
-        <p>© 2024 Eventchain. Todos los derechos reservados.</p>
-      </footer>
     </div>
   );
 }

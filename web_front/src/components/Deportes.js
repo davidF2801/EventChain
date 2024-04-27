@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 // Suponiendo que tienes un array de objetos con información sobre los eventos deportivos
 const eventosDeportivos = [
@@ -28,15 +29,15 @@ const Deportes = () => {
             <p>Precio de la entrada: {evento.precioEntrada}</p>
             {/* Otros detalles del evento */}
             <button>Comprar entradas</button>
-        </div>
+          </div>
         ))}
       </div>
-
-      <footer>
-        <p>© 2024 EventChain. All rights reserved.</p>
-      </footer>
+      {/* Agrega un enlace para volver a EventGeneric */}
+      <Link to="/">
+        <button className="button">Volver a todos los eventos</button>
+      </Link>
     </div>
   );
-}
+};
 
 export default Deportes;

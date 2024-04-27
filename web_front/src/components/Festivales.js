@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Festivales = () => {
   // Array de objetos con información sobre los festivales
@@ -7,7 +7,7 @@ const Festivales = () => {
       nombre: "Tomorrowland",
       imagen: "url_del_festival.jpg",
       fecha: "20-22 de Julio, 2024",
-      ubicacion: "Boom, Bélgica"
+      ubicacion: "Boom, Bélgica",
     },
     // Puedes agregar más objetos para representar más festivales
   ];
@@ -26,12 +26,8 @@ const Festivales = () => {
           </div>
         ))}
       </div>
-       
-      <footer>
-        <p>© 2024 EventChain. All rights reserved.</p>
-      </footer>
     </div>
   );
-}
+};
 
 export default Festivales;
