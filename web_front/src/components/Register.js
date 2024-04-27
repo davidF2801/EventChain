@@ -1,15 +1,16 @@
-import './Registro.css'; // Importar los estilos CSS
-import React, { useState } from 'react';
-import Login from './Login';
-import { useNavigate } from 'react-router-dom';
+import "./Registro.css"; // Importar los estilos CSS
+import React, { useState } from "react";
+import Login from "./Login";
+import { useNavigate } from "react-router-dom";
+import logo from "./images/logo1.png";
 
 function Registro() {
-  const [username, setUsername] = useState('');
-  const [surname, setSurname] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [phone, setPhone] = useState('');
-  const [mail, setMail] = useState('');
+  const [username, setUsername] = useState("");
+  const [surname, setSurname] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [mail, setMail] = useState("");
   const [registro, setRegistro] = useState(false); // Declarar loginError y setLoginError
   const [errorregistro, setErrorRegistro] = useState(false); // Declarar loginError y setLoginError
   const [passwordMismatchError, setPasswordMismatchError] = useState(false);
@@ -21,7 +22,7 @@ function Registro() {
     const inputValue = e.target.value;
     const regex = /^[0-9]*$/;
     if (!regex.test(inputValue)) {
-      setPhone('');
+      setPhone("");
     }
   };
 
@@ -32,62 +33,73 @@ function Registro() {
       setPasswordMismatchError(true);
       return;
     }
-  
+
     if (!username || !surname || !password || !phone || !mail) {
-        setErrorRegistro(true);
-        return;
+      setErrorRegistro(true);
+      return;
     }
 
-    if(password.length < 8){
+    if (password.length < 8) {
       setTooShortPassword(true);
       return;
     }
 
-    
-  
     // Object to be sent to the backend
     const userData = {
       username,
       email: mail,
       password,
-      roles: [],  // assuming roles or other necessary fields
-      profilePictureUrl: ''  // assuming a URL or handling files separately
+      roles: [], // assuming roles or other necessary fields
+      profilePictureUrl: "", // assuming a URL or handling files separately
     };
-  
-    fetch('http://localhost:8888/users/', {  // Adjust URL if needed
-      method: 'POST',
+
+    fetch("http://localhost:8888/users/", {
+      // Adjust URL if needed
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(userData)
+      body: JSON.stringify(userData),
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-      setRegistro(true);
-      setErrorRegistro(false);
-      navigate('/login');
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-      setErrorRegistro(true);
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        setRegistro(true);
+        setErrorRegistro(false);
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        setErrorRegistro(true);
+      });
   };
 
   return (
-    <div className="container">
-      {!registro && <h2 className="heading">Registro</h2>}
-      {registro && <h2 className="registro">Registro con éxito</h2>}
+    <div className="container gradient-custom">
+      <a
+        href="#"
+        class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+      >
+        <img class="w-4 h-4 mr-2" src={logo} alt="logo" />{" "}
+      </a>
+      {!registro && <h2 className="heading">Sign Up</h2>}
+      {registro && <h2 className="registro">Sign Up successful</h2>}
       {errorregistro && <h3 className="failed">Complete all the fields</h3>}
-      {passwordMismatchError && <h3 className="failed">Passwords do not match</h3>}
-      {passwordShortError && <h3 className="failed">Password has to be at least 8 characters long</h3>}
+      {passwordMismatchError && (
+        <h3 className="failed">Passwords do not match</h3>
+      )}
+      {passwordShortError && (
+        <h3 className="failed">
+          Password has to be at least 8 characters long
+        </h3>
+      )}
       {!registro && (
         <form className="form">
           <div className="form-group">
             <input
               className="input"
               type="text"
-              placeholder="Nombre"
+              placeholder="Name"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -96,7 +108,7 @@ function Registro() {
             <input
               className="input"
               type="text"
-              placeholder="Apellidos"
+              placeholder="Surnames"
               value={surname}
               onChange={(e) => setSurname(e.target.value)}
             />
@@ -105,7 +117,7 @@ function Registro() {
             <input
               className="input"
               type="text"
-              placeholder="Correo"
+              placeholder="Email Address"
               value={mail}
               onChange={(e) => setMail(e.target.value)}
             />
@@ -116,7 +128,7 @@ function Registro() {
               type="text"
               inputMode="numeric"
               pattern="[0-9]*"
-              placeholder="Teléfono"
+              placeholder="Mobile Number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               onKeyDown={soloNumeros}
@@ -126,22 +138,22 @@ function Registro() {
             <input
               className="input"
               type="password"
-              placeholder="Contraseña"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="form-group">
-          <input
-            className="input"
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
+            <input
+              className="input"
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
           </div>
           <button className="button" type="submit" onClick={handleRegister}>
-            Registro
+            Register
           </button>
         </form>
       )}

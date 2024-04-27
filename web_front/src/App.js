@@ -4,11 +4,11 @@ import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import About from "./components/About.js";
 import Login from "./components/Login";
-import Registro from "./components/Registro.js";
+import Register from "./components/Register.js";
 import Recover from "./components/Recover.js";
 import Image from "./components/images/mcloving.jpg";
 import Deportes from "./components/Deportes.js";
-import Teatro from "./components/Teatro.js";
+import Teatro from "./components/Theater.js";
 import Musica from "./components/Musica.js";
 import Festivales from "./components/Festivales.js";
 import EventGeneric from "./components/Events/EventGeneric.js";
@@ -50,7 +50,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/registro" element={<Registro />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/recover" element={<Recover />} />
           <Route path="/deportes" element={<Deportes />} />
           <Route path="/musica" element={<Musica />} />

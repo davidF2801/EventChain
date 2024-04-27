@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import logo from "./images/logo1.png";
 
 function Recover() {
   const [username, setUsername] = useState("");
@@ -26,25 +27,23 @@ function Recover() {
     }
   };
   return (
-    <div className="container">
-      {!loginError && !login && (
-        <h2 className="heading">Recuperar contraseña</h2>
-      )}{" "}
-      {}
-      {loginError && <h2 className="failed">Usuario no dado de alta</h2>} {}
-      {login && <h2 className="loginn">Correo enviado con exito</h2>} {}
+    <div className="container mx-auto">
+      <img className="mx-auto h-4 w-4" src={logo} alt="EventChain" />
+      {!loginError && !login && <h2 className="heading">Reset Password</h2>} {}
+      {loginError && <h2 className="failed">Error</h2>} {}
+      {login && <h2 className="loginn">Confirmation email sent</h2>} {}
       {!login && (
         <form className="form">
           <input
             className="input"
             type="text"
-            placeholder="Correo"
+            placeholder="Put you email address"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <br />
           <button className="button" type="button" onClick={handleLogin}>
-            Recuperar contraseña
+            Reset
           </button>
         </form>
       )}{" "}

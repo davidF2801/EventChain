@@ -40,7 +40,7 @@ const TicketResale = () => {
     return <div>Error: {error.message}</div>;
   }
   return (
-    <div>
+    <div className="container mx-auto">
       <h1>Tickets for resale</h1>
       <div className="ticket-resale-container">
         {data.map((ticket, index) => (
@@ -53,9 +53,6 @@ const TicketResale = () => {
           </div>
         ))}
       </div>
-      <footer>
-        <p>© 2024 EventChain. All rights reserved.</p>
-      </footer>
     </div>
   );
 };

@@ -13,9 +13,9 @@ const Musica = () => {
   ];
 
   return (
-    <div>
+    <div className="container mx-auto p-">
       <h1>Música</h1>
-      <div className="eventos-container">
+      <div className="container mx-auto">
         {eventosMusicales.map((evento, index) => (
           <div key={index} className="evento">
             <img src={evento.imagen} alt={evento.nombre} />
@@ -28,6 +28,9 @@ const Musica = () => {
           </div>
         ))}
       </div>
+      <Link to="/events">
+        <button className="button">All Events</button>
+      </Link>
     </div>
   );
 };

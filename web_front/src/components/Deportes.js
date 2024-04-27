@@ -19,9 +19,9 @@ const eventosDeportivos = [
 
 const Deportes = () => {
   return (
-    <div>
+    <div className="container mx-auto p-">
       <h1>Eventos Deportivos</h1>
-      <div className="eventos-container">
+      <div className="container mx-auto p-8">
         {eventosDeportivos.map((evento, index) => (
           <div key={index} className="evento">
             <img src={evento.imagen} alt={evento.nombre} />
@@ -33,8 +33,8 @@ const Deportes = () => {
         ))}
       </div>
       {/* Agrega un enlace para volver a EventGeneric */}
-      <Link to="/">
-        <button className="button">Volver a todos los eventos</button>
+      <Link to="/events">
+        <button className="button">All Events</button>
       </Link>
     </div>
   );

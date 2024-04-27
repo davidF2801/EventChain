@@ -16,7 +16,7 @@ code {
     monospace;
 }
 footer {
-  background-color: #151a50;
+  /* background-color: #151a50; */
   color: #ffffff;
   padding: 5px; /* Añade algo de espacio alrededor del contenido del footer */
   text-align: center; /* Centra el texto horizontalmente */

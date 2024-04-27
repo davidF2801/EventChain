@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Festivales = () => {
   // Array de objetos con información sobre los festivales
@@ -13,9 +14,9 @@ const Festivales = () => {
   ];
 
   return (
-    <div>
+    <div className="container mx-auto p-">
       <h1>Festivales</h1>
-      <div className="eventos-container">
+      <div className="container mx-auto p-8">
         {festivales.map((festival, index) => (
           <div key={index} className="evento">
             <img src={festival.imagen} alt={festival.nombre} />
@@ -26,6 +27,9 @@ const Festivales = () => {
           </div>
         ))}
       </div>
+      <Link to="/events">
+        <button className="button">All Events</button>
+      </Link>
     </div>
   );
 };

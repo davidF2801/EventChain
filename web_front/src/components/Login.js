@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import logo from "./images/logo1.png";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -39,17 +40,20 @@ function Login() {
 
   return (
     <div className="container gradient-custom">
-      {!loginError && (
-        <h2 className="text-white font-bold text-md">Iniciar Sesión</h2>
-      )}
-      {loginError && (
-        <h2 className="text-white font-bold text-md">Fallo inicio de sesión</h2>
-      )}
+      <a
+        href="#"
+        class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+      >
+        <img class="w-8 h-8 mr-2" src={logo} alt="logo" />{" "}
+      </a>
+
+      {!loginError && <h1 className="text-white font-bold text-md">Sign In</h1>}
+      {loginError && <h2 className="text-white font-bold text-md">Error</h2>}
       <form className="form" onSubmit={handleLogin}>
         <input
           className="input"
           type="text"
-          placeholder="Usuario"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -57,27 +61,27 @@ function Login() {
         <input
           className="input"
           type="password"
-          placeholder="Contraseña"
+          placeholder="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
         <button className="button" type="submit">
-          Iniciar Sesión
+          Sign in
         </button>
       </form>
 
       {loginError && (
         <p className="text-white text-md">
           <Link to="/recover" className="link">
-            ¿Deseas restaurar la contraseña?
+            Forget password?
           </Link>
         </p>
       )}
       <p className="text-white text-md">
-        ¿No tienes una cuenta?{" "}
-        <Link to="/registro" className="link">
-          Crear cuenta
+        Not Member?{" "}
+        <Link to="/register" className="link">
+          Register
         </Link>
       </p>
     </div>

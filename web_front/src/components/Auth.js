@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { buyTicket } from "./buyTicket.js";
 import { resellTicket } from "./resellTicket.js";
+import { Link } from "react-router-dom";
 
 const Auth = () => {
   const [publicKey, setPublicKey] = useState("");
@@ -66,7 +67,7 @@ const Auth = () => {
   };
 
   return (
-    <div>
+    <div className="container mx-auto p-">
       <style>
         {`
           .input-group {
@@ -101,6 +102,9 @@ const Auth = () => {
         </div>
         <button>Ingresar</button>
       </form>
+      <Link to="/">
+        <button className="button">All Events</button>
+      </Link>
     </div>
   );
 };

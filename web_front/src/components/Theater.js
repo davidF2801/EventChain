@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Teatro = () => {
   // Array de objetos con información sobre los espectáculos de teatro
@@ -13,7 +14,7 @@ const Teatro = () => {
   ];
 
   return (
-    <div>
+    <div className="container mx-auto p-">
       <h1>Teatro</h1>
       <div className="eventos-container">
         {espectaculosTeatro.map((espectaculo, index) => (
@@ -26,6 +27,9 @@ const Teatro = () => {
           </div>
         ))}
       </div>
+      <Link to="/events">
+        <button className="button">All Events</button>
+      </Link>
     </div>
   );
 };
