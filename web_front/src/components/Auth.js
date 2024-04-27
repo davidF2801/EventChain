@@ -33,7 +33,7 @@ const Auth = () => {
           eventName: eventInfo.title,
           user: "gorketas",
           forSale: true,
-          ticketId: ticketInfo.ticketId._hex,
+          ticketId: ticketInfo.ticketId,
           price: ticketInfo.ticketPrice._hex,
           contractAddress: eventInfo.contractAddress,
         };

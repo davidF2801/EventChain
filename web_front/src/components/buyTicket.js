@@ -15,7 +15,7 @@ export const buyTicket = async (pk, buyerAccount, contractAddress) => {
     shouldPollResponse: true,
   });
 
-  const ticketId = await contractInstance.ticketsSold().call();
+  const ticketId = (await contractInstance.ticketsSold().call()) - 1;
 
   console.log("Ticket Price:", ticketPrice);
   console.log("Ticket Id:", ticketId);

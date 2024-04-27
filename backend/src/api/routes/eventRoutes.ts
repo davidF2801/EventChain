@@ -44,17 +44,18 @@ router.post('/createEvent', async (req, res) => {
         new_event.save()
           .then(result => {
             // Envía una respuesta de éxito al cliente
+            res.status(201).json({
+              message: 'Event created and contract deployed',
+              event: new_event,
+              contractAddress: contractAddress
+            });     
           })
           .catch(error => {
             // Envía una respuesta de error al cliente
             res.status(500).json({ error: 'Error when creating event', message: error.message });
           });
                
-          res.status(201).json({
-            message: 'Event created and contract deployed',
-            event: new_event,
-            contractAddress: contractAddress
-        });     
+          
 
 
     } catch (error) {

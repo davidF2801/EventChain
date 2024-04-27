@@ -49,7 +49,7 @@ contract Event {
             price: ticketPrice,
             forSale: false
         });
-
+        
         // tickets.push(Ticket({
         //     ticketId: tickets.length,
         //     price: _price,

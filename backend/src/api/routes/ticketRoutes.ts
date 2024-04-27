@@ -60,7 +60,7 @@ router.post('/createTicket', async (req, res) => {
           })
           .catch(error => {
             // Envía una respuesta de error al cliente
-            res.status(500).json({ error: 'Error when creating event', message: error.message });
+            res.status(500).json({ error: 'Error when creating ticket', message: error.message });
           });
     } catch (error) {
         console.error(error);

@@ -11,12 +11,12 @@ export const resellTicket = async (
 
   const contractInstance = await tronWebInst.contract().at(contractAddress);
 
-  const ticket = await contractInstance.tickets(ticketId).call();
-  console.log("Tickets:", ticket);
+  const ticketPrice = await contractInstance.checkPrice(ticketId).call();
+  console.log("Ticket price:", ticketPrice._hex);
   const result = await contractInstance.rebuyTicket(ticketId).send({
     from: buyerAccount,
     feeLimit: 100000000,
-    callValue: ticket.price,
+    callValue: ticketPrice,
     shouldPollResponse: true,
   });
 
