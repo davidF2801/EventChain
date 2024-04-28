@@ -47,6 +47,7 @@ const TicketResale = () => {
         {data.map((ticket, index) => (
           <div key={index} className="ticket">
             <h2>{ticket.title}</h2>
+            <p>Event: {ticket.eventName}</p>
             <p>Price: {ticket.price}</p>
             <Link to={`/auth`} state={ticket}>
               <button className="button-cool">Buy ticket</button>

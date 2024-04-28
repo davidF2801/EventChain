@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Error from "./images/404.png";
-
+import "./Auth.css"; // Importa el archivo CSS
 const MyTickets = () => {
   const [data, setData] = useState(null);
   const [eventData, setEventData] = useState(null);
@@ -49,7 +49,7 @@ const MyTickets = () => {
             <h2>{ticket.title}</h2>
             <p>Event: {ticket.eventName}</p>
             <Link to={`/AuthListTicket`} state={ticket}>
-              <button>List ticket for resale</button>
+              <button className="button-cool">List ticket for resale</button>
             </Link>
           </div>
         ))}

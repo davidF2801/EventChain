@@ -1,5 +1,5 @@
 .button-cool {
-  background-color: #4caf50;
+  background-color: #9a0bd3;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -17,7 +17,7 @@
 
 .button-cool:hover,
 .button-cool:focus {
-  background-color: #45a049;
+  background-color: #19cccc;
   transform: scale(1.05);
 }
 
