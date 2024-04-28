@@ -16,7 +16,6 @@ export const listTicketForResale = async (
     .send({
       from: buyerAccount,
       feeLimit: 100000000,
-      callValue: price,
       shouldPollResponse: true,
     });
   const ticketPrice = await contractInstance.checkPrice(ticketId).call();
