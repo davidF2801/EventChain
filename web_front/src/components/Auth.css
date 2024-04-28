@@ -11,6 +11,8 @@
   cursor: pointer;
   border-radius: 8px;
   transition: background 0.3s, transform 0.3s;
+  margin-bottom: 20px; /* Space between input groups */
+  margin-top: 20px; /* Space between input groups */
 }
 
 .button-cool:hover,
@@ -35,6 +37,7 @@
 
 .input-group {
   margin-bottom: 20px; /* Space between input groups */
+  margin-top: 20px; /* Space between input groups */
   width: 100%; /* Adjust the width as needed, or keep it responsive */
   max-width: 360px; /* Maximum width of the input group for better control */
   display: flex;

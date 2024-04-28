@@ -15,12 +15,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-footer {
-  /* background-color: #151a50; */
-  color: #ffffff;
-  padding: 5px; /* Añade algo de espacio alrededor del contenido del footer */
-  text-align: center; /* Centra el texto horizontalmente */
-  position: fixed; /* Fija el footer en la parte inferior de la ventana */
-  bottom: 0; /* Lo coloca al fondo de la ventana */
-  width: 100%; /* Ocupa todo el ancho de la ventana */
-}

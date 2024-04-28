@@ -3,20 +3,26 @@ import { useLocation } from "react-router-dom";
 import { buyTicket } from "./buyTicket.js";
 import { resellTicket } from "./resellTicket.js";
 import { Link } from "react-router-dom";
-import "./Auth.css"; // Import the CSS file
+import "./Auth.css"; // Importa el archivo CSS
 
 const Auth = () => {
   const [publicKey, setPublicKey] = useState("");
   const [privateKey, setPrivateKey] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const location = useLocation();
-  console.log("Location:", location);
   const eventInfo = location.state || "";
+
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Public Key:", publicKey);
-    console.log("Private Key:", privateKey);
 
     try {
+      if (!publicKey || !privateKey) {
+        throw new Error("Error: Keys are missing.");
+      }
+
+      console.log("Public Key:", publicKey);
+      console.log("Private Key:", privateKey);
+
       if (!eventInfo.startDate) {
         const ticketInfo = await resellTicket(
           privateKey,
@@ -64,23 +70,12 @@ const Auth = () => {
       }
     } catch (error) {
       console.error("Error buying ticket:", error.message || error);
+      setErrorMessage(error.message);
     }
   };
 
   return (
     <div className="container mx-auto p-">
-      <style>
-        {`
-          .input-group {
-            margin-bottom: 20px; /* Agrega un margen inferior entre los grupos de entrada */
-          }
-
-          /* Estilo personalizado para hacer que las checkbox sean más grandes */
-          input[type="checkbox"] {
-            transform: scale(1.5); /* Ajusta el tamaño de las checkbox */
-          }
-        `}
-      </style>
       <h1>Introduce your TRON wallet</h1>
       <form onSubmit={handleLogin}>
         <div className="input-group">
@@ -103,6 +98,7 @@ const Auth = () => {
           <button className="button-cool">Buy Ticket</button>
         </div>
       </form>
+      {errorMessage && <h3 className="failed">{errorMessage}</h3>}
     </div>
   );
 };

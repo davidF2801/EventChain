@@ -12,9 +12,6 @@ document.head.appendChild(fontAwesomeScript);
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <footer>
-      <p>© 2024 EventChain. All rights reserved.</p>
-    </footer>
   </React.StrictMode>,
   document.getElementById("root")
 );

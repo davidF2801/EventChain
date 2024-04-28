@@ -6,10 +6,14 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   async function loginUser(credentials) {
     try {
+      if (!credentials.username && !credentials.password) {
+        throw new Error("Error: Credentials missing.");
+      }
       const response = await fetch("http://localhost:8888/login/login", {
         method: "POST",
         headers: {
@@ -25,7 +29,7 @@ function Login() {
       console.log("Login successful:", credentials);
       navigate("/");
     } catch (error) {
-      console.error("Login error:", error);
+      setErrorMessage(error.message);
       setLoginError(true);
     }
   }
@@ -40,8 +44,7 @@ function Login() {
 
   return (
     <div className="container gradient-custom">
-      {!loginError && <h1 className="text-white font-bold text-md">Sign In</h1>}
-      {loginError && <h2 className="text-white font-bold text-md">Error</h2>}
+      <h1 className="text-white font-bold text-md">Log In</h1>
       <form className="form" onSubmit={handleLogin}>
         <input
           className="input"
@@ -63,18 +66,27 @@ function Login() {
           Sign in
         </button>
       </form>
+      {loginError && <h3 className="failed">{errorMessage}</h3>}
 
       {loginError && (
         <p className="text-white text-md">
-          <Link to="/recover" className="link">
-            Forget password?
+          <Link
+            to="/recover"
+            className="link"
+            style={{ color: "deepskyblue", textDecoration: "none" }}
+          >
+            Did you forget your credentials?
           </Link>
         </p>
       )}
       <p className="text-white text-md">
-        Not Member?{" "}
-        <Link to="/register" className="link">
-          Register
+        Not Member?{"    "}
+        <Link
+          to="/register"
+          className="link"
+          style={{ color: "deepskyblue", textDecoration: "none" }}
+        >
+          Register.
         </Link>
       </p>
     </div>

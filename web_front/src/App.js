@@ -73,6 +73,7 @@ function App() {
           <Route path="/AuthListTicket" element={<AuthListTicket />} />
           <Route path="/NotFound" element={<NotFound />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );

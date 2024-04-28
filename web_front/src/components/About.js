@@ -1,6 +1,4 @@
 import React from "react";
-
-// Importa las imágenes con la ruta correcta
 import erikImage from "./images/erik.jpeg";
 import joelImage from "./images/joel.jpeg";
 import gokarnaImage from "./images/gokarna.jpeg";
@@ -26,10 +24,12 @@ function About() {
           className="estudiantes"
           style={{ display: "flex", justifyContent: "center" }}
         >
-          {/* Primera sección con tres personas */}
           <div style={{ display: "flex", marginRight: "10px" }}>
             <div className="estudiante" style={{ marginRight: "10px" }}>
-              <a href="https://www.linkedin.com/in/eriksole/">
+              <a
+                href="https://www.linkedin.com/in/eriksole/"
+                style={{ textDecoration: "none" }}
+              >
                 <img
                   src={erikImage}
                   alt="Erik Sole"
@@ -41,18 +41,20 @@ function About() {
                   }}
                 />
                 <p>
-                  <strong>Erik Sole</strong>
+                  <strong style={{ color: "deepskyblue" }}>Erik Sole</strong>
                 </p>
               </a>
               <p>
-                {" "}
                 Network
                 <br />
                 Engineer
               </p>
             </div>
             <div className="estudiante" style={{ marginRight: "10px" }}>
-              <a href="https://www.linkedin.com/in/joel-jurado-4a9a8b208/">
+              <a
+                href="https://www.linkedin.com/in/joel-jurado-4a9a8b208/"
+                style={{ textDecoration: "none" }}
+              >
                 <img
                   src={joelImage}
                   alt="Joel Jurado"
@@ -64,11 +66,10 @@ function About() {
                   }}
                 />
                 <p>
-                  <strong>Joel Jurado</strong>
+                  <strong style={{ color: "deepskyblue" }}>Joel Jurado</strong>
                 </p>
               </a>
               <p>
-                {" "}
                 Electrial
                 <br /> Engineer
               </p>
@@ -79,10 +80,12 @@ function About() {
           className="estudiantes"
           style={{ display: "flex", justifyContent: "center" }}
         >
-          {/* Segunda sección con dos personas */}
           <div style={{ display: "flex", marginRight: "10px" }}>
             <div className="estudiante" style={{ marginRight: "10px" }}>
-              <a href="https://www.linkedin.com/in/gdum/">
+              <a
+                href="https://www.linkedin.com/in/gdum/"
+                style={{ textDecoration: "none" }}
+              >
                 <img
                   src={gokarnaImage}
                   alt="Gokarna Dumre"
@@ -94,17 +97,21 @@ function About() {
                   }}
                 />
                 <p>
-                  <strong>Gokarna Dumre</strong>
+                  <strong style={{ color: "deepskyblue" }}>
+                    Gokarna Dumre
+                  </strong>
                 </p>
               </a>
               <p>
-                {" "}
                 Network
                 <br /> Engineer
               </p>
             </div>
             <div className="estudiante" style={{ marginRight: "10px" }}>
-              <a href="https://www.linkedin.com/in/david-forn%C3%B3s/">
+              <a
+                href="https://www.linkedin.com/in/david-forn%C3%B3s/"
+                style={{ textDecoration: "none" }}
+              >
                 <img
                   src={davidImage}
                   alt="David Fornos"
@@ -116,7 +123,7 @@ function About() {
                   }}
                 />
                 <p>
-                  <strong>David Fornos</strong>
+                  <strong style={{ color: "deepskyblue" }}>David Fornos</strong>
                 </p>
               </a>
               <p>

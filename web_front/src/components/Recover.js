@@ -28,7 +28,10 @@ function Recover() {
   };
   return (
     <div className="container mx-auto">
-      {!loginError && !login && <h2 className="heading">Reset Password</h2>} {}
+      {!loginError && !login && (
+        <h2 className="heading">Recover your account</h2>
+      )}{" "}
+      {}
       {loginError && <h2 className="failed">Error</h2>} {}
       {login && <h2 className="loginn">Confirmation email sent</h2>} {}
       {!login && (
@@ -42,7 +45,7 @@ function Recover() {
           />
           <br />
           <button className="button" type="button" onClick={handleLogin}>
-            Reset
+            Send
           </button>
         </form>
       )}{" "}

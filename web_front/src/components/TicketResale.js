@@ -49,7 +49,7 @@ const TicketResale = () => {
             <h2>{ticket.title}</h2>
             <p>Price: {ticket.price}</p>
             <Link to={`/auth`} state={ticket}>
-              <button>Buy ticket</button>
+              <button className="button-cool">Buy ticket</button>
             </Link>
           </div>
         ))}
