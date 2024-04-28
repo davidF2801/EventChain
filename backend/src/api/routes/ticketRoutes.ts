@@ -40,6 +40,19 @@ router.get('/resale', async (req, res) => {
         //res.status(500).json({ error: 'Error finding ticket', message: error.message });
     }
 });
+router.get('/myTickets', async (req, res) => {
+    try {
+        const ticket = await TicketModel.find({}).exec();
+        if (ticket) {
+            res.send(ticket);
+        } else {
+            res.status(404).send('Ticket not found');
+        }
+    } catch (error) {
+        console.error(error);
+        //res.status(500).json({ error: 'Error finding ticket', message: error.message });
+    }
+});
 
 router.post('/createTicket', async (req, res) => {
     try {
@@ -67,6 +80,29 @@ router.post('/createTicket', async (req, res) => {
         //res.status(500).json({ error: 'Error when creating ticket', message: error.message });
     }
 }); 
+
+router.put('/updateTicket', async (req, res) => {  
+    // Get the ticket ID from URL parameters
+    const { contractAddress, ticketId, forSale, price } = req.body;  // Destructure the fields you want to update from the request body
+
+    try {
+        const result = await TicketModel.findOneAndUpdate(
+            { contractAddress:contractAddress, ticketId: ticketId },  // Find a ticket by its ticketId
+            { forSale: forSale, price: price },  // Update these fields in the ticket
+            { new: true }  // Return the updated document
+        );
+
+        if (result) {
+            res.status(200).json({ message: 'Ticket updated successfully', data: result });
+        } else {
+            res.status(404).json({ message: 'Ticket not found' });
+        }
+    } catch (error) {
+        console.error(error);
+        //res.status(500).json({ error: 'Error updating ticket', message: error.message });
+    }
+});
+
 
 router.delete('/removeTicket', async (req, res) => {
   try {

@@ -12,7 +12,7 @@ const MyTickets = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:8888/tickets/resale");
+        const response = await fetch("http://localhost:8888/tickets/myTickets");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
