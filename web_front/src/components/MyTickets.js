@@ -49,7 +49,11 @@ const MyTickets = () => {
             <h2>{ticket.title}</h2>
             <p>Event: {ticket.eventName}</p>
             <Link to={`/AuthListTicket`} state={ticket}>
-              <button className="button-cool">List ticket for resale</button>
+              {ticket.forSale ? (
+                <button className="button-cool">Change Resale Price</button>
+              ) : (
+                <button className="button-cool">List Ticket for Resale</button>
+              )}
             </Link>
           </div>
         ))}

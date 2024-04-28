@@ -95,7 +95,11 @@ const AuthListTicket = () => {
             value={ticketPrice}
             onChange={(e) => setTicketPrice(e.target.value)}
           />
-          <button className="button-cool">List ticket for resale</button>
+          {ticketInfo.forSale ? (
+            <button className="button-cool">Change Resale Price</button>
+          ) : (
+            <button className="button-cool">List Ticket for Resale</button>
+          )}
         </div>
       </form>
     </div>
