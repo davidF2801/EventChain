@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
 router.post('/createEvent', async (req, res) => {
     try {
         const { title, description,location, startDate, endDate,type, image, address, price, nTickets, allowResale,resaleFee,maxPrice} = req.body;
-        const contractAddress = await deployEvent(address,nTickets,price)
+        const contractAddress = await deployEvent(address,nTickets,price, allowResale, resaleFee)
         .catch(error => {
           // Envía una respuesta de error al cliente
           res.status(500).json({ error: 'Error when creating event', message: error.message });

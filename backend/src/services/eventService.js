@@ -2,7 +2,7 @@ const fs = require('fs');
 const TronWeb = require('tronweb');
 require('dotenv').config();
 
-async function deployEvent(address, nTickets, ticketPrice) {
+async function deployEvent(address, nTickets, ticketPrice, allowResale, resaleFee) {
   console.log(`Current working directory: ${process.cwd()}`);
 
   const rawdata = fs.readFileSync('build/contracts/Event.json');

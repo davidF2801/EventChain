@@ -1,1 +1,1 @@
-export default function deployEvent(address: string, nTickets: number, price: number): Promise<string>;
+export default function deployEvent(address: string, nTickets: number, price: number, allowResale: boolean, resaleFee: number): Promise<string>;
