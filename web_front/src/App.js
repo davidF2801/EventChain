@@ -21,6 +21,8 @@ import OldEvents from "./components/Events/OldEvents.js";
 import NavBar from "./components/NavBar.js";
 import Footer from "./components/Footer.js";
 import Contact from "./components/Contact.js";
+import MyTickets from "./components/MyTickets.js";
+import AuthListTicket from "./components/AuthListTicket.js";
 import "./App.css";
 import TronWeb from "tronweb";
 
@@ -67,6 +69,8 @@ function App() {
           <Route path="/Footer" element={<Footer />} />
           <Route path="/NavBar" element={<NavBar />} />
           <Route path="/Contact" element={<Contact />} />
+          <Route path="/MyTickets" element={<MyTickets />} />
+          <Route path="/AuthListTicket" element={<AuthListTicket />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

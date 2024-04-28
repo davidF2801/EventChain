@@ -1,8 +1,8 @@
 // LoggedIn.js
-import React from 'react';
-import { Link } from 'react-router-dom';
-import user from './images/user.png';
-import './LoggedIn.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import user from "./images/user.png";
+import "./LoggedIn.css";
 
 function LoggedIn() {
   return (
@@ -17,8 +17,15 @@ function LoggedIn() {
         <div className="Header-right">
           <nav className="Navbar">
             <ul className="Navbar-links">
-              <li><Link to="/edit-profile">Edit Profile</Link></li>
-              <li><Link to="/logout">Logout</Link></li>
+              <li>
+                <Link to="/edit-profile">Edit Profile</Link>
+              </li>
+              <li>
+                <Link to="/MyTickets">My Tickets</Link>
+              </li>
+              <li>
+                <Link to="/logout">Logout</Link>
+              </li>
             </ul>
           </nav>
         </div>
