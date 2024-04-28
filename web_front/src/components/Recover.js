@@ -28,7 +28,6 @@ function Recover() {
   };
   return (
     <div className="container mx-auto">
-      <img className="mx-auto h-4 w-4" src={logo} alt="EventChain" />
       {!loginError && !login && <h2 className="heading">Reset Password</h2>} {}
       {loginError && <h2 className="failed">Error</h2>} {}
       {login && <h2 className="loginn">Confirmation email sent</h2>} {}

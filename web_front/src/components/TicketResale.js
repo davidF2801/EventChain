@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Error from "./images/404.png";
 
 const TicketResale = () => {
   const [data, setData] = useState(null);
@@ -37,7 +38,7 @@ const TicketResale = () => {
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <img class="w-4 h-4 mr-2" src={Error} alt="logo" />;
   }
   return (
     <div className="container mx-auto">

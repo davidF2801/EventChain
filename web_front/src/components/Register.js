@@ -76,12 +76,6 @@ function Registro() {
 
   return (
     <div className="container gradient-custom">
-      <a
-        href="#"
-        class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-      >
-        <img class="w-4 h-4 mr-2" src={logo} alt="logo" />{" "}
-      </a>
       {!registro && <h2 className="heading">Sign Up</h2>}
       {registro && <h2 className="registro">Sign Up successful</h2>}
       {errorregistro && <h3 className="failed">Complete all the fields</h3>}

@@ -102,7 +102,7 @@ const Auth = () => {
         </div>
         <button>Ingresar</button>
       </form>
-      <Link to="/">
+      <Link to="/events">
         <button className="button">All Events</button>
       </Link>
     </div>

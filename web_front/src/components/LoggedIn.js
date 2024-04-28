@@ -18,13 +18,13 @@ function LoggedIn() {
           <nav className="Navbar">
             <ul className="Navbar-links">
               <li>
-                <Link to="/edit-profile">Edit Profile</Link>
+                <Link to="/NotFound">Edit Profile</Link>
               </li>
               <li>
                 <Link to="/MyTickets">My Tickets</Link>
               </li>
               <li>
-                <Link to="/logout">Logout</Link>
+                <Link to="/NotFound">Logout</Link>
               </li>
             </ul>
           </nav>

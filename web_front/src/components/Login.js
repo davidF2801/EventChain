@@ -40,13 +40,6 @@ function Login() {
 
   return (
     <div className="container gradient-custom">
-      <a
-        href="#"
-        class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-      >
-        <img class="w-8 h-8 mr-2" src={logo} alt="logo" />{" "}
-      </a>
-
       {!loginError && <h1 className="text-white font-bold text-md">Sign In</h1>}
       {loginError && <h2 className="text-white font-bold text-md">Error</h2>}
       <form className="form" onSubmit={handleLogin}>

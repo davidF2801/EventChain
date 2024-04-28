@@ -1,24 +1,76 @@
-/* OldEvents.css */
+/* eventgeneric.css */
+
 .event-generic-container {
-  max-width: 800px;
   margin: 0 auto;
+  text-emphasis-color: red;
 }
 
 .heading {
   text-align: center;
 }
 
-.event-card {
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.event-container {
+  display: flex;
+  color: rgb(202, 22, 238);
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01); /* Reducir la intensidad de la sombra */
+  max-width: 800px; /* Limitar el ancho del contenedor */
+  margin: auto; /* Centrar horizontalmente */
+  margin-top: 20px; /* Añadir espacio en la parte superior */
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease; /* Transición de color al pasar el mouse */
+}
+
+.event-container:hover {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.7
+  ); /* Cambiar el color de fondo al pasar el mouse */
+}
+
+.event {
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  margin: 10px;
   padding: 10px;
-  margin-bottom: 15px;
+  opacity: 1; /* Opacidad del contenedor */
 }
 
-.event-card h3 {
+.event img {
+  max-width: 70%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.event h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.event p {
+  font-size: 1rem;
   margin-bottom: 5px;
+  color: #9e3232;
 }
 
-.event-card p {
-  margin: 5px 0;
+.event button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.event button:hover {
+  background-color: #0056b3;
 }

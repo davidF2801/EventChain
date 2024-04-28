@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./components/Home";
-import NotFound from "./components/NotFound";
+import NotFound from "./components/NotFound.js";
 import About from "./components/About.js";
 import Login from "./components/Login";
 import Register from "./components/Register.js";
@@ -71,7 +71,7 @@ function App() {
           <Route path="/Contact" element={<Contact />} />
           <Route path="/MyTickets" element={<MyTickets />} />
           <Route path="/AuthListTicket" element={<AuthListTicket />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/NotFound" element={<NotFound />} />
         </Routes>
       </div>
     </Router>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Error from "./images/404.png";
 
 const MyTickets = () => {
   const [data, setData] = useState(null);
@@ -37,10 +38,10 @@ const MyTickets = () => {
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <img class="w-4 h-4 mr-2" src={Error} alt="logo" />;
   }
   return (
-    <div>
+    <div className="container gradient-custom">
       <h1>Your Tickets</h1>
       <div className="my-tickets-container">
         {data.map((ticket, index) => (
