@@ -94,6 +94,7 @@ contract Event {
     }
 
     function listTicketForResale(uint _ticketId, uint _price) public {
+        //TODO: Hacer privado
         require(_ticketId < ticketsSold, "Ticket does not exist.");
         Ticket storage ticket = tickets[_ticketId];
         
