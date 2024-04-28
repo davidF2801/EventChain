@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { listTicketForResale } from "./listTicketForResale";
-
+import "./Auth.css"; // Import the CSS file
 const AuthListTicket = () => {
   const [publicKey, setPublicKey] = useState("");
   const [privateKey, setPrivateKey] = useState("");
@@ -29,7 +29,7 @@ const AuthListTicket = () => {
   };
 
   return (
-    <div>
+    <div className="container mx-auto p-">
       <style>
         {`
           .input-group {
@@ -42,10 +42,10 @@ const AuthListTicket = () => {
           }
         `}
       </style>
-      <h1>Autentication</h1>
+      <h1>Introduce your TRON wallet</h1>
       <form onSubmit={handleLogin}>
         <div className="input-group">
-          <label htmlFor="publicKey">Account:</label>
+          <label htmlFor="publicKey">Public key:</label>
           <input
             type="text"
             id="publicKey"
@@ -62,6 +62,7 @@ const AuthListTicket = () => {
             onChange={(e) => setPrivateKey(e.target.value)}
           />
         </div>
+
         <div className="input-group">
           <label htmlFor="newTicketPrice">New ticket price:</label>
           <input
@@ -70,8 +71,8 @@ const AuthListTicket = () => {
             value={ticketPrice}
             onChange={(e) => setTicketPrice(e.target.value)}
           />
+          <button className="button-cool">List ticket for resale</button>
         </div>
-        <button>Ingresar</button>
       </form>
     </div>
   );

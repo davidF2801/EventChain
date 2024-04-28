@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { buyTicket } from "./buyTicket.js";
 import { resellTicket } from "./resellTicket.js";
 import { Link } from "react-router-dom";
+import "./Auth.css"; // Import the CSS file
 
 const Auth = () => {
   const [publicKey, setPublicKey] = useState("");
@@ -80,10 +81,10 @@ const Auth = () => {
           }
         `}
       </style>
-      <h1>Autentication</h1>
+      <h1>Introduce your TRON wallet</h1>
       <form onSubmit={handleLogin}>
         <div className="input-group">
-          <label htmlFor="publicKey">Account:</label>
+          <label htmlFor="publicKey">Public key:</label>
           <input
             type="text"
             id="publicKey"
@@ -99,12 +100,9 @@ const Auth = () => {
             value={privateKey}
             onChange={(e) => setPrivateKey(e.target.value)}
           />
+          <button className="button-cool">Buy Ticket</button>
         </div>
-        <button>Ingresar</button>
       </form>
-      <Link to="/events">
-        <button className="button">All Events</button>
-      </Link>
     </div>
   );
 };
