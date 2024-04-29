@@ -4,6 +4,8 @@ contract Event {
     uint public totalTickets;
     uint public ticketPrice;
     uint public ticketsSold = 0;
+    uint public resaleFee; // Fee as a percentage of the sale price
+    bool public allowResale;
     address public host;
     
     struct Ticket {
@@ -26,10 +28,12 @@ contract Event {
         _;
     }
     
-    constructor(uint _totalTickets, address _host, uint _price) {
+    constructor(uint _totalTickets, address _host, uint _price, bool _allowResale, uint _resaleFee) {
         totalTickets = _totalTickets;
         host = _host;
         ticketPrice = _price; // Set the ticket price
+        allowResale = _allowResale;
+        resaleFee = _resaleFee;
     }
     
     function checkTickets() public{
@@ -76,14 +80,15 @@ contract Event {
     function rebuyTicket(uint _ticketId) public payable {
         require(_ticketId < ticketsSold, "Ticket does not exist."); // Ensures the ticket exists
         Ticket storage ticket = tickets[_ticketId];
-        
         require(ticket.forSale, "This ticket is not for sale."); // Check if the ticket is available for sale
         require(msg.value == ticket.price, "Incorrect payment amount."); // Ensures the payment is correct
 
         // The original owner gets the payment
         address payable originalOwner = payable(ticketOwners[_ticketId]);
-        originalOwner.transfer(msg.value);
-
+        uint resaleFeeAmount = msg.value * resaleFee / 100;
+        uint paymentToOwner = msg.value - resaleFeeAmount;
+        originalOwner.transfer(paymentToOwner);
+        payable(host).transfer(resaleFeeAmount);
         // Update ownership mapping and mark the ticket as not for sale
         ownedTickets[originalOwner][_ticketId] = 0;
         ownedTickets[msg.sender][_ticketId] = 1;
@@ -95,7 +100,10 @@ contract Event {
 
     function listTicketForResale(uint _ticketId, uint _price) public {
         //TODO: Hacer privado
+        require(allowResale, 'Resale is not permitted for this event');
         require(_ticketId < ticketsSold, "Ticket does not exist.");
+        require(ticketOwners[_ticketId] == msg.sender, "Caller is not the owner of the ticket"); 
+
         Ticket storage ticket = tickets[_ticketId];
         
         ticket.forSale = true;
