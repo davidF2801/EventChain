@@ -82,7 +82,10 @@ const EventGeneric = () => {
                   alt={event.title}
                   className="event-image"
                 />
-                <h2 className="event-title">{event.title}</h2>
+                {/* Enlace al detalle del evento con el ID */}
+                <Link to={`/eventdetailed/${event.title}`} state={event}>
+                  <h2 className="event-title">{event.title}</h2>
+                </Link>
                 <p>Date: {event.date}</p>
                 <p>Location: {event.location}</p>
                 <Link to={`/auth`} state={event}>

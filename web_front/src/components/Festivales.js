@@ -23,7 +23,9 @@ const Festivales = () => {
             <h2>{festival.nombre}</h2>
             <p>Fecha: {festival.fecha}</p>
             <p>Ubicación: {festival.ubicacion}</p>
-            <button>Comprar entradas</button>
+            <Link to={`/auth`}>
+              <button className="button-cool">Buy ticket</button>
+            </Link>
           </div>
         ))}
       </div>

@@ -23,7 +23,9 @@ const Teatro = () => {
             <h2>{espectaculo.nombre}</h2>
             <p>Fecha: {espectaculo.fecha}</p>
             <p>Lugar: {espectaculo.lugar}</p>
-            <button>Comprar entradas</button>
+            <Link to={`/auth`}>
+              <button className="button-cool">Buy ticket</button>
+            </Link>
           </div>
         ))}
       </div>

@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { HiMenuAlt4 } from "react-icons/hi";
-import Image from "./images/mcloving.jpg";
 import logo from "./images/logo1.png";
 
 const NavBarItem = ({ title, classprops }) => (
@@ -49,7 +48,7 @@ const Navbar = () => {
           <Link to="/login" className="login-link">
             Login
           </Link>
-          <Link to="/loggedIn" className="login-link">
+          <Link to="/myprofile" className="login-link">
             My Profile
           </Link>
           <select className="language-selector">

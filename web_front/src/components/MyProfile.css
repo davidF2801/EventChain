@@ -1,0 +1,96 @@
+/* MyProfile.css */
+.loggedIn-container {
+  width: 100%;
+}
+
+.Header2 {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Header-left {
+  display: flex;
+  align-items: center;
+}
+
+.Header-title {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+
+.Header-logo {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.Navbar {
+  display: flex;
+  align-items: center;
+}
+
+.Navbar-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.Navbar-links li {
+  margin-right: 20px;
+}
+
+.Navbar-links li a {
+  text-decoration: none;
+  color: white;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ticket-container {
+  margin-top: 20px;
+}
+
+.action-buttons {
+  margin-top: 40px;
+}
+
+.action-button {
+  text-decoration: none;
+  color: black;
+  margin-top: 20px;
+}
+
+.button-cool2 {
+  background-color: rgba(66, 64, 78, 0.09); /* Color con opacidad del 8% */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.3s;
+  margin-bottom: 20px; /* Espacio entre grupos de entrada */
+  margin-top: 20px; /* Espacio entre grupos de entrada */
+}
+
+.button-cool2:hover,
+.button-cool2:focus {
+  background-color: #7c48db;
+  transform: scale(1.05);
+}
+
+.button-cool2:active {
+  transform: scale(0.95);
+  background-color: #397d39;
+}

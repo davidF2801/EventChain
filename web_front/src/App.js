@@ -15,9 +15,10 @@ import EventGeneric from "./components/Events/EventGeneric.js";
 import TicketResale from "./components/TicketResale.js";
 import Auth from "./components/Auth.js";
 import buyTicket from "./components/buyTicket.js";
-import LoggedIn from "./components/LoggedIn"; // Importa el componente LoggedIn
+import MyProfile from "./components/MyProfile.js";
 import NewEvent from "./components/Events/NewEvent.js";
 import OldEvents from "./components/Events/OldEvents.js";
+import EventDetailed from "./components/Events/EventDetailed.js";
 import NavBar from "./components/NavBar.js";
 import Footer from "./components/Footer.js";
 import Contact from "./components/Contact.js";
@@ -63,9 +64,10 @@ function App() {
           <Route path="/auth" element={<Auth />} />
           <Route path="/buyTicket" element={<buyTicket />} />
           {/* Agrega la ruta para la página de perfil */}
-          <Route path="/loggedIn" element={<LoggedIn />} />
+          <Route path="/MyProfile" element={<MyProfile />} />
           <Route path="/newevent" element={<NewEvent />} />
           <Route path="/oldevents" element={<OldEvents />} />
+          <Route path="/eventdetailed" element={<EventDetailed />} />
           <Route path="/Footer" element={<Footer />} />
           <Route path="/NavBar" element={<NavBar />} />
           <Route path="/Contact" element={<Contact />} />

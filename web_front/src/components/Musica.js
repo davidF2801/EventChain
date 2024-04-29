@@ -22,8 +22,8 @@ const Musica = () => {
             <h2>{evento.nombre}</h2>
             <p>Fecha: {evento.fecha}</p>
             <p>Lugar: {evento.lugar}</p>
-            <Link to="/auth">
-              <button>Comprar entradas</button>
+            <Link to={`/auth`}>
+              <button className="button-cool">Buy ticket</button>
             </Link>
           </div>
         ))}

@@ -1,17 +1,17 @@
-// LoggedIn.js
+// MyProfile.js
 import React from "react";
 import { Link } from "react-router-dom";
 import user from "./images/user.png";
-import "./LoggedIn.css";
+import "./MyProfile.css";
 
-function LoggedIn() {
+function MyProfile() {
   return (
     <div className="loggedIn-container">
-      <header className="Header">
+      <header className="Header2">
         <div className="Header-left">
           <Link to="/" className="Header-title">
             <img src={user} className="Header-logo" alt="User" />
-            EventChain
+            User
           </Link>
         </div>
         <div className="Header-right">
@@ -21,27 +21,37 @@ function LoggedIn() {
                 <Link to="/NotFound">Edit Profile</Link>
               </li>
               <li>
-                <Link to="/MyTickets">My Tickets</Link>
-              </li>
-              <li>
                 <Link to="/NotFound">Logout</Link>
               </li>
             </ul>
           </nav>
         </div>
       </header>
-      <div className="main-content">
-        <div className="user-info">
-          <h2>My Information</h2>
-          {/* Place your user information here */}
+      <div className="button-cool2">
+        <div className="button-cool2">
+          <h2>
+            <Link to="/MyTickets" className="action-button">
+              My Tickets
+            </Link>
+          </h2>
         </div>
-        <div className="center-links">
-          <Link to="/newevent">Create Event</Link>
-          <Link to="/oldevents">Past Events</Link>
+        <div className="button-cool2">
+          <h3>
+            <Link to="/newevent" className="action-button">
+              Create Event
+            </Link>
+          </h3>
+        </div>
+        <div className="button-cool2">
+          <h3>
+            <Link to="/oldevents" className="action-button">
+              View Past Events
+            </Link>
+          </h3>
         </div>
       </div>
     </div>
   );
 }
 
-export default LoggedIn;
+export default MyProfile;

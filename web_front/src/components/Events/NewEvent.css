@@ -47,3 +47,41 @@
 .failed {
   color: red;
 }
+
+/* Estilos para la sección de subida de foto */
+.FotoEvent {
+  display: flex;
+  align-items: center;
+}
+
+.FotoEvent .shrink-0 {
+  flex-shrink: 0;
+}
+
+.FotoEvent .MdOutlineFileUpload {
+  height: 64px; /* Ajustar según sea necesario */
+  width: 64px; /* Ajustar según sea necesario */
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  padding: 4px;
+}
+
+.FotoEvent label {
+  display: block;
+}
+
+.FotoEvent input[type="file"] {
+  border: none;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 16px 16px;
+  background-color: #d1d5db;
+  color: #4b5563;
+  border-radius: 9999px;
+}
+
+.FotoEvent input[type="file"]:hover {
+  background-color: #9ca3af;
+}

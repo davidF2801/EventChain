@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import "./NewEvent.css";
 import { useNavigate } from "react-router-dom";
+import { MdOutlineFileUpload } from "react-icons/md";
+import { v4 as uuidv4 } from "uuid"; // Importar uuid
+
 function NewEvent() {
   const [title, setEventName] = useState("");
   const [description, setEventDesc] = useState("");
@@ -67,7 +70,40 @@ function NewEvent() {
       return;
     }
 
-    //TODO: Add real image + uid
+    // Convert startDate and endDate to Date objects for comparison
+    const startDateObj = new Date(startDate);
+    const endDateObj = new Date(endDate);
+
+    // Get the current date
+    const currentDate = new Date();
+
+    // Get the current year
+    const currentYear = currentDate.getFullYear();
+
+    // Check if the start date is in the past
+    if (startDateObj < currentDate) {
+      setError(true);
+      return;
+    }
+
+    // Check if the end date is before the start date
+    if (endDateObj < startDateObj) {
+      setError(true);
+      return;
+    }
+
+    // Check if the year of start date is earlier than the current year
+    if (startDateObj.getFullYear() < currentYear) {
+      setError(true);
+      return;
+    }
+
+    // Check if the year of end date is more than 5 years from the current year
+    if (endDateObj.getFullYear() - currentYear > 5) {
+      setError(true);
+      return;
+    }
+
     // Object with event data
     const eventData = {
       title,
@@ -86,7 +122,6 @@ function NewEvent() {
 
     // Here you can send the data to the backend to save it
     createEvent(eventData);
-    // Logic to simulate the event being saved
   };
 
   return (
@@ -126,20 +161,26 @@ function NewEvent() {
           </div>
 
           <div className="form-group">
+            <label htmlFor="start-date">Start Date:</label>
             <input
+              id="start-date"
               className="input"
               type="date"
               placeholder="Start Date"
               value={startDate}
+              min={new Date().toISOString().split("T")[0]}
               onChange={(e) => setStartDate(e.target.value)}
             />
           </div>
           <div className="form-group">
+            <label htmlFor="end-date">End Date:</label>
             <input
+              id="end-date"
               className="input"
               type="date"
               placeholder="End Date"
               value={endDate}
+              min={startDate} // Minimum end date should be the start date
               onChange={(e) => setEndDate(e.target.value)}
             />
           </div>

@@ -28,7 +28,9 @@ const Deportes = () => {
             <h2>{evento.nombre}</h2>
             <p>Precio de la entrada: {evento.precioEntrada}</p>
             {/* Otros detalles del evento */}
-            <button>Comprar entradas</button>
+            <Link to={`/auth`}>
+              <button className="button-cool">Buy ticket</button>
+            </Link>
           </div>
         ))}
       </div>
