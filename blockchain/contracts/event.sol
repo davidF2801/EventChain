@@ -45,15 +45,15 @@ contract Event {
         return ownedTickets[account][ticketId];
     }
 
+    //TODO: cambiar ticketsSold para que no puedan tener dos tickets mismo id
     function createTicket() public{
         require(ticketsSold < totalTickets, "All tickets have already been created.");
-        ticketsSold++;
         tickets[ticketsSold] = Ticket({
             ticketId: ticketsSold,
             price: ticketPrice,
             forSale: false
         });
-        
+        ticketsSold++;
         // tickets.push(Ticket({
         //     ticketId: tickets.length,
         //     price: _price,
@@ -64,18 +64,18 @@ contract Event {
     }
     
     function buyTicket() public payable {
-            Ticket storage ticket;
+        Ticket storage ticket;
 
-            createTicket();
-            ticket = tickets[ticketsSold - 1];
+        createTicket();
+        ticket = tickets[ticketsSold - 1];
 
-            require(msg.value == ticket.price, "Incorrect payment amount.");
+        require(msg.value == ticket.price, "Incorrect payment amount.");
 
-            payable(host).transfer(msg.value);
+        payable(host).transfer(msg.value);
 
-            ownedTickets[msg.sender][ticketsSold - 1] = 1;
-            ticketOwners[ticketsSold - 1] = msg.sender;
-            emit TicketPurchased(msg.sender); 
+        ownedTickets[msg.sender][ticketsSold - 1] = 1;
+        ticketOwners[ticketsSold - 1] = msg.sender;
+        emit TicketPurchased(msg.sender); 
         }
     function rebuyTicket(uint _ticketId) public payable {
         require(_ticketId < ticketsSold, "Ticket does not exist."); // Ensures the ticket exists
@@ -100,7 +100,7 @@ contract Event {
 
     function listTicketForResale(uint _ticketId, uint _price) public {
         //TODO: Hacer privado
-        require(allowResale, 'Resale is not permitted for this event');
+        require(allowResale == true, 'Resale is not permitted for this event');
         require(_ticketId < ticketsSold, "Ticket does not exist.");
         require(ticketOwners[_ticketId] == msg.sender, "Caller is not the owner of the ticket"); 
 

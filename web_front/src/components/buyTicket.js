@@ -8,6 +8,8 @@ export const buyTicket = async (pk, buyerAccount, contractAddress) => {
 
   const ticketPrice = await contractInstance.ticketPrice().call();
 
+  console.log("Ticket Price:", ticketPrice);
+
   const result = await contractInstance.buyTicket().send({
     from: buyerAccount,
     feeLimit: 100000000,
@@ -15,12 +17,11 @@ export const buyTicket = async (pk, buyerAccount, contractAddress) => {
     shouldPollResponse: true,
   });
 
+  console.log("Transaction successful:", result);
+
   const ticketId = (await contractInstance.ticketsSold().call()) - 1;
 
-  console.log("Ticket Price:", ticketPrice);
   console.log("Ticket Id:", ticketId);
-
-  console.log("Transaction successful:", result);
 
   var ticketInfo = { ticketId: ticketId, ticketPrice: ticketPrice };
   return ticketInfo;

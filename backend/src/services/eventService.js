@@ -26,7 +26,7 @@ async function deployEvent(address, nTickets, ticketPrice, allowResale, resaleFe
       bytecode: bytecode,
       feeLimit: 100000000,
       callValue: 0,
-      parameters: [nTickets, address, ticketPrice],
+      parameters: [nTickets, address, ticketPrice, allowResale, resaleFee],
     });
   
     console.log('Contract deployed successfully at address:', contract.address);
