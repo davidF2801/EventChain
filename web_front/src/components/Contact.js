@@ -1,8 +1,10 @@
 import React from "react";
+import contactphoto from "./images/contact-img.png";
 
 const Contact = () => {
   return (
     <div className="container mx-auto p-8">
+      <img src={contactphoto} className="w-full mb-8" alt="Contact" />
       <h1 className="text-3xl font-bold mb-4">Contact Us</h1>
       <div className="flex flex-col md:flex-row md:space-x-8">
         <div className="flex-1">
@@ -22,6 +24,7 @@ const Contact = () => {
         </div>
         <div className="flex-1">
           <h2 className="text-xl font-semibold mb-2">Follow Us</h2>
+          <h2 className="text-xl font-semibold mb-2">@itsgorkiwiski</h2>
           <div className="flex space-x-4 mb-4">
             <a href="#" className="text-blue-500 hover:text-blue-700">
               <i className="fab fa-linkedin fa-2x"></i>

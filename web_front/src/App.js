@@ -24,6 +24,7 @@ import Footer from "./components/Footer.js";
 import Contact from "./components/Contact.js";
 import MyTickets from "./components/MyTickets.js";
 import AuthListTicket from "./components/AuthListTicket.js";
+import Search from "./components/Search.js";
 import "./App.css";
 import TronWeb from "tronweb";
 
@@ -73,6 +74,7 @@ function App() {
           <Route path="/Contact" element={<Contact />} />
           <Route path="/MyTickets" element={<MyTickets />} />
           <Route path="/AuthListTicket" element={<AuthListTicket />} />
+          <Route path="/Search" element={<Search />} />
           <Route path="/NotFound" element={<NotFound />} />
         </Routes>
         <Footer />
