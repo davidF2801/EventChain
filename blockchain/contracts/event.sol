@@ -108,6 +108,7 @@ contract Event {
         
         ticket.forSale = true;
         ticket.price = _price;
+        tickets[_ticketId] = ticket;
         emit TicketListedForResale(_ticketId, _price);
     }
 
