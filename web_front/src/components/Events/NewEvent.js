@@ -239,7 +239,7 @@ function NewEvent() {
             <input
               className="input"
               type="text"
-              placeholder="Ticket Price"
+              placeholder="Ticket Price (in TRX)"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />

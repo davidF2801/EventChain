@@ -4,7 +4,6 @@ require('dotenv').config();
 
 async function deployEvent(address, nTickets, ticketPrice, allowResale, resaleFee) {
   console.log(`Current working directory: ${process.cwd()}`);
-
   const rawdata = fs.readFileSync('build/contracts/Event.json');
   const compiledContract = JSON.parse(rawdata);
 
@@ -24,7 +23,7 @@ async function deployEvent(address, nTickets, ticketPrice, allowResale, resaleFe
     const contract = await tronWebInst.contract().new({
       abi: abi,
       bytecode: bytecode,
-      feeLimit: 100000000,
+      feeLimit: 200000000,
       callValue: 0,
       parameters: [nTickets, address, ticketPrice, allowResale, resaleFee],
     });

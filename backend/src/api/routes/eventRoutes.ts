@@ -61,7 +61,11 @@ router.post('/details', async (req, res) => {
 router.post('/createEvent', async (req, res) => {
     try {
         const { title, description,location, startDate, endDate,type, image, address, price, nTickets, allowResale,resaleFee,maxPrice} = req.body;
-        const contractAddress = await deployEvent(address,nTickets,price, allowResale, resaleFee)
+        console.log(price);
+        const trxSun = 1000000;
+        const sunAmount = price * trxSun;
+        console.log(sunAmount);
+        const contractAddress = await deployEvent(address,nTickets,sunAmount, allowResale, resaleFee)
         .catch(error => {
           // Envía una respuesta de error al cliente
           res.status(500).json({ error: 'Error when creating event', message: error.message });
