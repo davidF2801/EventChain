@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "./images/logo1.png";
+import Cookies from "js-cookie";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -22,6 +23,8 @@ function Login() {
         body: JSON.stringify(credentials),
       });
       const data = await response.json();
+      const token = data.token;
+      Cookies.set("token", token, { expires: 1 });
       console.log("Login response:", credentials);
       if (!response.ok) {
         throw new Error("Login failed");

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./EventGeneric.css";
 import Error from "../images/404.png";
+import useToken from "../../authenticate_utils";
 
 const EventGeneric = () => {
   const [data, setData] = useState(null);
@@ -9,11 +10,18 @@ const EventGeneric = () => {
   const [error, setError] = useState(null);
   const [redirectToError, setRedirectToError] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:8888/events");
+        const token = useToken(navigate);
+        const response = await fetch("http://localhost:8888/events", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -34,7 +42,7 @@ const EventGeneric = () => {
   }, []);
 
   if (redirectToError) {
-    return <img class="w-4 h-4 mr-auto" src={Error} alt="logo" />;
+    return <img className="w-4 h-4 mr-auto" src={Error} alt="logo" />;
   }
 
   return (

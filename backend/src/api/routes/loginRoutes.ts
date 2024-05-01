@@ -2,6 +2,12 @@ import { Router } from 'express';
 import { collections } from '../../services/databaseService';
 import UserModel from '../../models/userModel';
 import bcrypt from 'bcryptjs'; // Ensure bcryptjs is installed for password hashing
+import jwt from 'jsonwebtoken'
+
+import dotenv from 'dotenv';
+dotenv.config();
+
+
 
 
 
@@ -18,7 +24,15 @@ router.post('/login', async (req, res) => {
     const hashed_password = await bcrypt.hash(password, salt);
     //const isMatch = await bcrypt.compare(password, user.password);
     if (hashed_password==user.password) {
-      res.status(200).json({ message: 'Login successful' });
+      const userForToken = {
+        username: user.username,
+        id: user._id,
+      }
+      const secret: string = process.env.SECRET ?? "";
+      const token = jwt.sign(userForToken, secret,  {expiresIn: 60*60 })
+      console.log(token)
+
+      res.status(200).json({ token, message: 'Login successful' });
     } else {
       res.status(401).json({ error: 'Invalid credentials' });
     }

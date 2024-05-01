@@ -1,6 +1,14 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+// import session from 'express-session';
+// import cookieParser from 'cookie-parser';
+// declare module 'express-session' {
+//   export interface SessionData {
+//     username: string;
+//   }
+// }
+
 import router from './api/routes';  // Ensure this path is correct and that the file exports the router properly
 import { connectToDatabase } from './services/databaseService';
 
