@@ -15,6 +15,7 @@ function NewEvent() {
   const [address, setAddress] = useState("");
   const [eventSaved, setEventSaved] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(""); // Nuevo estado para el mensaje de error
   const [price, setPrice] = useState("");
   const [nTickets, setNtickets] = useState("");
   const [allowResale, setAllowResale] = useState(false);
@@ -42,11 +43,16 @@ function NewEvent() {
     } catch (error) {
       console.error("Error creating event:", error);
       setError(true);
+      setErrorMessage("Error creating event. Please try again."); // Establecer un mensaje de error genérico
     }
   }
 
   const handleSaveEvent = (e) => {
     e.preventDefault();
+
+    // Reset error state
+    setError(false);
+    setErrorMessage("");
 
     // Validation of fields
     if (
@@ -61,12 +67,14 @@ function NewEvent() {
       !nTickets
     ) {
       setError(true);
+      setErrorMessage("Please fill in all required fields.");
       return;
     }
 
     // Check for the resale fields only if resale is allowed
     if (allowResale && (!resaleFee || !maxPrice)) {
       setError(true);
+      setErrorMessage("Please fill in all required resale fields.");
       return;
     }
 
@@ -83,24 +91,30 @@ function NewEvent() {
     // Check if the start date is in the past
     if (startDateObj < currentDate) {
       setError(true);
+      setErrorMessage("Start Date must be current date or later.");
       return;
     }
 
     // Check if the end date is before the start date
     if (endDateObj < startDateObj) {
       setError(true);
+      setErrorMessage("End Date must be after Start Date.");
       return;
     }
 
     // Check if the year of start date is earlier than the current year
     if (startDateObj.getFullYear() < currentYear) {
       setError(true);
+      setErrorMessage("Start Date cannot be in the past.");
       return;
     }
 
     // Check if the year of end date is more than 5 years from the current year
     if (endDateObj.getFullYear() - currentYear > 5) {
       setError(true);
+      setErrorMessage(
+        "Events cannot be scheduled more than 5 years in advance."
+      );
       return;
     }
 
@@ -128,7 +142,8 @@ function NewEvent() {
     <div className="container">
       {!eventSaved && <h2 className="heading">New Event</h2>}
       {eventSaved && <h2 className="saved">Event Saved Successfully</h2>}
-      {error && <h3 className="failed">Please fill in all fields</h3>}
+      {error && <h3 className="failed">{errorMessage}</h3>}{" "}
+      {/* Mostrar el mensaje de error */}
       {!eventSaved && (
         <form className="form">
           <div className="form-group">
@@ -169,6 +184,7 @@ function NewEvent() {
               placeholder="Start Date"
               value={startDate}
               min={new Date().toISOString().split("T")[0]}
+              max={new Date().getFullYear() + 5 + "-12-31"} // Limitar a 5 años en el futuro
               onChange={(e) => setStartDate(e.target.value)}
             />
           </div>
@@ -181,6 +197,7 @@ function NewEvent() {
               placeholder="End Date"
               value={endDate}
               min={startDate} // Minimum end date should be the start date
+              max={new Date().getFullYear() + 5 + "-12-31"} // Limitar a 5 años en el futuro
               onChange={(e) => setEndDate(e.target.value)}
             />
           </div>
