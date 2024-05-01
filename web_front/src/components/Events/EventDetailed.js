@@ -1,7 +1,7 @@
-// EventDetailed.js
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ErrorImage from "../images/404.png";
+import "./EventGeneric.css"; // Importa el archivo CSS de EventGeneric
 
 const EventDetailed = () => {
   const { title } = useParams();
@@ -9,9 +9,6 @@ const EventDetailed = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log(title);
-    // In your EventDetailed component (frontend)
-    // In your EventDetailed component (frontend)
     const fetchEventDetails = async () => {
       try {
         const response = await fetch("http://localhost:8888/events/details", {
@@ -19,7 +16,7 @@ const EventDetailed = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ title: title }), // Send title in the request body
+          body: JSON.stringify({ title: title }),
         });
         if (!response.ok) {
           throw new Error("Failed to fetch event details");
@@ -27,15 +24,23 @@ const EventDetailed = () => {
         const eventData = await response.json();
         setEventData(eventData);
       } catch (error) {
-        setError(error.message); // Ensure the error message is passed, not the error object
+        setError(error.message);
       }
     };
 
-    console.log(title);
     fetchEventDetails();
 
     return () => {};
   }, [title]);
+
+  const handleLocationClick = (location) => {
+    window.open(
+      `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+        location
+      )}`,
+      "_blank"
+    );
+  };
 
   if (error) {
     return <img className="w-4 h-4 mr-auto" src={ErrorImage} alt="Error" />;
@@ -46,23 +51,87 @@ const EventDetailed = () => {
   }
 
   return (
-    <div>
-      <h1>{eventData.title}</h1>
-      <p>Date: {eventData.date}</p>
-      <p>Location: {eventData.location}</p>
-      <p>Description: {eventData.description}</p>
-      <p>Start Date: {eventData.startDate}</p>
-      <p>End Date: {eventData.endDate}</p>
-      <p>Type: {eventData.type}</p>
-      <p>Address: {eventData.address}</p>
-      <p>Price: {eventData.price}</p>
-      <p>Number of Tickets: {eventData.nTickets}</p>
-      {eventData.allowResale && (
-        <>
-          <p>Resale Fee: {eventData.resaleFee}</p>
-          <p>Maximum Price Allowed: {eventData.maxPrice}</p>
-        </>
-      )}
+    <div
+      className="container mx-auto"
+      style={{ width: "80%", margin: "0 auto" }}
+    >
+      <div className="button-cool2">
+        <h1 style={{ color: "white", fontWeight: "bold" }}>
+          {eventData.title}
+        </h1>
+        <h3
+          style={{ marginBottom: "10px", fontWeight: "bold", color: "#ff6666" }}
+        >
+          Description:{" "}
+        </h3>
+        <p>
+          <span style={{ textAlign: "justify" }}>{eventData.description}</span>
+        </p>
+        <p
+          style={{ marginBottom: "10px", fontWeight: "bold", color: "#99cc00" }}
+        >
+          Dates:{" "}
+        </p>
+        <p
+          style={{ marginBottom: "10px", fontWeight: "bold", color: "#ffcc00" }}
+        >
+          Start Date: {eventData.startDate}
+        </p>
+        <p
+          style={{ marginBottom: "10px", fontWeight: "bold", color: "#ffcc00" }}
+        >
+          Finish Date: {eventData.endDate}
+        </p>
+        <p
+          style={{ marginBottom: "10px", fontWeight: "bold", color: "#66ff99" }}
+        >
+          Type: {eventData.type}
+        </p>
+        {/* <p style={{ marginBottom: "10px", fontWeight: "bold", color: "#66ccff" }}>Address: {eventData.address}</p> */}
+        <p
+          style={{ marginBottom: "10px", fontWeight: "bold", color: "#ff33cc" }}
+        >
+          Price: {eventData.price}
+        </p>
+        <p
+          style={{ marginBottom: "10px", fontWeight: "bold", color: "#ff3399" }}
+        >
+          Number of Tickets: {eventData.nTickets}
+        </p>
+        {eventData.allowResale && (
+          <>
+            <p
+              style={{
+                marginBottom: "10px",
+                fontWeight: "bold",
+                color: "#33cccc",
+              }}
+            >
+              Resale Fee: {eventData.resaleFee}
+            </p>
+            <p
+              style={{
+                marginBottom: "10px",
+                fontWeight: "bold",
+                color: "#cc66ff",
+              }}
+            >
+              Maximum Price Allowed: {eventData.maxPrice}
+            </p>
+          </>
+        )}
+        <h3 style={{ color: "white", fontWeight: "bold" }}>Location</h3>
+        <div>
+          <span
+            className="location-link"
+            onClick={() => handleLocationClick(eventData.location)}
+            onMouseEnter={(e) => (e.target.style.textDecoration = "underline")}
+            onMouseLeave={(e) => (e.target.style.textDecoration = "none")}
+          >
+            {eventData.location}
+          </span>
+        </div>
+      </div>
     </div>
   );
 };

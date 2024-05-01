@@ -89,8 +89,3 @@
   background-color: #7c48db;
   transform: scale(1.05);
 }
-
-.button-cool2:active {
-  transform: scale(0.95);
-  background-color: #397d39;
-}
