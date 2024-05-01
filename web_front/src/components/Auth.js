@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { buyTicket } from "./buyTicket.js";
 import { resellTicket } from "./resellTicket.js";
-import { useNavigate } from "react-router-dom";
 import "./Auth.css"; // Importa el archivo CSS
-import useToken from "../authenticate_utils.js";
+import useRequireAuth from "../authenticate_utils.js";
 
 const Auth = () => {
   const [publicKey, setPublicKey] = useState("");
@@ -12,11 +11,19 @@ const Auth = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const location = useLocation();
   const eventInfo = location.state || "";
-  const navigate = useNavigate();
+  const isAuthenticated = useRequireAuth();
   useEffect(() => {
-    const token = useToken(navigate);
-  }, []);
+    if (!isAuthenticated) {
+      window.location.href = "/login";
+    }
+  }, [isAuthenticated]);
 
+  if (isAuthenticated == null) {
+    return null;
+  }
+  if (!isAuthenticated) {
+    return null;
+  }
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -44,17 +51,17 @@ const Auth = () => {
         console.log("Ticket Info:", ticketInfo);
         const ticketData = {
           eventName: eventInfo.title,
-          user: "gorketas",
           forSale: false,
           ticketId: ticketInfo.ticketId,
           price: ticketInfo.ticketPrice._hex,
           contractAddress: eventInfo.contractAddress,
         };
-
+        console.log(isAuthenticated);
         fetch("http://localhost:8888/tickets/createTicket", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: "Bearer " + isAuthenticated,
           },
           body: JSON.stringify(ticketData),
         })

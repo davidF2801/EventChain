@@ -20,7 +20,7 @@ const MyTickets = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const token = useToken(navigate);
+        const token = isAuthenticated;
         if (!token) {
           return;
         }

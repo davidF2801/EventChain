@@ -1,5 +1,9 @@
 import { Router } from 'express';
 import TicketModel from '../../models/ticketModel';
+import getTokenFrom from '../validators/token_handling';
+import jwt from 'jsonwebtoken'
+import { JwtPayload } from 'jsonwebtoken';
+
 
 const router = Router();
 
@@ -42,7 +46,18 @@ router.get('/resale', async (req, res) => {
 });
 router.get('/myTickets', async (req, res) => {
     try {
-        const ticket = await TicketModel.find({}).exec();
+        const secret: string = process.env.SECRET ?? "";
+        const token: string | null = getTokenFrom(req);
+        if (token == null) {
+          return res.status(401).json({ error: 'no token in the call' })
+        } 
+        const decodedToken = jwt.verify(token!, secret)
+        const jwtPayload = decodedToken as JwtPayload
+        if (!decodedToken)
+        {
+          return res.status(401).json({ error: 'token invalid' })
+        }
+        const ticket = await TicketModel.find({user: jwtPayload.username}).exec();
         if (ticket) {
             res.send(ticket);
         } else {
@@ -56,7 +71,15 @@ router.get('/myTickets', async (req, res) => {
 
 router.post('/createTicket', async (req, res) => {
     try {
-        const { eventName, user, forSale, ticketId, price, contractAddress } = req.body;
+        const { eventName, forSale, ticketId, price, contractAddress } = req.body;
+        const secret: string = process.env.SECRET ?? "";
+        const token: string | null = getTokenFrom(req);
+        if (token == null) {
+          return res.status(401).json({ error: 'no token in the call' })
+        } 
+        const decodedToken = jwt.verify(token!, secret)
+        const jwtPayload = decodedToken as JwtPayload
+        const user = jwtPayload.username
 
         const new_ticket = new TicketModel({
             eventName,
