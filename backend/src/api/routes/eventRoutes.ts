@@ -13,10 +13,34 @@ router.get('/', async (req, res) => {
         console.error(error);
     }
 });
-
-router.get('/:id', (req, res) => {
-    res.send(`User ${req.params.id} route!`);
+router.post('/details', async (req, res) => {
+  const {title} = req.body;
+  try {
+      const event = await EventModel.findOne({title});
+      if (event) {
+          res.send(event);
+      } else {
+          res.status(404).send('Event not found');
+      }
+  } catch (error) {
+      console.error(error);
+      //res.status(500).json({ error: 'Error finding ticket', message: error.message });
+  }
 });
+
+// In your EventRoutes file (backend)
+// router.get('/', (req, res) => { // Changed from '/:id' to '/'
+//   const { title } = req.query; // Accessing title passed as a query parameter
+//   if (title) {
+//        const event =  EventModel.find({title: title}).exec();
+//       // Here, you would ideally fetch and return the event details by title.
+//       // This is a placeholder example. Adjust according to your database or data handling logic.
+//       res.send(`Event details for title: ${title}`);
+//   } else {
+//       res.status(400).send("Title parameter is missing");
+//   }
+// });
+
 //TODO: Test with frontend
 router.post('/createEvent', async (req, res) => {
     try {

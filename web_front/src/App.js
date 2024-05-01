@@ -68,7 +68,7 @@ function App() {
           <Route path="/MyProfile" element={<MyProfile />} />
           <Route path="/newevent" element={<NewEvent />} />
           <Route path="/oldevents" element={<OldEvents />} />
-          <Route path="/eventdetailed" element={<EventDetailed />} />
+          <Route path="/eventdetailed/:title" element={<EventDetailed />} />
           <Route path="/Footer" element={<Footer />} />
           <Route path="/NavBar" element={<NavBar />} />
           <Route path="/Contact" element={<Contact />} />

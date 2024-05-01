@@ -9,21 +9,29 @@ const EventDetailed = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    console.log(title);
+    // In your EventDetailed component (frontend)
+    // In your EventDetailed component (frontend)
     const fetchEventDetails = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:8888/events?title=${title}`
-        );
+        const response = await fetch("http://localhost:8888/events/details", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ title: title }), // Send title in the request body
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch event details");
         }
         const eventData = await response.json();
         setEventData(eventData);
       } catch (error) {
-        setError(error);
+        setError(error.message); // Ensure the error message is passed, not the error object
       }
     };
 
+    console.log(title);
     fetchEventDetails();
 
     return () => {};
