@@ -1,11 +1,27 @@
 // NewEvent.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./NewEvent.css";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid"; // Importar uuid
+import useRequireAuth from "../../authenticate_utils.js";
+import Cookies from "js-cookie";
 
 function NewEvent() {
+  const isAuthenticated = useRequireAuth();
+  useEffect(() => {
+    if (!isAuthenticated) {
+      window.location.href = "/login";
+    }
+  }, [isAuthenticated]);
+
+  if (isAuthenticated == null) {
+    return null;
+  }
+  if (!isAuthenticated) {
+    return null;
+  }
+
   const [title, setEventName] = useState("");
   const [description, setEventDesc] = useState("");
   const [location, setLocation] = useState("");

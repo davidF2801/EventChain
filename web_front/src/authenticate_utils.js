@@ -1,13 +1,15 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-function useToken(navigate) {
+function useRequireAuth() {
   const token = Cookies.get("token");
 
   if (!token) {
-    navigate("/login");
+    return false; // User is not authenticated
   }
 
-  return token;
+  return true; // User is authenticated
 }
 
-export default useToken;
+export default useRequireAuth;

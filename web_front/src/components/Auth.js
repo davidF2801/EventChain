@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { buyTicket } from "./buyTicket.js";
 import { resellTicket } from "./resellTicket.js";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Auth.css"; // Importa el archivo CSS
+import useToken from "../authenticate_utils.js";
 
 const Auth = () => {
   const [publicKey, setPublicKey] = useState("");
@@ -11,6 +12,10 @@ const Auth = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const location = useLocation();
   const eventInfo = location.state || "";
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = useToken(navigate);
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();

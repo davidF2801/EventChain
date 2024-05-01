@@ -1,18 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Error from "./images/404.png";
 import "./Auth.css"; // Importa el archivo CSS
+import useRequireAuth from "../authenticate_utils.js";
+
 const MyTickets = () => {
   const [data, setData] = useState(null);
   const [eventData, setEventData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const isAuthenticated = useRequireAuth();
+
   useEffect(() => {
+    if (!isAuthenticated) {
+      window.location.href = "/login";
+    }
+
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:8888/tickets/myTickets");
+        const token = useToken(navigate);
+        if (!token) {
+          return;
+        }
+        const response = await fetch(
+          "http://localhost:8888/tickets/myTickets",
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -27,11 +46,17 @@ const MyTickets = () => {
         setLoading(false);
       }
     };
+    if (isAuthenticated == null) {
+      return null;
+    }
+    if (!isAuthenticated) {
+      return null;
+    }
 
     fetchData();
 
     return () => {};
-  }, []);
+  }, [isAuthenticated]);
 
   if (loading) {
     return <div>Loading...</div>;

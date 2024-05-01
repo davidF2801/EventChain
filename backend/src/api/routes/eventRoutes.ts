@@ -10,19 +10,19 @@ const router = Router();
 
 router.get('/', async (req, res) => {
     try {
-        const secret: string = process.env.SECRET ?? "";
-        const token: string | null = getTokenFrom(req);
-        console.log(token)
-        if (token == null) {
-          return res.status(401).json({ error: 'no token in the call' })
-        } 
-        console.log(token)
-        const decodedToken = jwt.verify(token!, secret)
-        console.log(decodedToken)
-        if (!decodedToken)
-        {
-          return res.status(401).json({ error: 'token invalid' })
-        }
+        // const secret: string = process.env.SECRET ?? "";
+        // const token: string | null = getTokenFrom(req);
+        // console.log(token)
+        // if (token == null) {
+        //   return res.status(401).json({ error: 'no token in the call' })
+        // } 
+        // console.log(token)
+        // const decodedToken = jwt.verify(token!, secret)
+        // console.log(decodedToken)
+        // if (!decodedToken)
+        // {
+        //   return res.status(401).json({ error: 'token invalid' })
+        // }
         const events = (await EventModel.find({}));
         res.status(200).send(events);
     } catch (error) {

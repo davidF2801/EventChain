@@ -1,10 +1,26 @@
 // MyProfile.js
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import user from "./images/user.png";
 import "./MyProfile.css";
+import useRequireAuth from "../authenticate_utils.js";
+import { useNavigate } from "react-router-dom";
 
 function MyProfile() {
+  const isAuthenticated = useRequireAuth();
+  useEffect(() => {
+    if (!isAuthenticated) {
+      window.location.href = "/login";
+    }
+  }, [isAuthenticated]);
+
+  if (isAuthenticated == null) {
+    return null;
+  }
+  if (!isAuthenticated) {
+    return null;
+  }
+
   return (
     <div className="loggedIn-container">
       <header className="Header2">

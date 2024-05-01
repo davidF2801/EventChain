@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./EventGeneric.css";
 import Error from "../images/404.png";
-import useToken from "../../authenticate_utils";
 
 const EventGeneric = () => {
   const [data, setData] = useState(null);
@@ -10,18 +9,14 @@ const EventGeneric = () => {
   const [error, setError] = useState(null);
   const [redirectToError, setRedirectToError] = useState(false);
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const token = useToken(navigate);
-        const response = await fetch("http://localhost:8888/events", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
+        // const response = await fetch("http://localhost:8888/events",{ headers: {
+        //   'Authorization': 'Bearer ' + token,
+        // }});
+        const response = await fetch("http://localhost:8888/events");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
