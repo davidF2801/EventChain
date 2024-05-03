@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ErrorImage from "../images/404.png";
 import "./EventGeneric.css"; // Importa el archivo CSS de EventGeneric
 
@@ -131,6 +132,9 @@ const EventDetailed = () => {
             {eventData.location}
           </span>
         </div>
+        <Link to={`/auth`} state={event}>
+          <button className="button">Buy tickets</button>
+        </Link>
       </div>
     </div>
   );

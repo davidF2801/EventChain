@@ -57,7 +57,7 @@ function MyProfile() {
     <div className="loggedIn-container">
       <header className="Header2">
         <div className="Header-left">
-          <Link to="/" className="Header-title">
+          <Link to="/MyProfile" className="Header-title">
             <img src={user} className="Header-logo" alt="User" />
             {userData ? userData.name : "User"}
           </Link>

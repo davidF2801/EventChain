@@ -50,7 +50,7 @@ const MyEvents = () => {
   }
 
   return (
-    <div className="event-generic-container">
+    <div className="container mx-auto">
       <h1 className="heading text-3xl font-bold mb-2 mt-4">My events</h1>
       {loading && <div>Loading...</div>}
       {error && (

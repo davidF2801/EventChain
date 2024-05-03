@@ -98,12 +98,6 @@ const Navbar = () => {
                 Login
               </Link>
             )}
-            <select className="language-selector">
-              <option value="es">Español</option>
-              <option value="en">English</option>
-              <option value="de">Deutsch</option>
-              <option value="zh">中文</option>
-            </select>
           </div>
         </div>
       </header>

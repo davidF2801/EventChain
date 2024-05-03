@@ -42,32 +42,6 @@ const EventGeneric = () => {
 
   return (
     <div className="event-generic-container">
-      <header className="Header bg-blue-500 text-white py-2 px-4 flex justify-between items-center">
-        <nav className="Navbar">
-          <ul className="Navbar-links flex space-x-4">
-            <li>
-              <Link to="/musica" className="hover:text-blue-700">
-                Música
-              </Link>
-            </li>
-            <li>
-              <Link to="/teatro" className="hover:text-blue-700">
-                Teatro
-              </Link>
-            </li>
-            <li>
-              <Link to="/festivales" className="hover:text-blue-700">
-                Festivales
-              </Link>
-            </li>
-            <li>
-              <Link to="/deportes" className="hover:text-blue-700">
-                Deportes
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
       <h1 className="heading text-3xl font-bold mb-2 mt-4">All events</h1>
       {loading && <div>Loading...</div>}
       {error && (

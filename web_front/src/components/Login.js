@@ -30,7 +30,7 @@ function Login() {
         throw new Error("Login failed");
       }
       console.log("Login successful:", credentials);
-      navigate("/");
+      navigate("/MyProfile");
     } catch (error) {
       setErrorMessage(error.message);
       setLoginError(true);
