@@ -1,18 +1,50 @@
-// MyProfile.js
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import user from "./images/user.png";
 import "./MyProfile.css";
 import useRequireAuth from "../authenticate_utils.js";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function MyProfile() {
   const isAuthenticated = useRequireAuth();
+  const [userData, setUserData] = useState(null);
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!isAuthenticated) {
-      window.location.href = "/login";
+      navigate("/login");
+    } else {
+      // Simular la obtención de datos del usuario desde la base de datos
+      // Aquí puedes hacer una llamada a tu backend para obtener la información del usuario
+      // Este es solo un ejemplo simulado
+      const fetchUserData = async () => {
+        try {
+          // Aquí puedes hacer una llamada a tu backend para obtener la información del usuario
+          // Ejemplo de cómo podría ser:
+          // const response = await fetch("URL_DEL_BACKEND_PARA_OBTENER_DATOS_DEL_USUARIO", {
+          //   method: "GET",
+          //   headers: {
+          //     Authorization: `Bearer ${Cookies.get("token")}`,
+          //   },
+          // });
+          // const userData = await response.json();
+          // setUserData(userData);
+
+          // En este ejemplo simulado, usamos un objeto estático
+          const userData = {
+            name: "Nombre del Usuario",
+            // Otros datos del usuario aquí...
+          };
+          setUserData(userData);
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      };
+
+      fetchUserData();
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, navigate]);
 
   if (isAuthenticated == null) {
     return null;
@@ -27,7 +59,7 @@ function MyProfile() {
         <div className="Header-left">
           <Link to="/" className="Header-title">
             <img src={user} className="Header-logo" alt="User" />
-            User
+            {userData ? userData.name : "User"}
           </Link>
         </div>
         <div className="Header-right">
@@ -35,6 +67,11 @@ function MyProfile() {
             <ul className="Navbar-links">
               <li>
                 <Link to="/NotFound">Edit Profile</Link>
+              </li>
+              <li>
+                <Link to="/" onClick={() => Cookies.remove("token")}>
+                  Logout
+                </Link>
               </li>
             </ul>
           </nav>

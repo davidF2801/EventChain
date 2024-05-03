@@ -29,10 +29,6 @@ const Navbar = () => {
     }
   };
 
-  const handleLogout = () => {
-    Cookies.remove("token");
-  };
-
   return (
     <nav className="w-full flex md:justify-center justify-between items-center p-4">
       <header className="Header">
@@ -95,9 +91,6 @@ const Navbar = () => {
               <>
                 <Link to="/myprofile" className="login-link">
                   My Profile
-                </Link>
-                <Link to="/" className="login-link">
-                  <button onClick={handleLogout}>Logout</button>
                 </Link>
               </>
             ) : (
