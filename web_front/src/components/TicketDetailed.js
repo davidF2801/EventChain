@@ -20,9 +20,9 @@ const TicketDetailed = () => {
         setCurrentNumber(numbers[nextIndex]); // Update the current number based on the new index
         return nextIndex;
       });
-    }, 3000); // Change the number every 30 seconds
+    }, 3000);
 
-    return () => clearInterval(interval); // Cleanup the interval on component unmount
+    return () => clearInterval(interval);
   }, []);
 
   return (

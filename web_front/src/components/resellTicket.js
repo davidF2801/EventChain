@@ -19,12 +19,25 @@ export const resellTicket = async (
     callValue: ticketPrice,
     shouldPollResponse: true,
   });
-
+  const message = tronWebInst.toHex(contractAddress.toString());
+  const signature = await tronWebInst.trx.sign(message, pk);
+  const isVerified = await tronWebInst.trx.verifyMessage(
+    message,
+    signature,
+    buyerAccount,
+    true
+  );
+  console.log("Verification result:", isVerified);
+  console.log("Signed Message:", signature);
+  console.log("Ticket Id:", ticketId);
   console.log("Ticket Price:", ticketPrice);
   console.log("Ticket Id:", ticketId);
-
   console.log("Transaction successful:", result);
-
-  var ticketInfo = { ticketId: ticketId, ticketPrice: ticketPrice };
+  var ticketInfo = {
+    ticketId: ticketId,
+    ticketPrice: ticketPrice,
+    signature: signature,
+    contractAddress: contractAddress,
+  };
   return ticketInfo;
 };

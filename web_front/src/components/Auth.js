@@ -42,6 +42,31 @@ const Auth = () => {
           eventInfo.contractAddress,
           eventInfo.ticketId
         );
+        //TODO: No acaba de funcionar, falta actualizar los datos de signature y for sale en la DB
+        const updateResponse = await fetch(
+          "http://localhost:8888/tickets/updateTicket",
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              contractAddress: ticketInfo.contractAddress,
+              ticketId: ticketInfo.ticketId,
+              forSale: false,
+              price: ticketInfo.ticketPrice,
+              signature: ticketInfo.signature,
+            }),
+          }
+        );
+        const updateResult = await updateResponse.json();
+        if (updateResponse.ok) {
+          console.log("Ticket updated successfully in database:", updateResult);
+        } else {
+          throw new Error(
+            updateResult.error || "Failed to update ticket in the database"
+          );
+        }
       } else {
         const ticketInfo = await buyTicket(
           privateKey,
@@ -55,7 +80,6 @@ const Auth = () => {
           ticketId: ticketInfo.ticketId,
           price: ticketInfo.ticketPrice._hex,
           contractAddress: eventInfo.contractAddress,
-          publicKey: publicKey,
           signature: ticketInfo.signature,
         };
         console.log(isAuthenticated);

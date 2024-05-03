@@ -122,12 +122,12 @@ router.post('/createTicket', async (req, res) => {
 
 router.put('/updateTicket', async (req, res) => {  
     // Get the ticket ID from URL parameters
-    const { contractAddress, ticketId, forSale, price } = req.body;  // Destructure the fields you want to update from the request body
+    const { contractAddress, ticketId, forSale, price, signature } = req.body;  // Destructure the fields you want to update from the request body
 
     try {
         const result = await TicketModel.findOneAndUpdate(
             { contractAddress:contractAddress, ticketId: ticketId },  // Find a ticket by its ticketId
-            { forSale: forSale, price: price },  // Update these fields in the ticket
+            { forSale: forSale, price: price, signature: signature },  // Update these fields in the ticket
             { new: true }  // Return the updated document
         );
 
