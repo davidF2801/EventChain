@@ -11,7 +11,7 @@ const TicketDetailed = () => {
   }
 
   return (
-    <div className="ticket-detailed-container">
+    <div className="container mx-auto p-">
       <h1>Ticket Details</h1>
       <div className="ticket-details">
         <div>
@@ -32,7 +32,7 @@ const TicketDetailed = () => {
         <div>
           <h3>QR Code for Ticket</h3>
           <QRCode
-            value={ticketInfo.publicKey}
+            value={ticketInfo.publicKey + ticketInfo.contractAddress}
             size={256}
             level="H"
             includeMargin={true}
