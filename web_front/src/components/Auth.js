@@ -56,6 +56,7 @@ const Auth = () => {
           price: ticketInfo.ticketPrice._hex,
           contractAddress: eventInfo.contractAddress,
           publicKey: publicKey,
+          signature: ticketInfo.signature,
         };
         console.log(isAuthenticated);
         fetch("http://localhost:8888/tickets/createTicket", {

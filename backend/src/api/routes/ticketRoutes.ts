@@ -70,9 +70,9 @@ router.get('/myTickets', async (req, res) => {
 });
 // Backend: EventRoutes
 router.post('/details', async (req, res) => {
-    const { contractAddress, publicKey } = req.body; // Receive both contractAddress and publicKey from the request body
+    const { contractAddress, user } = req.body; // Receive both contractAddress and publicKey from the request body
     try {
-        const ticket = await TicketModel.findOne({ contractAddress: contractAddress, publicKey: publicKey }).exec();
+        const ticket = await TicketModel.findOne({ contractAddress: contractAddress, user:user }).exec();
         if (ticket) {
             res.send(ticket);
         } else {
@@ -86,7 +86,7 @@ router.post('/details', async (req, res) => {
 
 router.post('/createTicket', async (req, res) => {
     try {
-        const { eventName, forSale, ticketId, price, contractAddress, publicKey} = req.body;
+        const { eventName, forSale, ticketId, price, contractAddress, signature} = req.body;
         const secret: string = process.env.SECRET ?? "";
         const token: string | null = getTokenFrom(req);
         if (token == null) {
@@ -103,7 +103,7 @@ router.post('/createTicket', async (req, res) => {
             ticketId,
             price,
             contractAddress,
-            publicKey
+            signature
         });
 
         const result = await new_ticket.save()

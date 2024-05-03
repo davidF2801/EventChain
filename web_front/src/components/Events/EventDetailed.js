@@ -132,7 +132,7 @@ const EventDetailed = () => {
             {eventData.location}
           </span>
         </div>
-        <Link to={`/auth`} state={event}>
+        <Link to={`/auth`} state={eventData}>
           <button className="button">Buy tickets</button>
         </Link>
       </div>

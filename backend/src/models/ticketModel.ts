@@ -7,7 +7,7 @@ interface ITicket extends Document {
   ticketId: number;
   price: number;
   contractAddress: string;
-  publicKey: string;
+  signature: string;
 }
 
 const TicketSchema: Schema = new Schema({
@@ -17,7 +17,7 @@ const TicketSchema: Schema = new Schema({
   ticketId: { type: Number, required: true },
   price: { type: Number, required: true },
   contractAddress: { type: String, required: true },
-  publicKey: { type: String, required: true }
+  signature: { type: String, required: true }
 }, {
   timestamps: true // Adds createdAt and updatedAt timestamps
 });
