@@ -16,6 +16,7 @@ import TicketResale from "./components/TicketResale.js";
 import Auth from "./components/Auth.js";
 import buyTicket from "./components/buyTicket.js";
 import MyProfile from "./components/MyProfile.js";
+import EditProfile from "./components/EditProfile.js";
 import NewEvent from "./components/Events/NewEvent.js";
 import OldEvents from "./components/Events/OldEvents.js";
 import EventDetailed from "./components/Events/EventDetailed.js";
@@ -66,6 +67,7 @@ function App() {
           <Route path="/buyTicket" element={<buyTicket />} />
           {/* Agrega la ruta para la página de perfil */}
           <Route path="/MyProfile" element={<MyProfile />} />
+          <Route path="/EditProfile" element={<EditProfile />} />
           <Route path="/newevent" element={<NewEvent />} />
           <Route path="/oldevents" element={<OldEvents />} />
           <Route path="/eventdetailed/:title" element={<EventDetailed />} />

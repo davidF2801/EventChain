@@ -66,7 +66,7 @@ function MyProfile() {
           <nav className="Navbar">
             <ul className="Navbar-links">
               <li>
-                <Link to="/NotFound">Edit Profile</Link>
+                <Link to="/EditProfile">Edit Profile</Link>
               </li>
               <li>
                 <Link to="/" onClick={() => Cookies.remove("token")}>
