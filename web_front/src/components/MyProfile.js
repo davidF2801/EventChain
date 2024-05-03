@@ -94,8 +94,8 @@ function MyProfile() {
         </div>
         <div className="button-cool2">
           <h3>
-            <Link to="/oldevents" className="action-button">
-              View Past Events
+            <Link to="/myevents" className="action-button">
+              View My Events
             </Link>
           </h3>
         </div>

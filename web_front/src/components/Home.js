@@ -32,7 +32,6 @@ function Home() {
     <div className="container mx-auto p-">
       <div className="text-center">
         <img src={logo1} alt="logo" className="mx-auto w-32" />
-        <h2 className="text-white text-2xl font-bold text-center">hola</h2>
       </div>
       <div className="max-w-3xl mx-auto"></div>
     </div>

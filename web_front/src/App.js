@@ -24,6 +24,7 @@ import NavBar from "./components/NavBar.js";
 import Footer from "./components/Footer.js";
 import Contact from "./components/Contact.js";
 import MyTickets from "./components/MyTickets.js";
+import MyEvents from "./components/MyEvents.js";
 import AuthListTicket from "./components/AuthListTicket.js";
 import Search from "./components/Search.js";
 import "./App.css";
@@ -67,6 +68,7 @@ function App() {
           <Route path="/buyTicket" element={<buyTicket />} />
           {/* Agrega la ruta para la página de perfil */}
           <Route path="/MyProfile" element={<MyProfile />} />
+          <Route path="/myevents" element={<MyEvents />} />
           <Route path="/EditProfile" element={<EditProfile />} />
           <Route path="/newevent" element={<NewEvent />} />
           <Route path="/oldevents" element={<OldEvents />} />

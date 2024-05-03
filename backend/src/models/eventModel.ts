@@ -3,6 +3,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 // Interface to describe the properties that an Event Document has
 interface IEvent extends Document {
   title: string;
+  host: string;
   description: string;
   location: string;
   startDate: Date;
@@ -20,6 +21,7 @@ interface IEvent extends Document {
 // Schema to define the structure of the document in MongoDB
 const EventSchema: Schema = new Schema({
   title: { type: String, required: true},
+  host: { type: String, required: true},
   description: { type: String, required: true },
   location: { type: String, required: true },
   startDate: { type: Date, required: true },
