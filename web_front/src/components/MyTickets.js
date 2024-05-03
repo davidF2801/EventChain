@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Error from "./images/404.png";
-import "./Auth.css"; // Importa el archivo CSS
+import ErrorImage from "./images/404.png";
+import "./Auth.css"; // Import CSS file
 import useRequireAuth from "../authenticate_utils.js";
 
 const MyTickets = () => {
-  const [data, setData] = useState(null);
-  const [eventData, setEventData] = useState(null);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -38,24 +37,14 @@ const MyTickets = () => {
         const jsonData = await response.json();
         console.log("Tickets:", jsonData);
         setData(jsonData);
-        setLoading(true);
-        setEventData(event);
       } catch (error) {
-        setError(error);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
     };
-    if (isAuthenticated == null) {
-      return null;
-    }
-    if (!isAuthenticated) {
-      return null;
-    }
 
     fetchData();
-
-    return () => {};
   }, [isAuthenticated]);
 
   if (loading) {
@@ -63,23 +52,40 @@ const MyTickets = () => {
   }
 
   if (error) {
-    return <img class="w-4 h-4 mr-2" src={Error} alt="logo" />;
+    return <img className="w-4 h-4 mr-auto" src={ErrorImage} alt="Error" />;
   }
+
   return (
     <div className="container gradient-custom">
       <h1>Your Tickets</h1>
       <div className="my-tickets-container">
         {data.map((ticket, index) => (
           <div key={index} className="ticket">
-            <h2>{ticket.title}</h2>
-            <p>Event: {ticket.eventName}</p>
-            <Link to={`/AuthListTicket`} state={ticket}>
-              {ticket.forSale ? (
-                <button className="button-cool">Change Resale Price</button>
-              ) : (
-                <button className="button-cool">List Ticket for Resale</button>
-              )}
+            {/* Make the title a link to the detailed ticket page */}
+            <Link
+              to={`/TicketDetailed/${ticket.publicKey}/${ticket.contractAddress}`}
+              state={ticket}
+            >
+              <h2>{ticket.title}</h2>
             </Link>
+            <p>Event: {ticket.eventName}</p>
+            <div className="ticket-actions">
+              <Link
+                to={`/TicketDetailed/${ticket.publicKey}/${ticket.contractAddress}`}
+                state={ticket}
+              >
+                <button className="button-cool">View Details</button>
+              </Link>
+              <Link to={`/AuthListTicket`} state={ticket}>
+                {ticket.forSale ? (
+                  <button className="button-cool">Change Resale Price</button>
+                ) : (
+                  <button className="button-cool">
+                    List Ticket for Resale
+                  </button>
+                )}
+              </Link>
+            </div>
           </div>
         ))}
       </div>

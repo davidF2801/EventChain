@@ -27,7 +27,7 @@ import AuthListTicket from "./components/AuthListTicket.js";
 import Search from "./components/Search.js";
 import "./App.css";
 import TronWeb from "tronweb";
-
+import TicketDetailed from "./components/TicketDetailed.js";
 const mainOptions = {
   fullNode: "http://127.0.0.1:9090/",
   solidityNode: "http://127.0.0.1:9090/",
@@ -69,6 +69,10 @@ function App() {
           <Route path="/newevent" element={<NewEvent />} />
           <Route path="/oldevents" element={<OldEvents />} />
           <Route path="/eventdetailed/:title" element={<EventDetailed />} />
+          <Route
+            path="/TicketDetailed/:publicKey/:contractAddress"
+            element={TicketDetailed}
+          />
           <Route path="/Footer" element={<Footer />} />
           <Route path="/NavBar" element={<NavBar />} />
           <Route path="/Contact" element={<Contact />} />

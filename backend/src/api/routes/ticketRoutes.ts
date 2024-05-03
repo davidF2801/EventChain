@@ -68,10 +68,25 @@ router.get('/myTickets', async (req, res) => {
         //res.status(500).json({ error: 'Error finding ticket', message: error.message });
     }
 });
+// Backend: EventRoutes
+router.post('/details', async (req, res) => {
+    const { contractAddress, publicKey } = req.body; // Receive both contractAddress and publicKey from the request body
+    try {
+        const ticket = await TicketModel.findOne({ contractAddress: contractAddress, publicKey: publicKey }).exec();
+        if (ticket) {
+            res.send(ticket);
+        } else {
+            res.status(404).send('Ticket not found');
+        }
+    } catch (error) {
+        console.error(error);
+    }
+  });
+  
 
 router.post('/createTicket', async (req, res) => {
     try {
-        const { eventName, forSale, ticketId, price, contractAddress } = req.body;
+        const { eventName, forSale, ticketId, price, contractAddress, publicKey} = req.body;
         const secret: string = process.env.SECRET ?? "";
         const token: string | null = getTokenFrom(req);
         if (token == null) {
@@ -87,7 +102,8 @@ router.post('/createTicket', async (req, res) => {
             forSale,
             ticketId,
             price,
-            contractAddress
+            contractAddress,
+            publicKey
         });
 
         const result = await new_ticket.save()
