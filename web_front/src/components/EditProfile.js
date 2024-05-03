@@ -71,7 +71,6 @@ function EditProfile() {
       }
       console.log("User updated successfully:", userData);
       setUserSaved(true);
-      navigate("/");
     } catch (error) {
       console.error("Error updating user:", error);
       setError(true);
@@ -99,10 +98,13 @@ function EditProfile() {
     };
 
     updateUser(userData);
-    Cookies.remove("token");
   };
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (userSaved) {
+    Cookies.remove("token");
   }
 
   return (

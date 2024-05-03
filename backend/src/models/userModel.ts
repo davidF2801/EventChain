@@ -1,5 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
+import TicketModel from './ticketModel';
+import EventModel from './eventModel';
 
 // Interface to describe the properties that a User Document has
 interface IUser extends Document {
@@ -27,8 +29,21 @@ const UserSchema: Schema = new Schema({
 // Pre-save hook to hash password before saving the user document
 UserSchema.pre<IUser>('save', async function(next) {
   // Only hash the password if it has been modified (or is new)
-  if (!this.isModified('password')) return next();
 
+  // Check if username is modified
+  if (this.isModified('username')) {
+      try {
+          const previousUser = await UserModel.findOne({ _id: this._id });
+          // Update username in associated tickets
+          await TicketModel.updateMany({ user: previousUser?.username }, { $set: { user: this.username }});
+          await EventModel.updateMany({ host: previousUser?.username }, { $set: { host: this.username }});
+          console.log('Associated tickets updated successfully');
+      } catch (error) {
+          console.error('Error updating associated tickets:', error);
+      }
+  }
+
+  if (!this.isModified('password')) return next();
   // Hash the password with a salt
   this.salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, this.salt);
