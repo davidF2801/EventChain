@@ -31,7 +31,12 @@ const TicketDetailed = () => {
         </div>
         <div>
           <h3>QR Code for Ticket</h3>
-          <QRCode value={574} size={256} level="H" includeMargin={true} />
+          <QRCode
+            value={ticketInfo.publicKey}
+            size={256}
+            level="H"
+            includeMargin={true}
+          />
         </div>
       </div>
     </div>
