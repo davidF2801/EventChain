@@ -71,10 +71,7 @@ function App() {
           <Route path="/newevent" element={<NewEvent />} />
           <Route path="/oldevents" element={<OldEvents />} />
           <Route path="/eventdetailed/:title" element={<EventDetailed />} />
-          <Route
-            path="/TicketDetailed/:publicKey/:contractAddress"
-            element={TicketDetailed}
-          />
+          <Route path="/TicketDetailed" element={<TicketDetailed />} />
           <Route path="/Footer" element={<Footer />} />
           <Route path="/NavBar" element={<NavBar />} />
           <Route path="/Contact" element={<Contact />} />

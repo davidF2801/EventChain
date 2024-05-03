@@ -61,20 +61,11 @@ const MyTickets = () => {
       <div className="my-tickets-container">
         {data.map((ticket, index) => (
           <div key={index} className="ticket">
-            {/* Make the title a link to the detailed ticket page */}
-            <Link
-              to={`/TicketDetailed/${ticket.publicKey}/${ticket.contractAddress}`}
-              state={ticket}
-            >
-              <h2>{ticket.title}</h2>
-            </Link>
+            <h2>{ticket.title}</h2>
             <p>Event: {ticket.eventName}</p>
             <div className="ticket-actions">
-              <Link
-                to={`/TicketDetailed/${ticket.publicKey}/${ticket.contractAddress}`}
-                state={ticket}
-              >
-                <button className="button-cool">View Details</button>
+              <Link to={`/TicketDetailed`} state={ticket}>
+                <button className="button-cool">View QR code</button>
               </Link>
               <Link to={`/AuthListTicket`} state={ticket}>
                 {ticket.forSale ? (
