@@ -6,7 +6,7 @@ function useRequireAuth() {
   const token = Cookies.get("token");
 
   if (!token) {
-    return null; // User is not authenticated
+    return false; // User is not authenticated
   }
 
   return token; // User is authenticated

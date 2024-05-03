@@ -36,9 +36,6 @@ function MyProfile() {
               <li>
                 <Link to="/NotFound">Edit Profile</Link>
               </li>
-              <li>
-                <Link to="/NotFound">Logout</Link>
-              </li>
             </ul>
           </nav>
         </div>

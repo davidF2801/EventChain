@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
+import useRequireAuth from "../authenticate_utils.js";
+import Cookies from "js-cookie";
 
 import logo from "./images/logo1.png";
 
 const Navbar = () => {
+  const isAuthenticated = useRequireAuth();
+  if (isAuthenticated == null) {
+    return null;
+  }
   const [searchQuery, setSearchQuery] = useState("");
   const [iconColor, setIconColor] = useState("#888"); // Color inicial del ícono
   const navigate = useNavigate();
@@ -21,6 +27,10 @@ const Navbar = () => {
     if (e.key === "Enter") {
       handleSearch();
     }
+  };
+
+  const handleLogout = () => {
+    Cookies.remove("token");
   };
 
   return (
@@ -81,12 +91,20 @@ const Navbar = () => {
               onMouseEnter={() => setIconColor("#007bff")} // Cambiar a azul cuando pasa el cursor
               onMouseLeave={() => setIconColor("#888")} // Cambiar al color original cuando sale el cursor
             />
-            <Link to="/login" className="login-link">
-              Login
-            </Link>
-            <Link to="/myprofile" className="login-link">
-              My Profile
-            </Link>
+            {isAuthenticated ? (
+              <>
+                <Link to="/myprofile" className="login-link">
+                  My Profile
+                </Link>
+                <Link to="/" className="login-link">
+                  <button onClick={handleLogout}>Logout</button>
+                </Link>
+              </>
+            ) : (
+              <Link to="/login" className="login-link">
+                Login
+              </Link>
+            )}
             <select className="language-selector">
               <option value="es">Español</option>
               <option value="en">English</option>
