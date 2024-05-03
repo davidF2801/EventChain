@@ -45,6 +45,7 @@ function NewEvent() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ` + isAuthenticated,
         },
         body: JSON.stringify(eventData),
       });

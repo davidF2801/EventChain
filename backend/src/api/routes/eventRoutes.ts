@@ -2,6 +2,10 @@ import { Router } from 'express';
 import { collections } from '../../services/databaseService';
 import EventModel from '../../models/eventModel';
 import deployEvent from '../../services/eventService';
+import getTokenFrom from '../validators/token_handling';
+import jwt from 'jsonwebtoken'
+import { JwtPayload } from 'jsonwebtoken';
+
 
 const router = Router();
 
@@ -29,6 +33,32 @@ router.post('/details', async (req, res) => {
   }
 });
 
+router.post('/myevents', async (req, res) => {
+  try {
+
+      const secret: string = process.env.SECRET ?? "";
+      const token: string | null = getTokenFrom(req);
+      if (token == null) {
+        return res.status(401).json({ error: 'no token in the call' })
+      } 
+      const decodedToken = jwt.verify(token!, secret)
+      const jwtPayload = decodedToken as JwtPayload
+      if (!decodedToken)
+      {
+        return res.status(401).json({ error: 'token invalid' })
+      }
+      const event = await EventModel.find({host: jwtPayload.username}).exec();
+      if (event) {
+          res.send(event);
+      } else {
+          res.status(404).send('Event not found');
+      }
+  } catch (error) {
+      console.error(error);
+      //res.status(500).json({ error: 'Error finding ticket', message: error.message });
+  }
+});
+
 // In your EventRoutes file (backend)
 // router.get('/', (req, res) => { // Changed from '/:id' to '/'
 //   const { title } = req.query; // Accessing title passed as a query parameter
@@ -45,6 +75,18 @@ router.post('/details', async (req, res) => {
 //TODO: Test with frontend
 router.post('/createEvent', async (req, res) => {
     try {
+
+        const secret: string = process.env.SECRET ?? "";
+        const token: string | null = getTokenFrom(req);
+        if (token == null) {
+          return res.status(401).json({ error: 'no token in the call' })
+        } 
+        const decodedToken = jwt.verify(token!, secret)
+        const jwtPayload = decodedToken as JwtPayload
+        if (!decodedToken)
+        {
+          return res.status(401).json({ error: 'token invalid' })
+        }
         const { title, description,location, startDate, endDate,type, image, address, price, nTickets, allowResale,resaleFee,maxPrice} = req.body;
         console.log(price);
         const trxSun = 1000000;
@@ -55,8 +97,10 @@ router.post('/createEvent', async (req, res) => {
           // Envía una respuesta de error al cliente
           res.status(500).json({ error: 'Error when creating event', message: error.message });
         });
+        const host = jwtPayload.username;
         const new_event = new EventModel({
             title,
+            host,
             description,
             location,
             startDate,
