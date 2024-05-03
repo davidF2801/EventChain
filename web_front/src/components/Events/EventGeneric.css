@@ -36,6 +36,23 @@
   ); /* Cambiar el color de fondo al pasar el mouse */
 }
 
+..event-container2 {
+  display: flex;
+  color: rgb(202, 22, 238);
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01); /* Reducir la intensidad de la sombra */
+  max-width: 100%; /* Cambiar el ancho máximo del contenedor al 100% para que ocupe todo el ancho disponible */
+  margin: auto; /* Centrar horizontalmente */
+  margin-top: 20px; /* Añadir espacio en la parte superior */
+  margin-bottom: 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease; /* Transición de color al pasar el mouse */
+}
+
 .event {
   width: 300px;
   height: 300px;
