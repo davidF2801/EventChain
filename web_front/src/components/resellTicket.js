@@ -19,16 +19,13 @@ export const resellTicket = async (
     callValue: ticketPrice,
     shouldPollResponse: true,
   });
-  const message = tronWebInst.toHex(contractAddress.toString());
-  const signature = await tronWebInst.trx.sign(message, pk);
-  const isVerified = await tronWebInst.trx.verifyMessage(
-    message,
-    signature,
-    buyerAccount,
-    true
-  );
-  console.log("Verification result:", isVerified);
-  console.log("Signed Message:", signature);
+  // const message = tronWebInst.toHex(contractAddress.toString());
+  // const signature = await tronWebInst.trx.sign(message, pk);
+  // const isVerified = await tronWebInst.trx.verifyMessage(
+  //   message,
+  //   buyerAccount,
+  //   true
+  // );
   console.log("Ticket Id:", ticketId);
   console.log("Ticket Price:", ticketPrice);
   console.log("Ticket Id:", ticketId);
@@ -36,7 +33,6 @@ export const resellTicket = async (
   var ticketInfo = {
     ticketId: ticketId,
     ticketPrice: ticketPrice,
-    signature: signature,
     contractAddress: contractAddress,
   };
   return ticketInfo;

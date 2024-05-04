@@ -55,7 +55,6 @@ const Auth = () => {
               ticketId: ticketInfo.ticketId,
               forSale: false,
               price: ticketInfo.ticketPrice,
-              signature: ticketInfo.signature,
             }),
           }
         );
@@ -80,7 +79,6 @@ const Auth = () => {
           ticketId: ticketInfo.ticketId,
           price: ticketInfo.ticketPrice._hex,
           contractAddress: eventInfo.contractAddress,
-          signature: ticketInfo.signature,
         };
         console.log(isAuthenticated);
         fetch("http://localhost:8888/tickets/createTicket", {

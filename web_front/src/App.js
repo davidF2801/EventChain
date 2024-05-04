@@ -30,6 +30,7 @@ import Search from "./components/Search.js";
 import "./App.css";
 import TronWeb from "tronweb";
 import TicketDetailed from "./components/TicketDetailed.js";
+import AuthSignature from "./components/AuthSiagnature.js";
 const mainOptions = {
   fullNode: "http://127.0.0.1:9090/",
   solidityNode: "http://127.0.0.1:9090/",
@@ -65,6 +66,7 @@ function App() {
           <Route path="/events" element={<EventGeneric />} />
           <Route path="/resale" element={<TicketResale />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/authSignature" element={<AuthSignature />} />
           <Route path="/buyTicket" element={<buyTicket />} />
           {/* Agrega la ruta para la página de perfil */}
           <Route path="/MyProfile" element={<MyProfile />} />

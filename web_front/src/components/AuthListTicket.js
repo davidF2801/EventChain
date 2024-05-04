@@ -34,7 +34,6 @@ const AuthListTicket = () => {
             ticketId: ticketInfo.ticketId,
             forSale: true,
             price: ticketPrice,
-            signature: ticketInfo.signature,
           }),
         }
       );

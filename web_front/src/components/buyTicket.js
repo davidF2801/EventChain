@@ -30,22 +30,19 @@ export const buyTicket = async (pk, buyerAccount, contractAddress) => {
 
   const ticketId = (await contractInstance.ticketsSold().call()) - 1;
 
-  const message = tronWebInst.toHex(contractAddress.toString());
-  const signature = await tronWebInst.trx.sign(message, pk);
-  const isVerified = await tronWebInst.trx.verifyMessage(
-    message,
-    signature,
-    buyerAccount,
-    true
-  );
-  console.log("Verification result:", isVerified);
-  console.log("Signed Message:", signature);
+  // const message = tronWebInst.toHex(contractAddress.toString());
+  // const signature = await tronWebInst.trx.sign(message, pk);
+  // const isVerified = await tronWebInst.trx.verifyMessage(
+  //   message,
+  //   signature,
+  //   buyerAccount,
+  //   true
+  // );
   console.log("Ticket Id:", ticketId);
 
   var ticketInfo = {
     ticketId: ticketId,
     ticketPrice: ticketPrice,
-    signature: signature,
   };
   return ticketInfo;
 };

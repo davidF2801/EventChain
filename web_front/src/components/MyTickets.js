@@ -64,7 +64,7 @@ const MyTickets = () => {
             <h2>{ticket.title}</h2>
             <p>Event: {ticket.eventName}</p>
             <div className="ticket-actions">
-              <Link to={`/TicketDetailed`} state={ticket}>
+              <Link to={`/AuthSignature`} state={ticket}>
                 <button className="button-cool">View QR code</button>
               </Link>
               <Link to={`/AuthListTicket`} state={ticket}>

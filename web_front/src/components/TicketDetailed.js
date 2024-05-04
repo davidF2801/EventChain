@@ -8,11 +8,16 @@ const TicketDetailed = () => {
   const [currentNumber, setCurrentNumber] = useState(numbers[currentIndex]);
   const location = useLocation();
   const ticketInfo = location.state;
-  console.log(`${ticketInfo.ticketId}|${ticketInfo.signature}`);
   if (!ticketInfo) {
     return <div>Loading ticket details...</div>; // Display loading or not found message if no ticket info
   }
   useEffect(() => {
+    if (ticketInfo) {
+      console.log(ticketInfo);
+      console.log(ticketInfo.ticketInfo.signature);
+      console.log(ticketInfo.ticketInfo.ticketId);
+    }
+
     const interval = setInterval(() => {
       // Update the index to cycle through the numbers
       setCurrentIndex((prevIndex) => {
@@ -32,22 +37,23 @@ const TicketDetailed = () => {
         <div>
           <h2>Event Name: {ticketInfo.eventName}</h2>
           <p>
-            <strong>Price:</strong> {ticketInfo.price / 1000000} TRX
+            <strong>Price:</strong> {ticketInfo.ticketInfo.price / 1000000} TRX
           </p>
           <p>
-            <strong>For Sale:</strong> {ticketInfo.forSale ? "Yes" : "No"}
+            <strong>For Sale:</strong>{" "}
+            {ticketInfo.ticketInfo.forSale ? "Yes" : "No"}
           </p>
           <p>
-            <strong>Ticket ID:</strong> {ticketInfo.ticketId}
+            <strong>Ticket ID:</strong> {ticketInfo.ticketInfo.ticketId}
           </p>
           <p>
-            <strong>User:</strong> {ticketInfo.user}
+            <strong>User:</strong> {ticketInfo.ticketInfo.user}
           </p>
         </div>
         <div>
           <h3>QR Code for Ticket</h3>
           <QRCode
-            value={`${ticketInfo.ticketId}|${ticketInfo.signature}|${currentNumber}`}
+            value={`${ticketInfo.ticketInfo.ticketId}|${ticketInfo.ticketInfo.signature}|${currentNumber}`}
             size={256}
             level="H"
             includeMargin={true}
