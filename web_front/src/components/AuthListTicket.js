@@ -23,7 +23,7 @@ const AuthListTicket = () => {
         publicKey
       );
       const updateResponse = await fetch(
-        "http://localhost:8888/tickets/updateTicket",
+        "http://localhost:8888/tickets/listTicket",
         {
           method: "PUT",
           headers: {

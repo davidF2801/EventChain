@@ -7,7 +7,7 @@
 
 .heading {
   text-align: center;
-  color: #1a202c; /* Dark gray for better readability */
+  color: white; /* Dark gray for better readability */
   font-size: 2rem; /* Larger font size for headings */
   margin-bottom: 20px; /* Space below the heading */
 }

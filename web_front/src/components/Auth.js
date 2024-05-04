@@ -42,13 +42,13 @@ const Auth = () => {
           eventInfo.contractAddress,
           eventInfo.ticketId
         );
-        //TODO: No acaba de funcionar, falta actualizar los datos de signature y for sale en la DB
         const updateResponse = await fetch(
-          "http://localhost:8888/tickets/updateTicket",
+          "http://localhost:8888/tickets/rebuyTicket",
           {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
+              Authorization: "Bearer " + isAuthenticated,
             },
             body: JSON.stringify({
               contractAddress: ticketInfo.contractAddress,
