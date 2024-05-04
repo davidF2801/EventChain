@@ -9,6 +9,9 @@ import Cookies from "js-cookie";
 function MyProfile() {
   const isAuthenticated = useRequireAuth();
   const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [redirectToError, setRedirectToError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,25 +23,31 @@ function MyProfile() {
       // Este es solo un ejemplo simulado
       const fetchUserData = async () => {
         try {
-          // Aquí puedes hacer una llamada a tu backend para obtener la información del usuario
-          // Ejemplo de cómo podría ser:
-          // const response = await fetch("URL_DEL_BACKEND_PARA_OBTENER_DATOS_DEL_USUARIO", {
-          //   method: "GET",
-          //   headers: {
-          //     Authorization: `Bearer ${Cookies.get("token")}`,
-          //   },
-          // });
-          // const userData = await response.json();
-          // setUserData(userData);
-
-          // En este ejemplo simulado, usamos un objeto estático
+          setLoading(true);
+          console.log("isAuthenticated:", isAuthenticated);
+          const response = await fetch("http://localhost:8888/users/userInfo", {
+            method: "POST",
+            headers: {
+              Authorization: "Bearer " + isAuthenticated,
+            },
+          });
+          console.log("Response:", response);
+          if (!response.ok) {
+            throw new Error("Failed to fetch data");
+          }
+          const jsonData = await response.json();
           const userData = {
-            name: "Nombre del Usuario",
+            name: jsonData[0].username,
             // Otros datos del usuario aquí...
           };
           setUserData(userData);
+          console.log("User info:", jsonData.username);
+          setData(jsonData[0]);
         } catch (error) {
-          console.error("Error fetching user data:", error);
+          setError(error);
+          setRedirectToError(true); // Establecer redirectToError a true en caso de error
+        } finally {
+          setLoading(false);
         }
       };
 
