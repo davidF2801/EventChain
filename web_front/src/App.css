@@ -13,11 +13,7 @@
 
 .Header {
   align-items: center;
-  background: linear-gradient(
-    to left,
-    #330cc0,
-    #9547d4
-  ); /* Degradado de azul a morado */
+  background-color: #151a50;
   border: #0e0a0a;
   color: white;
   display: flex;
