@@ -41,8 +41,10 @@ const EventGeneric = () => {
   }
 
   return (
-    <div className="container mx-auto p-">
-      <h1 className="heading text-3xl font-bold mb-2 mt-4">All events</h1>
+    <div className="full-screen-container">
+      <h1 className=" container mx-auto p-8 heading text-3xl font-bold mb-2 mt-4">
+        All Events
+      </h1>
       {loading && <div>Loading...</div>}
       {error && (
         <div>
@@ -63,8 +65,19 @@ const EventGeneric = () => {
                 <Link to={`/eventdetailed/${event.title}`} state={event}>
                   <h2 className="event-title">{event.title}</h2>
                 </Link>
-                <p>Date: {event.date}</p>
-                <p>Location: {event.location}</p>
+                <p>
+                  <span role="img" aria-label="Calendar">
+                    📅
+                  </span>{" "}
+                  Date: {formatDate(event.startDate)} -{" "}
+                  {formatDate(event.endDate)}
+                </p>
+                <p>
+                  <span role="img" aria-label="Location">
+                    📍
+                  </span>{" "}
+                  Location: {event.location}
+                </p>
                 <Link to={`/auth`} state={event}>
                   <button className="event-button">Buy tickets</button>
                 </Link>
@@ -75,6 +88,12 @@ const EventGeneric = () => {
       )}
     </div>
   );
+};
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return date.toLocaleDateString(undefined, options);
 };
 
 export default EventGeneric;
