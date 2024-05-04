@@ -64,32 +64,51 @@ const Home = () => {
 
   return (
     <div>
-      <div>
+      <div style={{ textAlign: "left" }}>
         <Slider ref={sliderRef} {...settings}>
           {events.map((event, index) => (
-            <Link
-              to={`/eventdetailed/${event.title}`}
+            <div
               key={index}
               className="banner-container"
+              style={{ display: "flex", alignItems: "left" }}
             >
-              <div>
+              <Link to={`/eventdetailed/${event.title}`} style={{ flex: 1 }}>
                 <img
                   src={event.image}
                   alt={event.title}
                   className="banner-image"
                 />
-                <div className="banner-content">
-                  <h2 className="banner-title">{event.title}</h2>
-                  <p className="banner-text">Date: {event.date}</p>
-                  <p className="banner-text">Location: {event.location}</p>
-                </div>
+              </Link>
+              <div
+                className="banner-content"
+                style={{
+                  flex: 0.5,
+                  textAlign: "center",
+                  background: "rgba(255, 255, 255, 0.05)",
+                }}
+              >
+                <h2
+                  className="banner-title"
+                  style={{ fontSize: "3rem", marginBottom: "0.5rem" }}
+                >
+                  {event.title}
+                </h2>
+                <p className="banner-text" style={{ marginBottom: "0.5rem" }}>
+                  Date: {formatDate(event.startDate)} -{" "}
+                  {formatDate(event.endDate)}
+                </p>
+                <p className="banner-text" style={{ marginBottom: "1rem" }}>
+                  Location: {event.location}
+                </p>
+                <Link to="/auth">
+                  <button className="button-cool" style={{ marginLeft: 0 }}>
+                    Buy Tickets
+                  </button>
+                </Link>
               </div>
-            </Link>
+            </div>
           ))}
         </Slider>
-        <Link to="/events">
-          <button className="button-cool">See more</button>
-        </Link>
       </div>
       <div>
         <img
@@ -134,7 +153,6 @@ const Home = () => {
       </div>
       <div
         style={{
-          textAlign: "center",
           fontSize: "1.2rem",
           fontStyle: "italic",
         }}
@@ -169,6 +187,13 @@ const Home = () => {
       </div>
     </div>
   );
+};
+
+// Función para formatear la fecha
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return date.toLocaleDateString(undefined, options);
 };
 
 export default Home;

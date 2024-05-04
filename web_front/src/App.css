@@ -239,11 +239,11 @@
 
 .banner-content {
   position: absolute;
-  bottom: 20px; /* Ajusta la posición vertical del texto */
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 10px; /* Ajusta la posición vertical del texto */
+  right: 0.3%;
   text-align: center;
-  color: #00ffbf;
+  color: #f3f3f8;
+  font-style: oblique;
 }
 
 .banner-title {

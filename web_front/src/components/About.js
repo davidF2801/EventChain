@@ -7,7 +7,14 @@ function About() {
   return (
     <div className="container mx-auto p-8">
       <h1 style={{ fontSize: "2rem" }}>About Us</h1>
-      <section>
+      <section
+        className="my-8"
+        style={{
+          fontSize: "1.2rem",
+          fontStyle: "italic",
+          borderRadius: "10px",
+        }}
+      >
         <p style={{ fontSize: "1.2rem" }}>
           We are a team of telecommunications engineering students at UPC
           Barcelona who have carried out this EventChain project, combining one
@@ -16,7 +23,14 @@ function About() {
           blockchain technology.
         </p>
       </section>
-      <section>
+      <section
+        className="button-cool3 my-8"
+        style={{
+          fontSize: "1.2rem",
+          fontStyle: "italic",
+          borderRadius: "40px",
+        }}
+      >
         <h3 style={{ fontSize: "1.5rem" }}>What we do</h3>
         <div style={{ maxWidth: "100%", margin: "0 auto" }}>
           <p style={{ fontSize: "1.2rem" }}>
