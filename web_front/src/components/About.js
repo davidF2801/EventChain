@@ -1,5 +1,4 @@
 import React from "react";
-import erikImage from "./images/erik.jpeg";
 import joelImage from "./images/joel.jpeg";
 import gokarnaImage from "./images/gokarna.jpeg";
 import davidImage from "./images/david.jpeg";
@@ -7,49 +6,35 @@ import davidImage from "./images/david.jpeg";
 function About() {
   return (
     <div className="container mx-auto p-8">
-      <h1>About Us</h1>
+      <h1 style={{ fontSize: "2rem" }}>About Us</h1>
       <section>
-        <p>Los jefes del blockchain</p>
+        <p style={{ fontSize: "1.2rem" }}>
+          We are a team of telecommunications engineering students at UPC
+          Barcelona who have carried out this EventChain project, combining one
+          of the most profitable businesses with one of the most emerging
+          technologies, such as online event and ticket buying/selling and
+          blockchain technology.
+        </p>
       </section>
       <section>
-        <h3>What we do</h3>
-        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
-          <p>Nos vamos con las samaritanas del amor</p>
+        <h3 style={{ fontSize: "1.5rem" }}>What we do</h3>
+        <div style={{ maxWidth: "100%", margin: "0 auto" }}>
+          <p style={{ fontSize: "1.2rem" }}>
+            With Eventchain, you can easily execute event or ticket buying and
+            selling thanks to its simple frontend built with React and a special
+            combination of conventional CSS and Tailwind CSS, along with its
+            robust backend made in TypeScript together with Solidity.
+          </p>
         </div>
       </section>
 
       <section>
-        <h3>Our team</h3>
+        <h3 style={{ fontSize: "1.5rem" }}>Our team</h3>
         <div
           className="estudiantes"
           style={{ display: "flex", justifyContent: "center" }}
         >
           <div style={{ display: "flex", marginRight: "10px" }}>
-            <div className="estudiante" style={{ marginRight: "10px" }}>
-              <a
-                href="https://www.linkedin.com/in/eriksole/"
-                style={{ textDecoration: "none" }}
-              >
-                <img
-                  src={erikImage}
-                  alt="Erik Sole"
-                  className="foto-erik"
-                  style={{
-                    height: "200px",
-                    width: "200px",
-                    borderRadius: "50%",
-                  }}
-                />
-                <p>
-                  <strong style={{ color: "deepskyblue" }}>Erik Sole</strong>
-                </p>
-              </a>
-              <p>
-                Network
-                <br />
-                Engineer
-              </p>
-            </div>
             <div className="estudiante" style={{ marginRight: "10px" }}>
               <a
                 href="https://www.linkedin.com/in/joel-jurado-4a9a8b208/"
@@ -65,48 +50,25 @@ function About() {
                     borderRadius: "50%",
                   }}
                 />
-                <p>
-                  <strong style={{ color: "deepskyblue" }}>Joel Jurado</strong>
-                </p>
               </a>
               <p>
-                Electrial
-                <br /> Engineer
+                <strong style={{ color: "deepskyblue" }}>Joel Jurado</strong>
+                <br />
+                <span style={{ color: "white", fontSize: "0.9rem" }}>
+                  Electrical Engineer,
+                  <br />
+                  Responsible for Backend
+                </span>
               </p>
             </div>
           </div>
         </div>
+
         <div
           className="estudiantes"
           style={{ display: "flex", justifyContent: "center" }}
         >
           <div style={{ display: "flex", marginRight: "10px" }}>
-            <div className="estudiante" style={{ marginRight: "10px" }}>
-              <a
-                href="https://www.linkedin.com/in/gdum/"
-                style={{ textDecoration: "none" }}
-              >
-                <img
-                  src={gokarnaImage}
-                  alt="Gokarna Dumre"
-                  className="foto-gokarna"
-                  style={{
-                    height: "200px",
-                    width: "200px",
-                    borderRadius: "50%",
-                  }}
-                />
-                <p>
-                  <strong style={{ color: "deepskyblue" }}>
-                    Gokarna Dumre
-                  </strong>
-                </p>
-              </a>
-              <p>
-                Network
-                <br /> Engineer
-              </p>
-            </div>
             <div className="estudiante" style={{ marginRight: "10px" }}>
               <a
                 href="https://www.linkedin.com/in/david-forn%C3%B3s/"
@@ -122,13 +84,41 @@ function About() {
                     borderRadius: "50%",
                   }}
                 />
-                <p>
-                  <strong style={{ color: "deepskyblue" }}>David Fornos</strong>
-                </p>
               </a>
               <p>
-                Electrial
-                <br /> Engineer
+                <strong style={{ color: "deepskyblue" }}>David Fornós</strong>
+                <br />
+                <span style={{ color: "white", fontSize: "0.9rem" }}>
+                  Electrical Engineer,
+                  <br />
+                  Responsible for Backend and Backend-Frontend connection
+                </span>
+              </p>
+            </div>
+            <div className="estudiante" style={{ marginRight: "10px" }}>
+              <a
+                href="https://www.linkedin.com/in/gdum/"
+                style={{ textDecoration: "none" }}
+              >
+                <img
+                  src={gokarnaImage}
+                  alt="Gokarna Dumre"
+                  className="foto-gokarna"
+                  style={{
+                    height: "200px",
+                    width: "200px",
+                    borderRadius: "50%",
+                  }}
+                />
+              </a>
+              <p>
+                <strong style={{ color: "deepskyblue" }}>Gokarna Dumre</strong>
+                <br />
+                <span style={{ color: "white", fontSize: "0.9rem" }}>
+                  Electrical Engineer,
+                  <br />
+                  Responsible for Frontend
+                </span>
               </p>
             </div>
           </div>

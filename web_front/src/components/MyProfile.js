@@ -66,10 +66,16 @@ function MyProfile() {
           <nav className="Navbar">
             <ul className="Navbar-links">
               <li>
-                <Link to="/EditProfile">Edit Profile</Link>
+                <Link to="/EditProfile" className="white-link">
+                  Edit Profile
+                </Link>
               </li>
               <li>
-                <Link to="/" onClick={() => Cookies.remove("token")}>
+                <Link
+                  to="/"
+                  onClick={() => Cookies.remove("token")}
+                  className="white-link"
+                >
                   Logout
                 </Link>
               </li>
@@ -80,21 +86,21 @@ function MyProfile() {
       <div className="button-cool2">
         <div className="button-cool2">
           <h2>
-            <Link to="/MyTickets" className="action-button">
+            <Link to="/MyTickets" className="action-button white-link">
               My Tickets
             </Link>
           </h2>
         </div>
         <div className="button-cool2">
           <h3>
-            <Link to="/newevent" className="action-button">
+            <Link to="/newevent" className="action-button white-link">
               Create Event
             </Link>
           </h3>
         </div>
         <div className="button-cool2">
           <h3>
-            <Link to="/myevents" className="action-button">
+            <Link to="/myevents" className="action-button white-link">
               View My Events
             </Link>
           </h3>

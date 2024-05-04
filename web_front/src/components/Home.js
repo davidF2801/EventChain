@@ -71,11 +71,13 @@ const Home = () => {
         style={{ maxWidth: "300px", maxHeight: "200px" }}
       />
       <div
-        className="introduction"
+        className="introduction-container"
         style={{
-          margin: "50px 50px",
-          fontWeight: "bold",
-          textAlign: "justify",
+          textAlign: "center",
+          fontSize: "1.2rem",
+          fontStyle: "italic",
+          padding: "50px",
+          borderRadius: "40px",
         }}
       >
         <h4>
@@ -117,7 +119,13 @@ const Home = () => {
         <Link to="/events">
           <button className="button-cool">See more</button>
         </Link>
-        <div>
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: "1.2rem",
+            fontStyle: "italic",
+          }}
+        >
           <h3>Sounds interesting?</h3>
           <p>
             Join our community, sign up to create events, buy, sell, and safely
@@ -134,7 +142,13 @@ const Home = () => {
             .
           </p>
         </div>
-        <div>
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: "1.2rem",
+            fontStyle: "italic",
+          }}
+        >
           <h3>Do you have any inquiries or need any help?</h3>
           <Link to="/contact">
             <button className="button-cool">Contact Us</button>

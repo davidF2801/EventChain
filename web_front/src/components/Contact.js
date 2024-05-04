@@ -5,7 +5,6 @@ const Contact = () => {
   return (
     <div className="container mx-auto p-8">
       <img src={contactphoto} className="w-full mb-8" alt="Contact" />
-      <h1 className="text-3xl font-bold mb-4">Contact Us</h1>
       <div className="flex flex-col md:flex-row md:space-x-8">
         <div className="flex-1">
           <h2 className="text-xl font-semibold mb-2">Contact Information</h2>

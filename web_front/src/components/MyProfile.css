@@ -97,3 +97,7 @@
   color: #007bff; /* Cambiar el color del enlace */
   font-style: bold;
 }
+
+.white-link {
+  color: white;
+}
