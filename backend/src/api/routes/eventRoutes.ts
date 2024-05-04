@@ -87,7 +87,7 @@ router.post('/createEvent', async (req, res) => {
         {
           return res.status(401).json({ error: 'token invalid' })
         }
-        const { title, description,location, startDate, endDate,type, image, address, price, nTickets, allowResale,resaleFee,maxPrice} = req.body;
+        const { title, description,location, startDate, endDate,type, image, address, price, nTickets, allowResale,resaleFee} = req.body;
         console.log(price);
         const trxSun = 1000000;
         const sunAmount = price * trxSun;
@@ -112,7 +112,6 @@ router.post('/createEvent', async (req, res) => {
             nTickets,
             allowResale,
             resaleFee,
-            maxPrice
           });
         new_event.save()
           .then(result => {

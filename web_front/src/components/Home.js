@@ -37,7 +37,7 @@ const Home = () => {
       if (sliderRef.current) {
         sliderRef.current.slickNext();
       }
-    }, 10000); // Modificar la velocidad de paso
+    }, 7000); // Modificar la velocidad de paso
 
     return () => clearInterval(interval);
   }, []);
@@ -63,15 +63,10 @@ const Home = () => {
   }
 
   return (
-    <div>
-      <img
-        src={logo1}
-        alt="logo"
-        className="logo"
-        style={{ maxWidth: "300px", maxHeight: "200px" }}
-      />
+    <div className="p-4">
+      <img src={logo1} alt="Event Chain Logo" className="logo mx-auto h-48" />
       <div
-        className="introduction-container"
+        className="text-center p-8 bg-base-100 rounded-box font-bold text-lg"
         style={{
           textAlign: "center",
           fontSize: "1.2rem",
@@ -80,26 +75,26 @@ const Home = () => {
           borderRadius: "40px",
         }}
       >
-        <h4>
+        <p>
           Welcome to Event Chain – where the future of event management meets
           the security of blockchain technology. At Event Chain, we
           revolutionize the way events are organized, tickets are bought and
           sold, and promotions are conducted. By harnessing the power of
           blockchain, we ensure that every transaction is transparent, secure,
           and tamper-proof.
-        </h4>
-        <h4>
+        </p>
+        <p>
           Our platform provides a seamless experience for event organizers,
           attendees, and advertisers alike. Whether you're hosting a concert,
           conference, or community gathering, Event Chain offers a trusted
           environment where you can easily manage ticket sales, promote your
           event, and engage with your audience.
-        </h4>
-        <h4>
+        </p>
+        <p>
           Join us in shaping the future of events – where innovation, security,
           and convenience converge. Explore our platform today and discover the
           endless possibilities with Event Chain.
-        </h4>
+        </p>
       </div>
       <div className="event-content2">
         <h2 className="heading text-3xt mb-0 mt-1">The Main Events</h2>
@@ -115,6 +110,7 @@ const Home = () => {
                   <h2 className="event-title">{event.title}</h2>
                   <p>Date: {event.date}</p>
                   <p>Location: {event.location}</p>
+                  <img src={event.image} className="event-image" />
                 </div>
               </div>
             </Link>

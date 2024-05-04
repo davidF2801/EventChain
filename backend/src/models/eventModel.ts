@@ -15,7 +15,6 @@ interface IEvent extends Document {
   nTickets: number;
   allowResale: boolean;
   resaleFee: number;
-  maxPrice: number;
 }
 
 // Schema to define the structure of the document in MongoDB
@@ -33,7 +32,6 @@ const EventSchema: Schema = new Schema({
   nTickets: { type: Number, required: true },
   allowResale: { type: Boolean, required: true },
   resaleFee: { type: Number, required: false },
-  maxPrice: { type: Number, required: false },
 }, {
   timestamps: true // Adds createdAt and updatedAt timestamps
 });

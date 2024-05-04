@@ -2,87 +2,63 @@
 
 .event-generic-container {
   margin: 0 auto;
-  text-emphasis-color: red;
+  max-width: 1200px; /* Control the maximum width to ensure readability */
 }
 
 .heading {
   text-align: center;
+  color: #1a202c; /* Dark gray for better readability */
+  font-size: 2rem; /* Larger font size for headings */
+  margin-bottom: 20px; /* Space below the heading */
 }
 
-.event-container {
+.event-container,
+.event-container2 {
   display: flex;
-  color: rgb(202, 22, 238);
   justify-content: center;
   align-items: center;
-  padding: 30px;
+  padding: 20px;
   background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01); /* Reducir la intensidad de la sombra */
-  max-width: 800px; /* Limitar el ancho del contenedor */
-  margin: auto; /* Centrar horizontalmente */
-  margin-top: 20px; /* Añadir espacio en la parte superior */
-  margin-bottom: 20px;
   border-radius: 8px;
-  text-decoration: none;
-  transition: background-color 0.3s ease; /* Transición de color al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Slightly stronger shadow for depth */
+  max-width: 800px;
+  margin: 20px auto; /* Simplified margin declaration */
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.event-container:hover {
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-  ); /* Cambiar el color de fondo al pasar el mouse */
-}
-
-..event-container2 {
-  display: flex;
-  color: rgb(202, 22, 238);
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01); /* Reducir la intensidad de la sombra */
-  max-width: 100%; /* Cambiar el ancho máximo del contenedor al 100% para que ocupe todo el ancho disponible */
-  margin: auto; /* Centrar horizontalmente */
-  margin-top: 20px; /* Añadir espacio en la parte superior */
-  margin-bottom: 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background-color 0.3s ease; /* Transición de color al pasar el mouse */
+.event-container:hover,
+.event-container2:hover {
+  background-color: rgba(0, 0, 0, 0.7); /* Darker on hover */
+  transform: translateY(-5px); /* Lift effect on hover */
 }
 
 .event {
-  width: 300px;
-  height: 300px;
+  width: 100%; /* Use 100% to make it responsive within the container */
   border-radius: 10px;
   margin: 10px;
   padding: 10px;
-  opacity: 1; /* Opacidad del contenedor */
+  opacity: 1; /* Full opacity */
 }
 
 .event img {
-  max-width: 70%;
-  height: auto;
+  width: 100%; /* Full width within the container */
   border-radius: 4px;
 }
 
 .event h2 {
   font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: #007bff;
+  color: #4fd1c5; /* Softer blue for a modern look */
+  margin-bottom: 5px;
 }
 
 .event p {
   font-size: 1rem;
-  margin-bottom: 5px;
-  color: #9e3232;
+  color: #718096; /* Soft gray for paragraphs */
 }
 
 .event button {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #4fd1c5; /* Unified color theme with h2 */
+  color: #ffffff;
   border: none;
   padding: 10px 20px;
   border-radius: 4px;
@@ -91,5 +67,5 @@
 }
 
 .event button:hover {
-  background-color: #0056b3;
+  background-color: #38b2ac; /* Darker shade on hover */
 }

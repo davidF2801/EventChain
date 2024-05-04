@@ -36,8 +36,21 @@ function NewEvent() {
   const [nTickets, setNtickets] = useState("");
   const [allowResale, setAllowResale] = useState(false);
   const [resaleFee, setResaleFee] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
+  const [image, setImage] = useState(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const navigate = useNavigate();
+
+  const handleFileChange = (event) => {
+    if (event.target.files[0]) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result); // Assuming you're handling a base64 string
+        setImagePreviewUrl(reader.result); // Set image preview URL
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   async function createEvent(eventData) {
     try {
@@ -89,7 +102,7 @@ function NewEvent() {
     }
 
     // Check for the resale fields only if resale is allowed
-    if (allowResale && (!resaleFee || !maxPrice)) {
+    if (allowResale && !resaleFee) {
       setError(true);
       setErrorMessage("Please fill in all required resale fields.");
       return;
@@ -146,9 +159,9 @@ function NewEvent() {
       address,
       price,
       nTickets,
+      image,
       allowResale,
       resaleFee: allowResale ? resaleFee : undefined,
-      maxPrice: allowResale ? maxPrice : undefined,
     };
 
     // Here you can send the data to the backend to save it
@@ -255,6 +268,36 @@ function NewEvent() {
             />
           </div>
           <div className="form-group">
+            <input
+              id="eventImage"
+              type="file"
+              onChange={handleFileChange}
+              accept="image/*"
+              style={{
+                display: "none",
+                opacity: 0,
+                position: "absolute",
+                left: "-9999px",
+              }}
+            />
+            <label
+              htmlFor="eventImage"
+              className="btn btn-primary flex items-center gap-2"
+            >
+              <MdOutlineFileUpload />
+              Upload Event Image
+            </label>
+            {imagePreviewUrl && (
+              <div className="image-preview">
+                <img
+                  src={imagePreviewUrl}
+                  alt="Event"
+                  style={{ width: "100%", marginTop: "10px" }}
+                />
+              </div>
+            )}
+          </div>
+          <div className="form-group">
             <label>
               <input
                 type="checkbox"
@@ -273,15 +316,6 @@ function NewEvent() {
                   placeholder="Resale Fee (%)"
                   value={resaleFee}
                   onChange={(e) => setResaleFee(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Maximum Price Allowed"
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(e.target.value)}
                 />
               </div>
             </>
