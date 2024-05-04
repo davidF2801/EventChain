@@ -63,11 +63,16 @@ const EventGeneric = () => {
                 />
                 {/* Enlace al detalle del evento con el ID */}
                 <Link to={`/eventdetailed/${event.title}`} state={event}>
-                  <h2 className="event-title">{event.title}</h2>
+                  <h2
+                    className="event-title"
+                    style={{ textDecoration: "none !important" }}
+                  >
+                    {event.title}
+                  </h2>
                 </Link>
                 <p>
                   <span role="img" aria-label="Calendar">
-                    📅
+                    🗓
                   </span>{" "}
                   Date: {formatDate(event.startDate)} -{" "}
                   {formatDate(event.endDate)}
@@ -79,7 +84,7 @@ const EventGeneric = () => {
                   Location: {event.location}
                 </p>
                 <Link to={`/auth`} state={event}>
-                  <button className="event-button">Buy tickets</button>
+                  <button className="event-button"> 💸 Buy tickets</button>
                 </Link>
               </div>
             </div>
