@@ -52,10 +52,14 @@ const EventDetailed = () => {
   }
 
   return (
-    <div
-      className="container mx-auto"
-      style={{ width: "100%", margin: "0 auto" }}
-    >
+    <div className="w-full" style={{ width: "100%", margin: "0 auto" }}>
+      <div className="w-full">
+        <img
+          src={eventData.image}
+          alt={eventData.title}
+          className="w-full h-96 object-cover"
+        />
+      </div>
       <div className="button-cool2">
         <h1 style={{ color: "white", fontWeight: "bold" }}>
           {eventData.title}
@@ -99,13 +103,6 @@ const EventDetailed = () => {
         >
           Number of Tickets: {eventData.nTickets}
         </p>
-        <figure className="px-10 pt-10">
-          <img
-            src={eventData.image}
-            alt={eventData.title}
-            className="rounded-xl"
-          />
-        </figure>
         {eventData.allowResale && (
           <>
             <p
