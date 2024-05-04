@@ -54,7 +54,7 @@ const Auth = () => {
               contractAddress: ticketInfo.contractAddress,
               ticketId: ticketInfo.ticketId,
               forSale: false,
-              price: ticketInfo.ticketPrice,
+              price: ticketInfo.ticketPrice._hex,
             }),
           }
         );
