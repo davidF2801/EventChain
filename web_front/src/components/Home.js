@@ -77,6 +77,7 @@ const Home = () => {
                   src={event.image}
                   alt={event.title}
                   className="banner-image"
+                  style={{ maxWidth: "100%", maxHeight: "100%" }}
                 />
               </Link>
               <div
@@ -84,20 +85,33 @@ const Home = () => {
                 style={{
                   flex: 0.5,
                   textAlign: "center",
-                  background: "rgba(255, 255, 255, 0.05)",
                 }}
               >
                 <h2
                   className="banner-title"
-                  style={{ fontSize: "3rem", marginBottom: "0.5rem" }}
+                  style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}
                 >
                   {event.title}
                 </h2>
-                <p className="banner-text" style={{ marginBottom: "0.5rem" }}>
+                <p
+                  className="banner-text"
+                  style={{
+                    marginBottom: "0.2rem",
+                    fontSize: "1rem",
+                    fontWeight: "bold",
+                  }}
+                >
                   Date: {formatDate(event.startDate)} -{" "}
                   {formatDate(event.endDate)}
                 </p>
-                <p className="banner-text" style={{ marginBottom: "1rem" }}>
+                <p
+                  className="banner-text"
+                  style={{
+                    marginBottom: "0.3rem",
+                    fontSize: "1rem",
+                    fontWeight: "bold",
+                  }}
+                >
                   Location: {event.location}
                 </p>
                 <Link to="/auth">

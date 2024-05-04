@@ -226,8 +226,8 @@
 
 .banner-container {
   position: relative;
-  width: 90%;
-  height: 90vh;
+  width: 100%;
+  height: 65vh;
   overflow: hidden;
 }
 
@@ -240,7 +240,7 @@
 .banner-content {
   position: absolute;
   bottom: 10px; /* Ajusta la posición vertical del texto */
-  right: 0.3%;
+  right: 0.7%;
   text-align: center;
   color: #f3f3f8;
   font-style: oblique;
@@ -248,7 +248,7 @@
 
 .banner-title {
   font-size: 4rem; /* Tamaño de fuente muy grande para el título */
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .banner-text {
