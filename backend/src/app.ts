@@ -29,7 +29,7 @@ app.use(cors({
 }));
 
 // Middleware for parsing JSON bodies
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 
 // Registering the routes from the router file
 app.use('/', router);
