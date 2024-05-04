@@ -37,7 +37,7 @@ const Home = () => {
       if (sliderRef.current) {
         sliderRef.current.slickNext();
       }
-    }, 3000); // Modificar la velocidad de paso
+    }, 10000); // Modificar la velocidad de paso
 
     return () => clearInterval(interval);
   }, []);
@@ -105,7 +105,11 @@ const Home = () => {
         <h2 className="heading text-3xt mb-0 mt-1">The Main Events</h2>
         <Slider ref={sliderRef} {...settings} className="slider">
           {events.map((event, index) => (
-            <Link to="/events" key={index} className="event-link">
+            <Link
+              to={`/eventdetailed/${event.title}`}
+              key={index}
+              className="event-link"
+            >
               <div className="event-container">
                 <div className="event">
                   <h2 className="event-title">{event.title}</h2>
