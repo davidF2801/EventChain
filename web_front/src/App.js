@@ -6,11 +6,6 @@ import About from "./components/About.js";
 import Login from "./components/Login";
 import Register from "./components/Register.js";
 import Recover from "./components/Recover.js";
-import Image from "./components/images/mcloving.jpg";
-import Deportes from "./components/Deportes.js";
-import Teatro from "./components/Theater.js";
-import Musica from "./components/Musica.js";
-import Festivales from "./components/Festivales.js";
 import EventGeneric from "./components/Events/EventGeneric.js";
 import TicketResale from "./components/TicketResale.js";
 import Auth from "./components/Auth.js";
@@ -59,10 +54,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/recover" element={<Recover />} />
-          <Route path="/deportes" element={<Deportes />} />
-          <Route path="/musica" element={<Musica />} />
-          <Route path="/teatro" element={<Teatro />} />
-          <Route path="/festivales" element={<Festivales />} />
           <Route path="/events" element={<EventGeneric />} />
           <Route path="/resale" element={<TicketResale />} />
           <Route path="/auth" element={<Auth />} />

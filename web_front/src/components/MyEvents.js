@@ -30,7 +30,7 @@ const MyEvents = () => {
         setData(jsonData);
       } catch (error) {
         setError(error);
-        setRedirectToError(true); // Establecer redirectToError a true en caso de error
+        setRedirectToError(true);
       } finally {
         setLoading(false);
       }
@@ -45,13 +45,18 @@ const MyEvents = () => {
 
     fetchData();
   }, [isAuthenticated]);
+
   if (redirectToError) {
     return <img className="w-4 h-4 mr-auto" src={Error} alt="logo" />;
   }
 
   return (
-    <div className="container mx-auto">
-      <h1 className="heading text-3xl font-bold mb-2 mt-4">My events</h1>
+    <div className="full-screen-container">
+      {" "}
+      {/* Aplica el estilo full-screen-container */}
+      <h1 className="container mx-auto p-8 heading text-3xl font-bold mb-2 mt-4">
+        My Events {/* Aplica el estilo heading */}
+      </h1>
       {loading && <div>Loading...</div>}
       {error && (
         <div>
@@ -68,12 +73,22 @@ const MyEvents = () => {
                   alt={event.title}
                   className="event-image"
                 />
-                {/* Enlace al detalle del evento con el ID */}
                 <Link to={`/eventdetailed/${event.title}`} state={event}>
                   <h2 className="event-title">{event.title}</h2>
                 </Link>
-                <p>Date: {event.date}</p>
-                <p>Location: {event.location}</p>
+                <p>
+                  <span role="img" aria-label="Calendar">
+                    🗓
+                  </span>{" "}
+                  Date: {formatDate(event.startDate)} -{" "}
+                  {formatDate(event.endDate)}
+                </p>
+                <p>
+                  <span role="img" aria-label="Location">
+                    📍
+                  </span>{" "}
+                  Location: {event.location}
+                </p>
               </div>
             </div>
           ))}
@@ -81,6 +96,12 @@ const MyEvents = () => {
       )}
     </div>
   );
+};
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return date.toLocaleDateString(undefined, options);
 };
 
 export default MyEvents;

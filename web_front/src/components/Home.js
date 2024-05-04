@@ -139,7 +139,7 @@ const Home = () => {
           backgroundColor: "",
           color: "#fff",
           textAlign: "center",
-          width: "90%",
+          width: "95%",
         }}
       >
         <h2>⚡ Nearest Event ⚡</h2>
