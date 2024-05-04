@@ -99,10 +99,12 @@ function NewEvent() {
       setError(true);
       setErrorMessage("Please fill in all required fields.");
       return;
+    } else if (!allowResale) {
+      setAllowResale(false);
     }
 
     // Check for the resale fields only if resale is allowed
-    if (allowResale && !resaleFee) {
+    if (allowResale == true && !resaleFee) {
       setError(true);
       setErrorMessage("Please fill in all required resale fields.");
       return;
@@ -161,7 +163,7 @@ function NewEvent() {
       nTickets,
       image,
       allowResale,
-      resaleFee: allowResale ? resaleFee : undefined,
+      resaleFee: allowResale ? resaleFee : 0,
     };
 
     // Here you can send the data to the backend to save it
