@@ -35,7 +35,7 @@ const TicketDetailed = () => {
       <h1>Ticket Details</h1>
       <div className="ticket-details">
         <div>
-          <h2>Event Name: {ticketInfo.eventName}</h2>
+          <h2>Event Name: {ticketInfo.ticketInfo.eventName}</h2>
           <p>
             <strong>Price:</strong> {ticketInfo.ticketInfo.price / 1000000} TRX
           </p>

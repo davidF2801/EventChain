@@ -30,7 +30,7 @@ import Search from "./components/Search.js";
 import "./App.css";
 import TronWeb from "tronweb";
 import TicketDetailed from "./components/TicketDetailed.js";
-import AuthSignature from "./components/AuthSiagnature.js";
+import AuthSignature from "./components/AuthSignature.js";
 const mainOptions = {
   fullNode: "http://127.0.0.1:9090/",
   solidityNode: "http://127.0.0.1:9090/",
