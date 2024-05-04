@@ -5,6 +5,7 @@ import { resellTicket } from "./resellTicket.js";
 import "./Auth.css"; // Importa el archivo CSS
 import useRequireAuth from "../authenticate_utils.js";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+import Cookies from "js-cookie";
 
 const AuthSignature = () => {
   const [privateKey, setPrivateKey] = useState("");
@@ -25,7 +26,7 @@ const AuthSignature = () => {
   if (!isAuthenticated) {
     return null;
   }
-  const handleLogin = async (e) => {
+  const handleInput = async (e) => {
     e.preventDefault();
 
     try {
@@ -38,8 +39,12 @@ const AuthSignature = () => {
       const message = tronWebInst.toHex(ticketInfo.contractAddress.toString());
       const signature = await tronWebInst.trx.sign(message, privateKey);
       console.log(signature);
-      ticketInfo.signature = signature;
-      navigate("/TicketDetailed", { state: { ticketInfo } });
+      Cookies.set(
+        "signature" + ticketInfo.contractAddress + ticketInfo.ticketId,
+        signature,
+        { expires: 0.25 }
+      );
+      navigate("/TicketDetailed", { state: ticketInfo });
     } catch (error) {
       console.error("Error buying ticket:", error.message || error);
       setErrorMessage(error.message);
@@ -49,7 +54,7 @@ const AuthSignature = () => {
   return (
     <div className="container mx-auto p-">
       <h1>Introduce your TRON private key to generate a digital signature</h1>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleInput}>
         <div className="input-group">
           <label htmlFor="privateKey">Private key:</label>
           <input

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ErrorImage from "./images/404.png";
 import "./Auth.css"; // Import CSS file
 import useRequireAuth from "../authenticate_utils.js";
+import Cookies from "js-cookie";
 
 const MyTickets = () => {
   const [data, setData] = useState([]);
@@ -55,6 +56,17 @@ const MyTickets = () => {
     return <img className="w-4 h-4 mr-auto" src={ErrorImage} alt="Error" />;
   }
 
+  // Function to determine if the signature cookie exists for a ticket
+  const hasSignature = (ticketId, contractAddress) => {
+    // Check for a cookie based on ticketId, adapt as necessary
+    console.log(
+      "Checking for signature cookie for ticketId",
+      "signature" + contractAddress + ticketId
+    );
+    const signature = Cookies.get("signature" + contractAddress + ticketId);
+    return signature ? true : false;
+  };
+
   return (
     <div className="container gradient-custom">
       <h1>Your Tickets</h1>
@@ -64,10 +76,18 @@ const MyTickets = () => {
             <h2>{ticket.title}</h2>
             <p>Event: {ticket.eventName}</p>
             <div className="ticket-actions">
-              <Link to={`/AuthSignature`} state={ticket}>
-                <button className="button-cool">View QR code</button>
-              </Link>
-              <Link to={`/AuthListTicket`} state={ticket}>
+              {hasSignature(ticket.ticketId, ticket.contractAddress) ? (
+                <Link to={"/TicketDetailed"} state={ticket}>
+                  <button className="button-cool">View QR code</button>
+                </Link>
+              ) : (
+                <Link to={"/AuthSignature"} state={ticket}>
+                  <button className="button-cool">
+                    Authenticate to View QR
+                  </button>
+                </Link>
+              )}
+              <Link to={"/AuthListTicket"} state={ticket}>
                 {ticket.forSale ? (
                   <button className="button-cool">Change Resale Price</button>
                 ) : (

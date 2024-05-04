@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom"; // Import useLocation
 import QRCode from "react-qr-code";
 import "./TicketDetailed.css";
+import Cookies from "js-cookie";
+
 const TicketDetailed = () => {
   const numbers = [123, 456, 789, 101, 112]; // Example array of numbers
   const [currentIndex, setCurrentIndex] = useState(0); // State to track the current index of the array
@@ -12,12 +14,6 @@ const TicketDetailed = () => {
     return <div>Loading ticket details...</div>; // Display loading or not found message if no ticket info
   }
   useEffect(() => {
-    if (ticketInfo) {
-      console.log(ticketInfo);
-      console.log(ticketInfo.ticketInfo.signature);
-      console.log(ticketInfo.ticketInfo.ticketId);
-    }
-
     const interval = setInterval(() => {
       // Update the index to cycle through the numbers
       setCurrentIndex((prevIndex) => {
@@ -35,25 +31,26 @@ const TicketDetailed = () => {
       <h1>Ticket Details</h1>
       <div className="ticket-details">
         <div>
-          <h2>Event Name: {ticketInfo.ticketInfo.eventName}</h2>
+          <h2>Event Name: {ticketInfo.eventName}</h2>
           <p>
-            <strong>Price:</strong> {ticketInfo.ticketInfo.price / 1000000} TRX
+            <strong>Price:</strong> {ticketInfo.price / 1000000} TRX
           </p>
           <p>
-            <strong>For Sale:</strong>{" "}
-            {ticketInfo.ticketInfo.forSale ? "Yes" : "No"}
+            <strong>For Sale:</strong> {ticketInfo.forSale ? "Yes" : "No"}
           </p>
           <p>
-            <strong>Ticket ID:</strong> {ticketInfo.ticketInfo.ticketId}
+            <strong>Ticket ID:</strong> {ticketInfo.ticketId}
           </p>
           <p>
-            <strong>User:</strong> {ticketInfo.ticketInfo.user}
+            <strong>User:</strong> {ticketInfo.user}
           </p>
         </div>
         <div>
           <h3>QR Code for Ticket</h3>
           <QRCode
-            value={`${ticketInfo.ticketInfo.ticketId}|${ticketInfo.ticketInfo.signature}|${currentNumber}`}
+            value={`${ticketInfo.ticketId}|${Cookies.get(
+              "signature" + ticketInfo.contractAddress + ticketInfo.ticketId
+            )}|${currentNumber}`}
             size={256}
             level="H"
             includeMargin={true}
