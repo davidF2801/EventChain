@@ -92,6 +92,23 @@
   transform: scale(1.05);
 }
 
+.button-cool3 {
+  background-color: rgba(66, 64, 78, 0.09);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 20px auto; /* Centrar horizontal y verticalmente */
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.3s;
+  width: 80%; /* Ancho del contenedor */
+  max-width: 800px; /* Ancho máximo del contenedor */
+}
+
 .location-link {
   cursor: pointer;
   color: #007bff; /* Cambiar el color del enlace */
