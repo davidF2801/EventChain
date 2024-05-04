@@ -20,7 +20,7 @@ const Home = () => {
         }
         const eventData = await response.json();
         // Obtener solo los primeros tres eventos
-        const firstThreeEvents = eventData.slice(0, 3);
+        const firstThreeEvents = eventData.slice(0, 5);
         setEvents(firstThreeEvents);
       } catch (error) {
         setError(error);
@@ -64,15 +64,15 @@ const Home = () => {
 
   return (
     <div>
-      <div className="banner-container">
-        <Slider ref={sliderRef} {...settings} className="slider">
+      <div>
+        <Slider ref={sliderRef} {...settings}>
           {events.map((event, index) => (
             <Link
               to={`/eventdetailed/${event.title}`}
               key={index}
               className="banner-container"
             >
-              <div className="banner-container">
+              <div>
                 <img
                   src={event.image}
                   alt={event.title}
