@@ -8,25 +8,9 @@ import logo from "./images/logo1.png";
 
 const Navbar = () => {
   const isAuthenticated = useRequireAuth();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [iconColor, setIconColor] = useState("#888"); // Color inicial del ícono
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 1150); // Estado para verificar si la pantalla es pequeña
   const [showMenu, setShowMenu] = useState(false); // Estado para controlar si se muestra el menú desplegable
   const navigate = useNavigate();
-
-  const handleSearchInputChange = (e) => {
-    setSearchQuery(e.target.value.toLowerCase());
-  };
-
-  const handleSearch = () => {
-    navigate(`/search?q=${searchQuery}`);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
 
   // Función para alternar la visibilidad del menú desplegable
   const toggleMenu = () => {
@@ -49,19 +33,29 @@ const Navbar = () => {
     };
   }, []);
 
+  // Manejador de clic en enlace dentro del popout
+  const handleLinkClick = () => {
+    setShowMenu(false); // Ocultar el popout cuando se hace clic en un enlace
+  };
+
   return (
     <nav
       className="w-full flex md:justify-center justify-between items-center p-4"
       style={{ fontFamily: "Orbitron" }}
     >
       <header className="Header">
-        {!isSmallScreen && (
-          <>
-            <div className="Header-left">
-              <Link to="/" className="Header-title">
-                <img src={logo} className="Header-logo" alt="Logo" />
-                EventChain
-              </Link>
+        <div className="Header-left">
+          <Link to="/" className="Header-title">
+            <img src={logo} className="Header-logo" alt="Logo" />
+            EventChain
+          </Link>
+        </div>
+        <div
+          className="Header-right"
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          {!isSmallScreen && (
+            <>
               <nav className="Navbar">
                 <ul className="Navbar-links">
                   <li>
@@ -102,39 +96,6 @@ const Navbar = () => {
                   </li>
                 </ul>
               </nav>
-            </div>
-            <div
-              className="Header-right"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <div
-                className="searchbox-container"
-                style={{ position: "relative", fontFamily: "Orbitron" }}
-              >
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="searchbox"
-                  value={searchQuery}
-                  onChange={handleSearchInputChange}
-                  onKeyPress={handleKeyPress}
-                  style={{ paddingRight: "40px" }}
-                />
-                <IoSearch
-                  className="search-icon"
-                  style={{
-                    position: "absolute",
-                    top: "50%",
-                    right: "10px",
-                    transform: "translateY(-50%)",
-                    color: iconColor,
-                    cursor: "pointer",
-                  }}
-                  onClick={handleSearch}
-                  onMouseEnter={() => setIconColor("#007bff")}
-                  onMouseLeave={() => setIconColor("#888")}
-                />
-              </div>
               <div style={{ marginLeft: "20px" }}>
                 {isAuthenticated ? (
                   <Link
@@ -154,15 +115,9 @@ const Navbar = () => {
                   </Link>
                 )}
               </div>
-            </div>
-          </>
-        )}
-        {isSmallScreen && (
-          <div className="Header-left">
-            <Link to="/" className="Header-title">
-              <img src={logo} className="Header-logo" alt="Logo" />
-              EventChain
-            </Link>
+            </>
+          )}
+          {isSmallScreen && (
             <div className="Header-right">
               <button
                 className="toggle-menu-btn"
@@ -170,81 +125,96 @@ const Navbar = () => {
                 style={{
                   background: "linear-gradient(to left, #330cc0, #9547d4)",
                   color: "#fff",
-                  position: "fixed",
-                  top: "5px", // Margen superior
-                  right: "20px", // Margen derecho
-                  zIndex: "990", // Asegura que el botón esté por encima de otros elementos
-                  padding: "10px", // Espacio alrededor del texto dentro del botón
-                  borderRadius: "50%", // Botón redondeado
-                  border: "none", // Sin borde
+                  padding: "10px",
+                  borderRadius: "50%",
+                  border: "none",
+                  cursor: "pointer",
                 }}
               >
                 ☰
               </button>
               {showMenu && (
-                <nav className="menu-sidebar">
-                  <ul>
-                    <li>
-                      <Link
-                        to="/events"
-                        className="login-link"
-                        style={{ fontFamily: "Orbitron" }}
-                      >
-                        All Events
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/resale"
-                        className="login-link"
-                        style={{ fontFamily: "Orbitron" }}
-                      >
-                        Resale Marketplace
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/about"
-                        className="login-link"
-                        style={{ fontFamily: "Orbitron" }}
-                      >
-                        About
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/contact"
-                        className="login-link"
-                        style={{ fontFamily: "Orbitron" }}
-                      >
-                        Contact
-                      </Link>
-                    </li>
-                    <li>
-                      {isAuthenticated ? (
+                <div
+                  className="menu-popout"
+                  style={{
+                    position: "fixed",
+                    top: "60px", // Margen superior aumentado
+                    bottom: "0",
+                    right: "0",
+                    backgroundColor: "rgba(255, 255, 255, 0.1)", // Fondo con baja opacidad
+                    zIndex: "999",
+                    padding: "10px",
+                    borderRadius: "5px",
+                  }}
+                  onClick={handleLinkClick} // Manejador de clic en el popout
+                >
+                  <nav className="Navbar">
+                    <ul
+                      className="Navbar-links"
+                      style={{ flexDirection: "column" }}
+                    >
+                      <li>
                         <Link
-                          to="/myprofile"
+                          to="/events"
                           className="login-link"
                           style={{ fontFamily: "Orbitron" }}
                         >
-                          My Profile
+                          All Events
                         </Link>
-                      ) : (
+                      </li>
+                      <li>
                         <Link
-                          to="/login"
+                          to="/resale"
                           className="login-link"
                           style={{ fontFamily: "Orbitron" }}
                         >
-                          Login
+                          Resale Marketplace
                         </Link>
-                      )}
-                    </li>
-                  </ul>
-                </nav>
+                      </li>
+                      <li>
+                        <Link
+                          to="/about"
+                          className="login-link"
+                          style={{ fontFamily: "Orbitron" }}
+                        >
+                          About
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/contact"
+                          className="login-link"
+                          style={{ fontFamily: "Orbitron" }}
+                        >
+                          Contact
+                        </Link>
+                      </li>
+                      <li>
+                        {isAuthenticated ? (
+                          <Link
+                            to="/myprofile"
+                            className="login-link"
+                            style={{ fontFamily: "Orbitron" }}
+                          >
+                            My Profile
+                          </Link>
+                        ) : (
+                          <Link
+                            to="/login"
+                            className="login-link"
+                            style={{ fontFamily: "Orbitron" }}
+                          >
+                            Login
+                          </Link>
+                        )}
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
               )}
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </header>
     </nav>
   );

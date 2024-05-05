@@ -21,7 +21,6 @@ import Contact from "./components/Contact.js";
 import MyTickets from "./components/MyTickets.js";
 import MyEvents from "./components/MyEvents.js";
 import AuthListTicket from "./components/AuthListTicket.js";
-import Search from "./components/Search.js";
 import "./App.css";
 import TronWeb from "tronweb";
 import TicketDetailed from "./components/TicketDetailed.js";
@@ -72,7 +71,6 @@ function App() {
           <Route path="/Contact" element={<Contact />} />
           <Route path="/MyTickets" element={<MyTickets />} />
           <Route path="/AuthListTicket" element={<AuthListTicket />} />
-          <Route path="/Search" element={<Search />} />
           <Route path="/NotFound" element={<NotFound />} />
         </Routes>
         <Footer />
