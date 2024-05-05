@@ -8,6 +8,7 @@ const handleBuy = async (eventInfo, isAuthenticated) => {
         eventInfo.contractAddress,
         eventInfo.ticketId
       );
+      console.log(isAuthenticated);
       const updateResponse = await fetch(
         "http://localhost:8888/tickets/rebuyTicket",
         {

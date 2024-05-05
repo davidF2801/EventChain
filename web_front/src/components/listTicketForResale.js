@@ -5,7 +5,7 @@ export const listTicketForResale = async (price, contractAddress, ticketId) => {
 
   const contractInstance = await tronWebInst.contract().at(contractAddress);
   const listedTicket = await contractInstance
-    .listTicketForResale(ticketId, price)
+    .listTicketForResale(ticketId, price * 1e6)
     .send({
       from: tronWebInst.address.fromPrivateKey(tronWeb.defaultPrivateKey),
       feeLimit: 100000000,
