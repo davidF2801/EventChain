@@ -103,6 +103,7 @@ router.post('/createTicket', async (req, res) => {
             ticketId,
             price,
             contractAddress,
+            accessNumber: -1
         });
 
         const result = await new_ticket.save()
