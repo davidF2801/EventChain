@@ -1,7 +1,13 @@
 const fs = require('fs');
 const TronWeb = require('tronweb');
+const bip39 = require('bip39');
 require('dotenv').config();
-
+async function getPrivateKeyFromMnemonics(mnemonics) {
+  const seed = await bip39.mnemonicToSeed(mnemonics);
+  const node = bip32.fromSeed(seed); // bip32 is part of the bitcoinjs-lib, which you might need to install
+  const child = node.derivePath("m/44'/195'/0'/0/0"); // Standard TRON derivation path
+  return child.privateKey.toString('hex');
+}
 async function deployEvent(address, nTickets, ticketPrice, allowResale, resaleFee) {
   console.log(`Current working directory: ${process.cwd()}`);
   const rawdata = fs.readFileSync('build/contracts/Event.json');
@@ -19,11 +25,11 @@ async function deployEvent(address, nTickets, ticketPrice, allowResale, resaleFe
       eventServer: eventServer,
       privateKey: privateKey,
     });
-  
+    console.log('Connected to Shasta network!');
     const contract = await tronWebInst.contract().new({
       abi: abi,
       bytecode: bytecode,
-      feeLimit: 200000000,
+      feeLimit: 1000000000,
       callValue: 0,
       parameters: [nTickets, address, ticketPrice, allowResale, resaleFee],
     });
