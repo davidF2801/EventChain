@@ -254,3 +254,15 @@
 .banner-text {
   font-size: 2rem; /* Tamaño de fuente grande para el texto */
 }
+.toggle-menu-btn {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.toggle-menu-btn:hover {
+  color: #007bff;
+}
