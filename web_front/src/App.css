@@ -141,16 +141,6 @@
   padding: 20px;
 }
 
-.searchbox {
-  background-position: right 10px center; /* Ajusta la posición del ícono */
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-  font-size: 0.9em;
-  margin-right: 20px;
-  padding: 10px 30px 10px 10px; /* Ajusta el padding para dejar espacio para el ícono */
-}
-
 .star {
   height: auto;
   width: 5%;
@@ -171,27 +161,6 @@
 .hstar {
   height: auto;
   width: 2.5%;
-}
-
-.searchbox-container {
-  position: relative;
-}
-
-.search-icon {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  color: #888;
-  font-size: 1.2rem;
-}
-
-.searchbox {
-  padding-left: 30px;
-}
-
-.search-icon:hover {
-  color: blue; /* Cambia el color a azul cuando el ratón está sobre el icono */
 }
 
 .button {
