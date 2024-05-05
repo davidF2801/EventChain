@@ -94,11 +94,11 @@ function MyProfile() {
       </header>
       <div className="button-cool2">
         <div className="button-cool2">
-          <h2>
+          <h3>
             <Link to="/MyTickets" className="action-button white-link">
               My Tickets
             </Link>
-          </h2>
+          </h3>
         </div>
         <div className="button-cool2">
           <h3>

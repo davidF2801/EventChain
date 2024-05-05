@@ -207,7 +207,7 @@ const Home = () => {
       <div
         style={{
           fontSize: "1.2rem",
-          fontStyle: "italic",
+          fontStyle: "Orbitron",
         }}
       >
         <h3>Sounds interesting?</h3>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Error from "./images/404.png";
-
+import "./ticketResale.css";
 const TicketResale = () => {
   const [data, setData] = useState(null);
   const [eventData, setEventData] = useState(null);
@@ -41,14 +41,14 @@ const TicketResale = () => {
     return <img class="w-4 h-4 mr-2" src={Error} alt="logo" />;
   }
   return (
-    <div className="container mx-auto">
-      <h1>Tickets for resale</h1>
-      <div className="ticket-resale-container">
+    <div className="container">
+      <h1 className="header">Tickets for resale</h1>
+      <div className="cards-container">
         {data.map((ticket, index) => (
-          <div key={index} className="ticket">
-            <h2>{ticket.title}</h2>
-            <p>Event: {ticket.eventName}</p>
-            <p>Price: {ticket.price}</p>
+          <div key={index} className="card">
+            <h2 className="title">{ticket.title}</h2>
+            <p className="event-name">Event: {ticket.eventName}</p>
+            <p className="price">Price: {ticket.price} TRX</p>
             <Link to={`/auth`} state={ticket}>
               <button className="button-cool">Buy ticket</button>
             </Link>

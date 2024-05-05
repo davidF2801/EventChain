@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap");
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  color: #ffffff; /* Set text color to white for better visibility on a dark gradient */
+  font-family: "Orbitron", sans-serif; /* Futuristic font */
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  position: relative;
+  justify-content: start; /* Align cards to the left */
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Enhanced shadow for floating effect */
+  backdrop-filter: blur(
+    10px
+  ); /* Apply blur to the background inside the card */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle white border */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.6);
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700; /* Bolder font for title */
+  margin-bottom: 15px;
+}
+
+.event-name,
+.price {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.buy-button {
+  background-color: #007bff; /* Primary button color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.buy-button:hover {
+  background-color: #0056b3;
+}
+h4 {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 400; /* Adjust the weight as needed */
+}
+h3 {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700; /* Adjust the weight as needed */
+}
+
+p {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 400; /* Adjust the weight as needed */
+}
+li {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 400; /* Adjust the weight as needed */
+}
