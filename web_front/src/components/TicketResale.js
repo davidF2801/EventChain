@@ -2,11 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Error from "./images/404.png";
 import "./ticketResale.css";
+import handleBuy from "./components_utils";
+import useRequireAuth from "../authenticate_utils.js";
+
 const TicketResale = () => {
   const [data, setData] = useState(null);
   const [eventData, setEventData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const isAuthenticated = useRequireAuth();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,9 +54,19 @@ const TicketResale = () => {
             <h2 className="title">{ticket.title}</h2>
             <p className="event-name">Event: {ticket.eventName}</p>
             <p className="price">Price: {ticket.price} TRX</p>
-            <Link to={`/auth`} state={ticket}>
-              <button className="button-cool">Buy ticket</button>
-            </Link>
+            {isAuthenticated ? (
+              <button
+                className="button-cool"
+                onClick={() => handleBuy(ticket, isAuthenticated)}
+              >
+                {" "}
+                💸 Buy tickets
+              </button>
+            ) : (
+              <Link to={"/login"}>
+                <button className="button-cool"> 💸 Buy tickets</button>
+              </Link>
+            )}
           </div>
         ))}
       </div>

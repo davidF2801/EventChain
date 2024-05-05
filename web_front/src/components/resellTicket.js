@@ -1,20 +1,14 @@
-export const resellTicket = async (
-  pk,
-  buyerAccount,
-  contractAddress,
-  ticketId
-) => {
+export const resellTicket = async (contractAddress, ticketId) => {
   console.log("Rebuying ticket...:", ticketId);
   console.log("Contract Address:", contractAddress);
   const tronWebInst = window.tronWeb;
-  tronWebInst.setPrivateKey(pk);
 
   const contractInstance = await tronWebInst.contract().at(contractAddress);
 
   const ticketPrice = await contractInstance.checkPrice(ticketId).call();
   console.log("Ticket price:", ticketPrice._hex);
   const result = await contractInstance.rebuyTicket(ticketId).send({
-    from: buyerAccount,
+    from: tronWebInst.address.fromPrivateKey(tronWeb.defaultPrivateKey),
     feeLimit: 100000000,
     callValue: ticketPrice,
     shouldPollResponse: true,

@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./EventGeneric.css";
 import Error from "../images/404.png";
+import { buyTicket } from "../buyTicket.js";
+import useRequireAuth from "../../authenticate_utils.js";
 
 const EventGeneric = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [redirectToError, setRedirectToError] = useState(false);
+
+  const isAuthenticated = useRequireAuth();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,11 +38,83 @@ const EventGeneric = () => {
     fetchData();
 
     return () => {};
-  }, []);
+  }, [isAuthenticated]);
 
   if (redirectToError) {
     return <img className="w-4 h-4 mr-auto" src={Error} alt="logo" />;
   }
+
+  const handleBuy = async (eventInfo) => {
+    try {
+      if (!eventInfo.startDate) {
+        const ticketInfo = await resellTicket(
+          privateKey,
+          publicKey,
+          eventInfo.contractAddress,
+          eventInfo.ticketId
+        );
+        const updateResponse = await fetch(
+          "http://localhost:8888/tickets/rebuyTicket",
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + isAuthenticated,
+            },
+            body: JSON.stringify({
+              contractAddress: ticketInfo.contractAddress,
+              ticketId: ticketInfo.ticketId,
+              forSale: false,
+              price: ticketInfo.ticketPrice._hex,
+            }),
+          }
+        );
+        const updateResult = await updateResponse.json();
+        if (updateResponse.ok) {
+          console.log("Ticket updated successfully in database:", updateResult);
+        } else {
+          throw new Error(
+            updateResult.error || "Failed to update ticket in the database"
+          );
+        }
+      } else {
+        const ticketInfo = await buyTicket(eventInfo.contractAddress);
+        console.log("Ticket Info:", ticketInfo);
+        const ticketData = {
+          eventName: eventInfo.title,
+          forSale: false,
+          ticketId: ticketInfo.ticketId,
+          price: ticketInfo.ticketPrice._hex,
+          contractAddress: eventInfo.contractAddress,
+        };
+        console.log(isAuthenticated);
+        fetch("http://localhost:8888/tickets/createTicket", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + isAuthenticated,
+          },
+          body: JSON.stringify(ticketData),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              console.log("Ticket created successfully:", data);
+            } else {
+              throw new Error(data.error || "Failed to create ticket");
+            }
+          })
+          .catch((error) => {
+            console.error(
+              "Error when creating ticket:",
+              error.message || error
+            );
+          });
+      }
+    } catch (error) {
+      console.error("Error buying ticket:", error.message || error);
+    }
+  };
 
   return (
     <div className="full-screen-container">
@@ -83,9 +159,19 @@ const EventGeneric = () => {
                   </span>{" "}
                   Location: {event.location}
                 </p>
-                <Link to={`/auth`} state={event}>
-                  <button className="event-button"> 💸 Buy tickets</button>
-                </Link>
+                {isAuthenticated ? (
+                  <button
+                    className="event-button"
+                    onClick={() => handleBuy(event)}
+                  >
+                    {" "}
+                    💸 Buy tickets
+                  </button>
+                ) : (
+                  <Link to={"/login"}>
+                    <button className="event-button"> 💸 Buy tickets</button>
+                  </Link>
+                )}
               </div>
             </div>
           ))}

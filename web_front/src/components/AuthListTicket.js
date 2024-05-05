@@ -16,11 +16,9 @@ const AuthListTicket = () => {
 
     try {
       listTicketForResale(
-        privateKey,
         ticketPrice,
         ticketInfo.contractAddress,
-        ticketInfo.ticketId,
-        publicKey
+        ticketInfo.ticketId
       );
       const updateResponse = await fetch(
         "http://localhost:8888/tickets/listTicket",
@@ -68,25 +66,6 @@ const AuthListTicket = () => {
       </style>
       <h1>Introduce your TRON wallet</h1>
       <form onSubmit={handleLogin}>
-        <div className="input-group">
-          <label htmlFor="publicKey">Public key:</label>
-          <input
-            type="text"
-            id="publicKey"
-            value={publicKey}
-            onChange={(e) => setPublicKey(e.target.value)}
-          />
-        </div>
-        <div className="input-group">
-          <label htmlFor="privateKey">Private key:</label>
-          <input
-            type="text"
-            id="privateKey"
-            value={privateKey}
-            onChange={(e) => setPrivateKey(e.target.value)}
-          />
-        </div>
-
         <div className="input-group">
           <label htmlFor="newTicketPrice">New ticket price:</label>
           <input
