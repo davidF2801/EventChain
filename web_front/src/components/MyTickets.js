@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import ErrorImage from "./images/404.png";
 import "./Auth.css"; // Import CSS file
 import useRequireAuth from "../authenticate_utils.js";
@@ -9,6 +9,7 @@ const MyTickets = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const isAuthenticated = useRequireAuth();
 
@@ -66,6 +67,26 @@ const MyTickets = () => {
     const signature = Cookies.get("signature" + contractAddress + ticketId);
     return signature ? true : false;
   };
+  const handleInput = async (ticketInfo) => {
+    try {
+      const tronWebInst = window.tronWeb;
+      const message = tronWebInst.toHex(ticketInfo.contractAddress.toString());
+      const signature = await tronWebInst.trx.sign(
+        message,
+        tronWebInst.defaultPrivateKey
+      );
+      console.log(signature);
+      Cookies.set(
+        "signature" + ticketInfo.contractAddress + ticketInfo.ticketId,
+        signature,
+        { expires: 0.25 }
+      );
+      navigate("/TicketDetailed", { state: ticketInfo });
+    } catch (error) {
+      console.error("Error buying ticket:", error.message || error);
+      setErrorMessage(error.message);
+    }
+  };
 
   return (
     <div className="container gradient-custom">
@@ -81,11 +102,12 @@ const MyTickets = () => {
                   <button className="button-cool">View QR code</button>
                 </Link>
               ) : (
-                <Link to={"/AuthSignature"} state={ticket}>
-                  <button className="button-cool">
-                    Authenticate to View QR
-                  </button>
-                </Link>
+                <button
+                  className="button-cool"
+                  onClick={() => handleInput(ticket)}
+                >
+                  Authenticate to View QR
+                </button>
               )}
               <Link to={"/AuthListTicket"} state={ticket}>
                 {ticket.forSale ? (
