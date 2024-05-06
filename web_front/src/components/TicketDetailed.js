@@ -20,7 +20,7 @@ const TicketDetailed = () => {
           ticketInfo.ticketId
         );
         const response = await fetch(
-          "http://localhost:8888/validation/requestNumber",
+          "http://51.21.149.50:8888/validation/requestNumber",
           {
             method: "POST",
             headers: {

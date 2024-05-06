@@ -26,7 +26,7 @@ const MyTickets = () => {
           return;
         }
         const response = await fetch(
-          "http://localhost:8888/tickets/myTickets",
+          "http://51.21.149.50:8888/tickets/myTickets",
           {
             headers: {
               Authorization: "Bearer " + token,

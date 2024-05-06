@@ -23,7 +23,7 @@ const AuthListTicket = () => {
       console.log(ticketInfo);
       console.log(ticketPrice);
       const updateResponse = await fetch(
-        "http://localhost:8888/tickets/listTicket",
+        "http://51.21.149.50:8888/tickets/listTicket",
         {
           method: "PUT",
           headers: {

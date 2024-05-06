@@ -24,13 +24,16 @@ const EventDetailed = () => {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        const response = await fetch("http://localhost:8888/events/details", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ title: title }),
-        });
+        const response = await fetch(
+          "http://51.21.149.50:8888/events/details",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ title: title }),
+          }
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch event details");
         }

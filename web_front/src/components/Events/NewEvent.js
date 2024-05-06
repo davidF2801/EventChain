@@ -54,14 +54,17 @@ function NewEvent() {
 
   async function createEvent(eventData) {
     try {
-      const response = await fetch("http://localhost:8888/events/createEvent", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ` + isAuthenticated,
-        },
-        body: JSON.stringify(eventData),
-      });
+      const response = await fetch(
+        "http://51.21.149.50:8888/events/createEvent",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ` + isAuthenticated,
+          },
+          body: JSON.stringify(eventData),
+        }
+      );
       const data = await response.json();
       console.log("CreateEvent response:", data);
       if (!response.ok) {

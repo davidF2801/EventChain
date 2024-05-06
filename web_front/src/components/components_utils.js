@@ -13,7 +13,7 @@ const handleBuy = async (eventInfo, isAuthenticated) => {
       }
       console.log(isAuthenticated);
       const updateResponse = await fetch(
-        "http://localhost:8888/tickets/rebuyTicket",
+        "http://51.21.149.50:8888/tickets/rebuyTicket",
         {
           method: "PUT",
           headers: {
@@ -49,7 +49,7 @@ const handleBuy = async (eventInfo, isAuthenticated) => {
         contractAddress: eventInfo.contractAddress,
       };
       console.log(isAuthenticated);
-      fetch("http://localhost:8888/tickets/createTicket", {
+      fetch("http://51.21.149.50:8888/tickets/createTicket", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

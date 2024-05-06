@@ -25,12 +25,15 @@ function MyProfile() {
         try {
           setLoading(true);
           console.log("isAuthenticated:", isAuthenticated);
-          const response = await fetch("http://localhost:8888/users/userInfo", {
-            method: "POST",
-            headers: {
-              Authorization: "Bearer " + isAuthenticated,
-            },
-          });
+          const response = await fetch(
+            "http://51.21.149.50:8888/users/userInfo",
+            {
+              method: "POST",
+              headers: {
+                Authorization: "Bearer " + isAuthenticated,
+              },
+            }
+          );
           console.log("Response:", response);
           if (!response.ok) {
             throw new Error("Failed to fetch data");
