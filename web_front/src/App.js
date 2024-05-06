@@ -32,7 +32,7 @@ const mainOptions = {
 };
 
 const privateKey = "";
-//Easter egg 2
+//Easter egg
 function App() {
   useEffect(() => {
     window.tronWeb = new TronWeb(
