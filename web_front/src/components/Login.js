@@ -15,7 +15,7 @@ function Login() {
       if (!credentials.username && !credentials.password) {
         throw new Error("Error: Credentials missing.");
       }
-      const response = await fetch("http://51.21.149.50:8888/login/login", {
+      const response = await fetch("http://51.21.149.50:80/login/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

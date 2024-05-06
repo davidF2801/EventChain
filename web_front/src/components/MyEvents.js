@@ -16,15 +16,12 @@ const MyEvents = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          "http://51.21.149.50:8888/events/myevents",
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ` + isAuthenticated,
-            },
-          }
-        );
+        const response = await fetch("http://51.21.149.50:80/events/myevents", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ` + isAuthenticated,
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }

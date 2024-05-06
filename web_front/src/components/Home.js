@@ -15,7 +15,7 @@ const Home = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("http://51.21.149.50:8888/events");
+        const response = await fetch("http://51.21.149.50:80/events");
         if (!response.ok) {
           throw new Error("Failed to fetch events");
         }

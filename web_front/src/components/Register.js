@@ -53,7 +53,7 @@ function Registro() {
       profilePictureUrl: "", // assuming a URL or handling files separately
     };
 
-    fetch("http://51.21.149.50:8888/users/", {
+    fetch("http://51.21.149.50:80/users/", {
       // Adjust URL if needed
       method: "POST",
       headers: {

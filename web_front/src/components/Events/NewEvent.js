@@ -55,7 +55,7 @@ function NewEvent() {
   async function createEvent(eventData) {
     try {
       const response = await fetch(
-        "http://51.21.149.50:8888/events/createEvent",
+        "http://51.21.149.50:80/events/createEvent",
         {
           method: "POST",
           headers: {

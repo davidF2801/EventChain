@@ -17,7 +17,7 @@ const TicketResale = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://51.21.149.50:8888/tickets/resale");
+        const response = await fetch("http://51.21.149.50:80/tickets/resale");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
