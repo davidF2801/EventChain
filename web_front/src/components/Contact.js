@@ -53,9 +53,9 @@ const Contact = () => {
           </div>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2989.175372418736!2d2.106348214838841!3d41.54498877924807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4978dd66f0cc1%3A0x43ad5e2a94659d59!2sSabadell%20Nord!5e0!3m2!1sen!2ses!4v1619915293117!5m2!1sen!2ses"
-            width="100%"
+            width="50%"
             height="300"
-            style={{ border: 0 }}
+            style={{ border: 3 }}
             allowFullScreen=""
             loading="lazy"
             className="rounded-lg shadow-lg"
@@ -74,7 +74,7 @@ const Contact = () => {
                     value={name}
                     onChange={handleChange}
                     placeholder="Your Name"
-                    className="border-2 border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:border-blue-500"
+                    className="border-2 border-gray-300 p-3 w-full md:w-2/3 rounded-lg focus:outline-none focus:border-blue-500"
                     required
                   />
                 </div>
@@ -85,7 +85,7 @@ const Contact = () => {
                     value={surname}
                     onChange={handleChange}
                     placeholder="Your Surname"
-                    className="border-2 border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:border-blue-500"
+                    className="border-2 border-gray-300 p-3 w-full md:w-2/3 rounded-lg focus:outline-none focus:border-blue-500"
                     required
                   />
                 </div>
@@ -96,7 +96,7 @@ const Contact = () => {
                     value={email}
                     onChange={handleChange}
                     placeholder="Your Email"
-                    className="border-2 border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:border-blue-500"
+                    className="border-2 border-gray-300 p-3 w-full md:w-2/3 rounded-lg focus:outline-none focus:border-blue-500"
                     required
                   />
                 </div>
@@ -107,7 +107,7 @@ const Contact = () => {
                     value={subject}
                     onChange={handleChange}
                     placeholder="Subject"
-                    className="border-2 border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:border-blue-500"
+                    className="border-2 border-gray-300 p-3 w-full md:w-2/3 rounded-lg focus:outline-none focus:border-blue-500"
                     required
                   />
                 </div>
@@ -118,13 +118,13 @@ const Contact = () => {
                   value={message}
                   onChange={handleChange}
                   placeholder="Your Message"
-                  className="border-2 border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:border-blue-500 h-32"
+                  className="border-2 border-gray-300 p-3 w-full md:w-2/3 rounded-lg focus:outline-none focus:border-blue-500 h-32"
                   required
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="button-cool bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="button-cool bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline"
               >
                 Submit
               </button>
