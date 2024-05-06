@@ -3,23 +3,25 @@ import { useLocation } from "react-router-dom";
 import { listTicketForResale } from "./listTicketForResale";
 import "./Auth.css"; // Import the CSS file
 const AuthListTicket = () => {
-  const [publicKey, setPublicKey] = useState("");
-  const [privateKey, setPrivateKey] = useState("");
   const [ticketPrice, setTicketPrice] = useState("");
   const location = useLocation();
   console.log("Location:", location);
   const ticketInfo = location.state || "";
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Public Key:", publicKey);
-    console.log("Private Key:", privateKey);
 
     try {
-      listTicketForResale(
+      const response = await listTicketForResale(
         ticketPrice,
         ticketInfo.contractAddress,
         ticketInfo.ticketId
       );
+      console.log(response);
+      if (response == null) {
+        throw new Error("Operation rejected");
+      }
+      console.log(ticketInfo);
+      console.log(ticketPrice);
       const updateResponse = await fetch(
         "http://localhost:8888/tickets/listTicket",
         {

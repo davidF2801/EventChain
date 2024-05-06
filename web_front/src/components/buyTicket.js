@@ -2,7 +2,7 @@ export const buyTicket = async (contractAddress) => {
   console.log("Buying ticket...");
   console.log("Contract Address:", contractAddress);
   const tronWebInst = window.tronWeb;
-
+  console.log(tronWebInst);
   const contractInstance = await tronWebInst.contract().at(contractAddress);
 
   const ticketPrice = await contractInstance.ticketPrice().call();
@@ -23,25 +23,18 @@ export const buyTicket = async (contractAddress) => {
       shouldPollResponse: true,
     });
     console.log("Transaction submitted, check events for confirmation.");
+    const ticketId = (await contractInstance.ticketsSold().call()) - 1;
+    console.log("Ticket Id:", ticketId);
+
+    var ticketInfo = {
+      ticketId: ticketId,
+      ticketPrice: ticketPrice,
+    };
   } catch (error) {
     console.error("Transaction failed:", error);
+    const ticketInfo = null;
+    return ticketInfo;
   }
 
-  const ticketId = (await contractInstance.ticketsSold().call()) - 1;
-
-  // const message = tronWebInst.toHex(contractAddress.toString());
-  // const signature = await tronWebInst.trx.sign(message, pk);
-  // const isVerified = await tronWebInst.trx.verifyMessage(
-  //   message,
-  //   signature,
-  //   buyerAccount,
-  //   true
-  // );
-  console.log("Ticket Id:", ticketId);
-
-  var ticketInfo = {
-    ticketId: ticketId,
-    ticketPrice: ticketPrice,
-  };
   return ticketInfo;
 };

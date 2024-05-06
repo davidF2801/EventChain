@@ -8,6 +8,9 @@ const handleBuy = async (eventInfo, isAuthenticated) => {
         eventInfo.contractAddress,
         eventInfo.ticketId
       );
+      if (!ticketInfo) {
+        throw new Error("Operation rejected");
+      }
       console.log(isAuthenticated);
       const updateResponse = await fetch(
         "http://localhost:8888/tickets/rebuyTicket",
@@ -35,7 +38,9 @@ const handleBuy = async (eventInfo, isAuthenticated) => {
       }
     } else {
       const ticketInfo = await buyTicket(eventInfo.contractAddress);
-      console.log("Ticket Info:", ticketInfo);
+      if (ticketInfo == null) {
+        throw new Error("Operation rejected");
+      }
       const ticketData = {
         eventName: eventInfo.title,
         forSale: false,
