@@ -1,7 +1,5 @@
 import React from "react";
 
-import logo from "./images/mcloving.jpg";
-
 const Footer = () => (
   <div className="container mx-auto p-8">
     <footer>

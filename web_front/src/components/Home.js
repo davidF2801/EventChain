@@ -142,7 +142,17 @@ const Home = () => {
           width: "95%",
         }}
       >
-        <h2>⚡ Nearest Event ⚡</h2>
+        <h2
+          style={{
+            textAlign: "center",
+            fontSize: "1.3rem",
+            fontStyle: "italic",
+            padding: "6px",
+            borderRadius: "15px",
+          }}
+        >
+          ⚡ Nearest Event ⚡
+        </h2>
         {nearestEvent && (
           <div>
             <h1>{nearestEvent.title}</h1>
@@ -175,7 +185,7 @@ const Home = () => {
             className="button-cool3"
             style={{
               textAlign: "center",
-              fontSize: "1.2rem",
+              fontSize: "1.4rem",
               fontStyle: "italic",
               padding: "60px",
               borderRadius: "40px",
@@ -206,21 +216,33 @@ const Home = () => {
       </div>
       <div
         style={{
-          fontSize: "1.2rem",
+          fontSize: "1.3rem",
           fontStyle: "Orbitron",
         }}
       >
         <h3>Sounds interesting?</h3>
-        <p>
+        <p
+          style={{
+            textAlign: "center",
+            fontSize: "1rem",
+            fontStyle: "italic",
+          }}
+        >
           Join our community, sign up to create events, buy, sell, and safely
           resale your tickets with blockchain technologies.
         </p>
         <Link to="/register">
           <button className="button-cool">Join Event Chain</button>
         </Link>
-        <p>
+        <p
+          style={{
+            textAlign: "center",
+            fontSize: "1rem",
+            fontStyle: "italic",
+          }}
+        >
           If you are already a member,{" "}
-          <Link to="/login" style={{ color: "#32C57C", fontSize: "17px" }}>
+          <Link to="/login" style={{ color: "#32C57C", fontSize: "14px" }}>
             Sign in
           </Link>
           .
