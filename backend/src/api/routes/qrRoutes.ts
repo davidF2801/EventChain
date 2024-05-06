@@ -24,7 +24,7 @@ function getRandomNumberBasedOnTime(): number {
 
 }
 
-async function deleteAccessNumber(ticketId): Promise<void> {
+async function deleteAccessNumber(ticketId: number): Promise<void> {
 
   const delayInMilliseconds = 30000;
   setTimeout(async () => {
@@ -66,7 +66,8 @@ router.post('/requestNumber', async (req, res) => {
   try {
     const { ticketId } = req.body;
     const number = getRandomNumberBasedOnTime();
-    
+    console.log('Number:', number);
+    console.log('TicketId:', ticketId);
     const ticket = await TicketModel.findOne({ ticketId });
         
     if (!ticket) {

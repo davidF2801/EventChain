@@ -70,12 +70,14 @@ const MyTickets = () => {
   const handleInput = async (ticketInfo) => {
     try {
       const tronWebInst = window.tronWeb;
+      console.log("TronWeb instance:", tronWebInst);
       const message = tronWebInst.toHex(ticketInfo.contractAddress.toString());
+      console.log("Message:", message);
       const signature = await tronWebInst.trx.sign(
         message,
-        tronWebInst.defaultPrivateKey
+        tronWeb.defaultPrivateKey
       );
-      console.log(signature);
+      console.log("Signature: ", signature);
       Cookies.set(
         "signature" + ticketInfo.contractAddress + ticketInfo.ticketId,
         signature,
