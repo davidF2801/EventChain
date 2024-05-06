@@ -1,16 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorImage from "../images/404.png";
 import "./EventGeneric.css"; // Importa el archivo CSS de EventGeneric
 import { buyTicket } from "../buyTicket.js";
 import useRequireAuth from "../../authenticate_utils.js";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+delete L.Icon.Default.prototype._getIconUrl;
 
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+  iconUrl: require("leaflet/dist/images/marker-icon.png"),
+  shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+});
 const EventDetailed = () => {
   const { title } = useParams();
   const [eventData, setEventData] = useState(null);
   const [error, setError] = useState(null);
-
+  const mapRef = useRef(null);
   const isAuthenticated = useRequireAuth();
 
   useEffect(() => {
@@ -37,6 +45,132 @@ const EventDetailed = () => {
 
     return () => {};
   }, [title]);
+
+  useEffect(() => {
+    if (eventData && eventData.location && mapRef.current) {
+      // Convert address to coordinates using Nominatim
+      const address = encodeURIComponent(eventData.location);
+      const nominatimUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${address}`;
+
+      fetch(nominatimUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.length > 0) {
+            const lat = data[0].lat;
+            const lon = data[0].lon;
+            console.log(lat);
+            console.log(lon);
+            // Now initialize the map with these coordinates
+            const map = L.map(mapRef.current).setView([lat, lon], 14);
+            L.tileLayer(
+              "https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=sUb7dqvLEI0JDY9r7PMY",
+              {
+                tileSize: 512,
+                zoomOffset: -1,
+                minZoom: 1,
+                attribution: "© MapTiler © OpenStreetMap contributors",
+                crossOrigin: true,
+              }
+            ).addTo(map);
+
+            // Add a marker to the map at the geocoded location
+            var myIcon = L.icon({
+              iconUrl:
+                "https://th.bing.com/th/id/R.34b0808d15abff6e7fc5555bfaf1ba6c?rik=4Ng%2blOvpDhY8qg&pid=ImgRaw&r=0",
+              iconSize: [38, 95], // size of the icon
+              iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+              popupAnchor: [-3, -76], // point from which the popup should open relative to the iconAnchor
+            });
+
+            L.marker([lat, lon], { icon: myIcon })
+              .addTo(map)
+              .bindPopup("Your Location");
+
+            // Cleanup function to remove map when component unmounts
+            return () => {
+              map.remove();
+            };
+          } else {
+            console.log("No results found for the address.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching geocoding data:", error);
+        });
+    }
+  }, [eventData]);
+
+  const handleBuy = async (eventInfo) => {
+    try {
+      if (!eventInfo.startDate) {
+        const ticketInfo = await resellTicket(
+          privateKey,
+          publicKey,
+          eventInfo.contractAddress,
+          eventInfo.ticketId
+        );
+        const updateResponse = await fetch(
+          "http://localhost:8888/tickets/rebuyTicket",
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + isAuthenticated,
+            },
+            body: JSON.stringify({
+              contractAddress: ticketInfo.contractAddress,
+              ticketId: ticketInfo.ticketId,
+              forSale: false,
+              price: ticketInfo.ticketPrice._hex,
+            }),
+          }
+        );
+        const updateResult = await updateResponse.json();
+        if (updateResponse.ok) {
+          console.log("Ticket updated successfully in database:", updateResult);
+        } else {
+          throw new Error(
+            updateResult.error || "Failed to update ticket in the database"
+          );
+        }
+      } else {
+        const ticketInfo = await buyTicket(eventInfo.contractAddress);
+        console.log("Ticket Info:", ticketInfo);
+        const ticketData = {
+          eventName: eventInfo.title,
+          forSale: false,
+          ticketId: ticketInfo.ticketId,
+          price: ticketInfo.ticketPrice._hex,
+          contractAddress: eventInfo.contractAddress,
+        };
+        console.log(isAuthenticated);
+        fetch("http://localhost:8888/tickets/createTicket", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + isAuthenticated,
+          },
+          body: JSON.stringify(ticketData),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              console.log("Ticket created successfully:", data);
+            } else {
+              throw new Error(data.error || "Failed to create ticket");
+            }
+          })
+          .catch((error) => {
+            console.error(
+              "Error when creating ticket:",
+              error.message || error
+            );
+          });
+      }
+    } catch (error) {
+      console.error("Error buying ticket:", error.message || error);
+    }
+  };
 
   const handleLocationClick = (location) => {
     window.open(
@@ -127,6 +261,7 @@ const EventDetailed = () => {
           </>
         )}
         <h3 style={{ color: "white", fontWeight: "bold" }}>Location</h3>
+        <div id="map" ref={mapRef} style={{ height: "300px" }}></div>
         <div>
           <span
             className="location-link"
