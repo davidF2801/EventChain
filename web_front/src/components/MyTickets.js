@@ -56,7 +56,7 @@ const MyTickets = () => {
   if (error) {
     return <img className="w-4 h-4 mr-auto" src={ErrorImage} alt="Error" />;
   }
-
+  //Easter egg
   // Function to determine if the signature cookie exists for a ticket
   const hasSignature = (ticketId, contractAddress) => {
     // Check for a cookie based on ticketId, adapt as necessary
