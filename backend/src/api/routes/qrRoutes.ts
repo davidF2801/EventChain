@@ -38,8 +38,19 @@ async function deleteAccessNumber(ticketId: number): Promise<void> {
 
 router.post('/', async (req, res) => {
   try {
-    const { ticketId, signature, currentNumber} = req.body;
+    const variable = req.body;
+    console.log(variable);
+    const ticketId = variable.ticketId;
+    const signature = variable.signature;
+    const currentNumber = variable.currentNumber;
+    const decimalValue = parseInt(signature, 16);
 
+    console.log('Decimal value:', decimalValue);
+
+
+    console.log('Ticket Id:', ticketId);
+    console.log('Signature: ', signature);
+    console.log('Current number: ', currentNumber);
     const ticket = await TicketModel.findOne({ ticketId });
 
     if (ticket?.accessNumber != currentNumber) {
@@ -47,9 +58,8 @@ router.post('/', async (req, res) => {
       return;
     }
 
-    const owner = await getTicketOwner(ticketId, ticket!.contractAddress)
-    
-    const isValid = TronWeb.Trx.verifyMessageV2(signature,ticket!.contractAddress);
+    //const owner = await getTicketOwner(ticketId, ticket!.contractAddress)
+    const isValid = TronWeb.Trx.verifyMessageV2(ticket!.contractAddress, signature);
 
     if (isValid){
       res.status(200).json({ message: 'User validated' });
