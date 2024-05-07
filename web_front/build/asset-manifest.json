@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8f4f0788.chunk.css",
+    "main.js": "/static/js/main.edf9d9e7.chunk.js",
+    "runtime-main.js": "/static/js/runtime-main.4b29ebfd.js",
+    "static/css/2.b60ed8cb.chunk.css": "/static/css/2.b60ed8cb.chunk.css",
+    "static/js/2.2f90a390.chunk.js": "/static/js/2.2f90a390.chunk.js",
+    "static/js/3.4fbcf1b7.chunk.js": "/static/js/3.4fbcf1b7.chunk.js",
+    "index.html": "/index.html",
+    "static/css/2.b60ed8cb.chunk.css.map": "/static/css/2.b60ed8cb.chunk.css.map",
+    "static/css/main.8f4f0788.chunk.css.map": "/static/css/main.8f4f0788.chunk.css.map",
+    "static/js/2.2f90a390.chunk.js.LICENSE.txt": "/static/js/2.2f90a390.chunk.js.LICENSE.txt",
+    "static/media/404.5f0e948f.png": "/static/media/404.5f0e948f.png",
+    "static/media/contact-img.4c8db84b.png": "/static/media/contact-img.4c8db84b.png",
+    "static/media/david.dd1373e0.jpeg": "/static/media/david.dd1373e0.jpeg",
+    "static/media/gokarna.c7d8379f.jpeg": "/static/media/gokarna.c7d8379f.jpeg",
+    "static/media/joel.36351a77.jpeg": "/static/media/joel.36351a77.jpeg",
+    "static/media/logo1.329e6c60.png": "/static/media/logo1.329e6c60.png",
+    "static/media/slick-theme.css": "/static/media/slick.c94f7671.ttf",
+    "static/media/user.2500a95c.png": "/static/media/user.2500a95c.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4b29ebfd.js",
+    "static/css/2.b60ed8cb.chunk.css",
+    "static/js/2.2f90a390.chunk.js",
+    "static/css/main.8f4f0788.chunk.css",
+    "static/js/main.edf9d9e7.chunk.js"
+  ]
+}
