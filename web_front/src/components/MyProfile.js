@@ -26,7 +26,7 @@ function MyProfile() {
           setLoading(true);
           console.log("isAuthenticated:", isAuthenticated);
           const response = await fetch(
-            "http://51.21.149.50:80/users/userInfo",
+            "https://51.21.149.50:443/users/userInfo",
             {
               method: "POST",
               headers: {

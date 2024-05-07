@@ -29,7 +29,7 @@ const EventGeneric = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        // const response = await fetch("http://51.21.149.50:80/events",{ headers: {
+        // const response = await fetch("https://51.21.149.50:80/events",{ headers: {
         //   'Authorization': 'Bearer ' + token,
         // }});
         const response = await fetch("https://51.21.149.50:443/events");
