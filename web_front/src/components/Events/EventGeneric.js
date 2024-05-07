@@ -10,6 +10,7 @@ const EventGeneric = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [loadingBuy, setLoadingBuy] = useState(false);
+  const [purchaseSuccess, setpurchaseSuccess] = useState(false);
   const [error, setError] = useState(null);
   const [redirectToError, setRedirectToError] = useState(false);
 
@@ -18,12 +19,14 @@ const EventGeneric = () => {
   const buyLoading = async (event, isAuthenticated) => {
     try {
       setLoadingBuy(true);
+      setpurchaseSuccess(false);
       await handleBuy(event, isAuthenticated); // Wait for the buying process to complete
     } catch (error) {
       console.error("Error buying tickets:", error);
       // Optionally handle errors, such as updating the UI to show an error message
     } finally {
       setLoadingBuy(false); // Ensure loading is turned off after the process completes or fails
+      setpurchaseSuccess(true);
     }
   };
   useEffect(() => {
@@ -101,14 +104,17 @@ const EventGeneric = () => {
                   Location: {event.location}
                 </p>
                 {isAuthenticated ? (
-                  <button
-                    className="event-button"
-                    onClick={() => buyLoading(event, isAuthenticated)}
-                  >
-                    {" "}
-                    {loadingBuy && <div>Buying Ticket...</div>}
-                    {!loadingBuy && <div>💸 Buy tickets</div>}
-                  </button>
+                  <div>
+                    <button
+                      className="event-button"
+                      onClick={() => buyLoading(event, isAuthenticated)}
+                    >
+                      {" "}
+                      {loadingBuy && <div>Buying Ticket...</div>}
+                      {!loadingBuy && <div>💸 Buy tickets</div>}
+                    </button>
+                    {purchaseSuccess && <div> Purchase finished</div>}
+                  </div>
                 ) : (
                   <Link to={"/login"}>
                     <button className="event-button"> 💸 Buy tickets</button>
