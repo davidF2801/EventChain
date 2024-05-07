@@ -4,6 +4,7 @@ import { MdOutlineFileUpload } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid"; // Importar uuid
 import useRequireAuth from "../authenticate_utils.js";
 import Cookies from "js-cookie";
+import { SERVER_ADDRESS } from "../constants.js";
 
 function EditProfile() {
   const isAuthenticated = useRequireAuth();
@@ -28,7 +29,7 @@ function EditProfile() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:8888/users/userInfo", {
+        const response = await fetch(`${SERVER_ADDRESS}/users/userInfo`, {
           method: "POST",
           headers: {
             Authorization: "Bearer " + isAuthenticated,
