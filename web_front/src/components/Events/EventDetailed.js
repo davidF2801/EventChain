@@ -61,7 +61,7 @@ const EventDetailed = () => {
             console.log(lat);
             console.log(lon);
             // Now initialize the map with these coordinates
-            const map = L.map(mapRef.current).setView([lat, lon], 14);
+            const map = L.map(mapRef.current).setView([lat, lon], 12);
             L.tileLayer(
               "https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=sUb7dqvLEI0JDY9r7PMY",
               {
@@ -76,9 +76,9 @@ const EventDetailed = () => {
             // Add a marker to the map at the geocoded location
             var myIcon = L.icon({
               iconUrl:
-                "https://th.bing.com/th/id/R.34b0808d15abff6e7fc5555bfaf1ba6c?rik=4Ng%2blOvpDhY8qg&pid=ImgRaw&r=0",
-              iconSize: [38, 95], // size of the icon
-              iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+                "https://cdn.icon-icons.com/icons2/2444/PNG/512/location_map_pin_mark_icon_148684.png",
+              iconSize: [40, 95], // size of the icon
+              iconAnchor: [42, 94], // point of the icon which will correspond to marker's location
               popupAnchor: [-3, -76], // point from which the popup should open relative to the iconAnchor
             });
 

@@ -92,7 +92,10 @@ const TicketDetailed = () => {
               includeMargin={true}
             />
           ) : null}
-          <button onClick={() => generateQRCode(ticketInfo)}>
+          <button
+            className="button-cool "
+            onClick={() => generateQRCode(ticketInfo)}
+          >
             Generate QR Code
           </button>
         </div>
