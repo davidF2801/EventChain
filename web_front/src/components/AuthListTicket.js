@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { listTicketForResale } from "./listTicketForResale";
 import "./Auth.css"; // Import the CSS file
+import { SERVER_ADDRESS } from "../constants";
+
 const AuthListTicket = () => {
   const [ticketPrice, setTicketPrice] = useState("");
   const location = useLocation();
