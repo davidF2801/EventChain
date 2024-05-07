@@ -4,7 +4,7 @@ import Error from "./images/404.png";
 import "./ticketResale.css";
 import handleBuy from "./components_utils";
 import useRequireAuth from "../authenticate_utils.js";
-
+import { SERVER_ADDRESS } from "../constants.js";
 const TicketResale = () => {
   const [data, setData] = useState(null);
   const [eventData, setEventData] = useState(null);
@@ -17,7 +17,7 @@ const TicketResale = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch("https://51.21.149.50:443/tickets/resale");
+        const response = await fetch(`${SERVER_ADDRESS}/tickets/resale`);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Login from "./Login";
 import { useNavigate } from "react-router-dom";
 import logo from "./images/logo1.png";
-
+import { SERVER_ADDRESS } from "../constants";
 function Registro() {
   const [username, setUsername] = useState("");
   const [surname, setSurname] = useState("");
@@ -53,7 +53,7 @@ function Registro() {
       profilePictureUrl: "", // assuming a URL or handling files separately
     };
 
-    fetch("https://51.21.149.50:443/users/", {
+    fetch(`${SERVER_ADDRESS}/users/`, {
       // Adjust URL if needed
       method: "POST",
       headers: {

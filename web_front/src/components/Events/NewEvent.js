@@ -6,7 +6,7 @@ import { MdOutlineFileUpload } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid"; // Importar uuid
 import useRequireAuth from "../../authenticate_utils.js";
 import Cookies from "js-cookie";
-
+import { SERVER_ADDRESS } from "../../constants.js";
 function NewEvent() {
   const isAuthenticated = useRequireAuth();
   useEffect(() => {
@@ -54,17 +54,14 @@ function NewEvent() {
 
   async function createEvent(eventData) {
     try {
-      const response = await fetch(
-        "https://51.21.149.50:443/events/createEvent",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ` + isAuthenticated,
-          },
-          body: JSON.stringify(eventData),
-        }
-      );
+      const response = await fetch(`${SERVER_ADDRESS}/events/createEvent`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ` + isAuthenticated,
+        },
+        body: JSON.stringify(eventData),
+      });
       const data = await response.json();
       console.log("CreateEvent response:", data);
       if (!response.ok) {

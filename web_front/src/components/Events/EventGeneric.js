@@ -5,6 +5,7 @@ import Error from "../images/404.png";
 import { buyTicket } from "../buyTicket.js";
 import useRequireAuth from "../../authenticate_utils.js";
 import handleBuy from "../components_utils.js";
+import { SERVER_ADDRESS } from "../../constants.js";
 const EventGeneric = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -32,7 +33,7 @@ const EventGeneric = () => {
         // const response = await fetch("https://51.21.149.50:80/events",{ headers: {
         //   'Authorization': 'Bearer ' + token,
         // }});
-        const response = await fetch("https://51.21.149.50:443/events");
+        const response = await fetch(`${SERVER_ADDRESS}/events`);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }

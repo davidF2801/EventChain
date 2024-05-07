@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useRequireAuth from "../authenticate_utils.js";
-
+import { SERVER_ADDRESS } from "../constants.js";
 const MyEvents = () => {
   const isAuthenticated = useRequireAuth();
   const [data, setData] = useState(null);
@@ -16,15 +16,12 @@ const MyEvents = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          "https://51.21.149.50:443/events/myevents",
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ` + isAuthenticated,
-            },
-          }
-        );
+        const response = await fetch(`${SERVER_ADDRESS}/events/myevents`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ` + isAuthenticated,
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }

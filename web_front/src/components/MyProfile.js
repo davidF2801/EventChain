@@ -5,7 +5,7 @@ import "./MyProfile.css";
 import useRequireAuth from "../authenticate_utils.js";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-
+import { SERVER_ADDRESS } from "../constants.js";
 function MyProfile() {
   const isAuthenticated = useRequireAuth();
   const [userData, setUserData] = useState(null);
@@ -25,15 +25,12 @@ function MyProfile() {
         try {
           setLoading(true);
           console.log("isAuthenticated:", isAuthenticated);
-          const response = await fetch(
-            "https://51.21.149.50:443/users/userInfo",
-            {
-              method: "POST",
-              headers: {
-                Authorization: "Bearer " + isAuthenticated,
-              },
-            }
-          );
+          const response = await fetch(`${SERVER_ADDRESS}/users/userInfo`, {
+            method: "POST",
+            headers: {
+              Authorization: "Bearer " + isAuthenticated,
+            },
+          });
           console.log("Response:", response);
           if (!response.ok) {
             throw new Error("Failed to fetch data");

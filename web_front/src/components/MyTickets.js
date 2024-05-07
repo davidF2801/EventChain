@@ -4,7 +4,7 @@ import ErrorImage from "./images/404.png";
 import "./Auth.css"; // Import CSS file
 import useRequireAuth from "../authenticate_utils.js";
 import Cookies from "js-cookie";
-
+import { SERVER_ADDRESS } from "../constants.js";
 const MyTickets = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,14 +25,11 @@ const MyTickets = () => {
         if (!token) {
           return;
         }
-        const response = await fetch(
-          "https://51.21.149.50:443/tickets/myTickets",
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
+        const response = await fetch(`${SERVER_ADDRESS}/tickets/myTickets`, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -86,7 +83,7 @@ const MyTickets = () => {
       navigate("/TicketDetailed", { state: ticketInfo });
     } catch (error) {
       console.error("Error buying ticket:", error.message || error);
-      setErrorMessage(error.message);
+      setError(error.message);
     }
   };
 

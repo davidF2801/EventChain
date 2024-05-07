@@ -5,7 +5,7 @@ import { MdOutlineFileUpload } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid"; // Importar uuid
 import useRequireAuth from "../authenticate_utils.js";
 import Cookies from "js-cookie";
-
+import { SERVER_ADDRESS } from "../constants.js";
 function EditProfile() {
   const isAuthenticated = useRequireAuth();
   const [data, setData] = useState(null);
@@ -25,15 +25,12 @@ function EditProfile() {
       try {
         setLoading(true);
         console.log("isAuthenticated:", isAuthenticated);
-        const response = await fetch(
-          "https://51.21.149.50:443/users/userInfo",
-          {
-            method: "POST",
-            headers: {
-              Authorization: "Bearer " + isAuthenticated,
-            },
-          }
-        );
+        const response = await fetch(`${SERVER_ADDRESS}/users/userInfo`, {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + isAuthenticated,
+          },
+        });
         console.log("Response:", response);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -59,17 +56,14 @@ function EditProfile() {
 
   async function updateUser(userData) {
     try {
-      const response = await fetch(
-        "https://51.21.149.50:443/users/updateUser",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + isAuthenticated,
-          },
-          body: JSON.stringify(userData),
-        }
-      );
+      const response = await fetch(`${SERVER_ADDRESS}/users/updateUser`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + isAuthenticated,
+        },
+        body: JSON.stringify(userData),
+      });
       const data = await response.json();
       console.log("User update response:", data);
       if (!response.ok) {

@@ -8,7 +8,7 @@ import useRequireAuth from "../../authenticate_utils.js";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import handleBuy from "../components_utils.js";
-
+import { SERVER_ADDRESS } from "../../constants.js";
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
   iconUrl: require("leaflet/dist/images/marker-icon.png"),
@@ -24,16 +24,13 @@ const EventDetailed = () => {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        const response = await fetch(
-          "https://51.21.149.50:443/events/details",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ title: title }),
-          }
-        );
+        const response = await fetch(`${SERVER_ADDRESS}/events/details`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ title: title }),
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch event details");
         }

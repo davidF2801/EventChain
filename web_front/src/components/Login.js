@@ -2,20 +2,19 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "./images/logo1.png";
 import Cookies from "js-cookie";
-
+import { SERVER_ADDRESS } from "../constants";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-
   async function loginUser(credentials) {
     try {
       if (!credentials.username && !credentials.password) {
         throw new Error("Error: Credentials missing.");
       }
-      const response = await fetch("https://51.21.149.50:443/login/login", {
+      const response = await fetch(`${SERVER_ADDRESS}/login/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

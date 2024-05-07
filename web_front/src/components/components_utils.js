@@ -1,6 +1,6 @@
 import { buyTicket } from "./buyTicket.js";
 import { resellTicket } from "./resellTicket.js";
-
+import { SERVER_ADDRESS } from "../constants.js";
 const handleBuy = async (eventInfo, isAuthenticated) => {
   try {
     if (!eventInfo.startDate) {
@@ -13,7 +13,7 @@ const handleBuy = async (eventInfo, isAuthenticated) => {
       }
       console.log(isAuthenticated);
       const updateResponse = await fetch(
-        "https://51.21.149.50:443/tickets/rebuyTicket",
+        `${SERVER_ADDRESS}/tickets/rebuyTicket`,
         {
           method: "PUT",
           headers: {
@@ -49,7 +49,7 @@ const handleBuy = async (eventInfo, isAuthenticated) => {
         contractAddress: eventInfo.contractAddress,
       };
       console.log(isAuthenticated);
-      fetch("https://51.21.149.50:443/tickets/createTicket", {
+      fetch(`${SERVER_ADDRESS}/tickets/createTicket`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

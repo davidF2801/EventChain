@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom"; // Import useLocation
 import QRCode from "react-qr-code";
 import "./TicketDetailed.css";
 import Cookies from "js-cookie";
-
+import { SERVER_ADDRESS } from "../constants";
 const TicketDetailed = () => {
   const numbers = [123, 456, 789, 101, 112]; // Example array of numbers
   const [currentIndex, setCurrentIndex] = useState(0); // State to track the current index of the array
@@ -20,7 +20,7 @@ const TicketDetailed = () => {
           ticketInfo.ticketId
         );
         const response = await fetch(
-          "https://51.21.149.50:443/validation/requestNumber",
+          `${SERVER_ADDRESS}/validation/requestNumber`,
           {
             method: "POST",
             headers: {

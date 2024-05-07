@@ -43,7 +43,7 @@ const Auth = () => {
           eventInfo.ticketId
         );
         const updateResponse = await fetch(
-          "https://51.21.149.50:443/tickets/rebuyTicket",
+          "${SERVER_ADDRESS}/tickets/rebuyTicket",
           {
             method: "PUT",
             headers: {
@@ -81,7 +81,7 @@ const Auth = () => {
           contractAddress: eventInfo.contractAddress,
         };
         console.log(isAuthenticated);
-        fetch("https://51.21.149.50:443/tickets/createTicket", {
+        fetch("${SERVER_ADDRESS}/tickets/createTicket", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
