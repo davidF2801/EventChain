@@ -13,6 +13,7 @@ const EventGeneric = () => {
   const [purchaseSuccess, setpurchaseSuccess] = useState(false);
   const [error, setError] = useState(null);
   const [redirectToError, setRedirectToError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false); // Add this state variable
 
   const isAuthenticated = useRequireAuth();
 
@@ -20,15 +21,24 @@ const EventGeneric = () => {
     try {
       setLoadingBuy(true);
       setpurchaseSuccess(false);
-      await handleBuy(event, isAuthenticated); // Wait for the buying process to complete
+      setErrorMessage(""); // Clear any previous error message
+
+      const result = await handleBuy(event, isAuthenticated); // Wait for the buying process to complete
+
+      // Check the result of handleBuy to ensure it was successful
+      if (result && result.success) {
+        setpurchaseSuccess(true); // Set success to true only if the purchase completes successfully
+      } else {
+        throw new Error("Purchase failed"); // Handle the case where handleBuy does not throw but purchase still fails
+      }
     } catch (error) {
       console.error("Error buying tickets:", error);
-      // Optionally handle errors, such as updating the UI to show an error message
+      setErrorMessage("Error buying tickets. Please try again."); // Set the error message
     } finally {
       setLoadingBuy(false); // Ensure loading is turned off after the process completes or fails
-      setpurchaseSuccess(true);
     }
   };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -109,15 +119,22 @@ const EventGeneric = () => {
                       className="event-button"
                       onClick={() => buyLoading(event, isAuthenticated)}
                     >
-                      {" "}
                       {loadingBuy && <div>Buying Ticket...</div>}
                       {!loadingBuy && <div>💸 Buy tickets</div>}
                     </button>
-                    {purchaseSuccess && <div> Purchase finished</div>}
+                    {purchaseSuccess && (
+                      <div className="success-message">Purchase finished</div>
+                    )}
+                    {errorMessage && (
+                      <div className="error-message">
+                        Error buying tickets. Please try again.
+                      </div>
+                    )}{" "}
+                    {/* Display error message */}
                   </div>
                 ) : (
                   <Link to={"/login"}>
-                    <button className="event-button"> 💸 Buy tickets</button>
+                    <button className="event-button">💸 Buy tickets</button>
                   </Link>
                 )}
               </div>

@@ -61,6 +61,7 @@ const handleBuy = async (eventInfo, isAuthenticated) => {
         .then((data) => {
           if (data.success) {
             console.log("Ticket created successfully:", data);
+            return { success: true };
           } else {
             throw new Error(data.error || "Failed to create ticket");
           }
@@ -71,6 +72,7 @@ const handleBuy = async (eventInfo, isAuthenticated) => {
     }
   } catch (error) {
     console.error("Error buying ticket:", error.message || error);
+    return { success: false, error };
   }
 };
 
