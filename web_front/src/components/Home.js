@@ -123,7 +123,7 @@ const Home = () => {
                 >
                   Location: {event.location}
                 </p>
-                <Link to="/auth">
+                <Link to={`/eventdetailed/${event.title}`} state={event}>
                   <button className="button-cool" style={{ marginLeft: 0 }}>
                     Buy Tickets
                   </button>
