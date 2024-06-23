@@ -2,7 +2,6 @@ export const buyTicket = async (contractAddress) => {
   console.log("Buying ticket...");
   console.log("Contract Address:", contractAddress);
   const tronWebInst = window.tronWeb;
-  console.log(tronWebInst);
   const contractInstance = await tronWebInst.contract().at(contractAddress);
 
   const ticketPrice = await contractInstance.ticketPrice().call();

@@ -1,51 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./EventGeneric.css";
-import Error from "../images/404.png";
-import { buyTicket } from "../buyTicket.js";
+import errorImage from "../images/404.png";
 import useRequireAuth from "../../authenticate_utils.js";
 import handleBuy from "../components_utils.js";
 import { SERVER_ADDRESS } from "../../constants.js";
+
 const EventGeneric = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [loadingBuy, setLoadingBuy] = useState(false);
-  const [purchaseSuccess, setpurchaseSuccess] = useState(false);
   const [error, setError] = useState(null);
   const [redirectToError, setRedirectToError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false); // Add this state variable
-
+  const [loadingBuy, setLoadingBuy] = useState({});
+  const [purchaseSuccess, setPurchaseSuccess] = useState({});
+  const [errorMessage, setErrorMessage] = useState({});
   const isAuthenticated = useRequireAuth();
-
-  const buyLoading = async (event, isAuthenticated) => {
-    try {
-      setLoadingBuy(true);
-      setpurchaseSuccess(false);
-      setErrorMessage(""); // Clear any previous error message
-
-      const result = await handleBuy(event, isAuthenticated); // Wait for the buying process to complete
-
-      // Check the result of handleBuy to ensure it was successful
-      if (result && result.success) {
-        setpurchaseSuccess(true); // Set success to true only if the purchase completes successfully
-      } else {
-        throw new Error("Purchase failed"); // Handle the case where handleBuy does not throw but purchase still fails
-      }
-    } catch (error) {
-      console.error("Error buying tickets:", error);
-      setErrorMessage("Error buying tickets. Please try again."); // Set the error message
-    } finally {
-      setLoadingBuy(false); // Ensure loading is turned off after the process completes or fails
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
-        // const response = await fetch("https://51.21.149.50:80/events",{ headers: {
-        //   'Authorization': 'Bearer ' + token,
-        // }});
         const response = await fetch(`${SERVER_ADDRESS}/events`);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -53,34 +26,77 @@ const EventGeneric = () => {
         const jsonData = await response.json();
         console.log("Events:", jsonData);
         setData(jsonData);
+
+        // Initializing states based on fetched data
+        const initialLoadingBuy = {};
+        const initialPurchaseSuccess = {};
+        const initialErrorMessage = {};
+        jsonData.forEach((_, index) => {
+          initialLoadingBuy[index] = false;
+          initialPurchaseSuccess[index] = false;
+          initialErrorMessage[index] = "";
+        });
+        setLoadingBuy(initialLoadingBuy);
+        setPurchaseSuccess(initialPurchaseSuccess);
+        setErrorMessage(initialErrorMessage);
       } catch (error) {
         setError(error);
-        setRedirectToError(true); // Establecer redirectToError a true en caso de error
+        setRedirectToError(true);
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-
-    return () => {};
   }, [isAuthenticated]);
 
+  const buyLoading = async (event, index) => {
+    try {
+      setLoadingBuy((prev) => ({ ...prev, [index]: true }));
+      setPurchaseSuccess((prev) => ({ ...prev, [index]: false }));
+      setErrorMessage((prev) => ({ ...prev, [index]: "" }));
+
+      const result = await handleBuy(event, isAuthenticated);
+      if (result && !result.success) {
+        setErrorMessage((prev) => ({
+          ...prev,
+          [index]: "Error buying tickets. Please try again.",
+        }));
+      } else {
+        setPurchaseSuccess((prev) => ({ ...prev, [index]: true }));
+      }
+    } catch (error) {
+      console.error("Error buying tickets:", error);
+      setErrorMessage((prev) => ({
+        ...prev,
+        [index]: "Error buying tickets. Please try again.",
+      }));
+    } finally {
+      setLoadingBuy((prev) => ({ ...prev, [index]: false }));
+    }
+  };
+
   if (redirectToError) {
-    return <img className="w-4 h-4 mr-auto" src={Error} alt="logo" />;
+    return <img className="w-4 h-4 mr-auto" src={errorImage} alt="Error" />;
+  }
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return (
+      <div>
+        <h1>Error: {error.message}</h1>
+      </div>
+    );
   }
 
   return (
     <div className="full-screen-container">
-      <h1 className=" container mx-auto p-8 heading text-3xl font-bold mb-2 mt-4">
+      <h1 className="container mx-auto p-8 heading text-3xl font-bold mb-2 mt-4">
         All Events
       </h1>
-      {loading && <div>Loading...</div>}
-      {error && (
-        <div>
-          <h1>Error: {error.message}</h1>
-        </div>
-      )}
       {data && (
         <div className="grid grid-cols-3 gap-4">
           {data.map((event, index) => (
@@ -91,51 +107,33 @@ const EventGeneric = () => {
                   alt={event.title}
                   className="event-image"
                 />
-                {/* Enlace al detalle del evento con el ID */}
                 <Link to={`/eventdetailed/${event.title}`} state={event}>
-                  <h2
-                    className="event-title"
-                    style={{ textDecoration: "none !important" }}
-                  >
-                    {event.title}
-                  </h2>
+                  <h2 className="event-title">{event.title}</h2>
                 </Link>
                 <p>
-                  <span role="img" aria-label="Calendar">
-                    🗓
-                  </span>{" "}
-                  Date: {formatDate(event.startDate)} -{" "}
+                  🗓 Date: {formatDate(event.startDate)} -{" "}
                   {formatDate(event.endDate)}
                 </p>
-                <p>
-                  <span role="img" aria-label="Location">
-                    📍
-                  </span>{" "}
-                  Location: {event.location}
-                </p>
-                {isAuthenticated ? (
+                <p>📍 Location: {event.location}</p>
+                {isAuthenticated && (
                   <div>
                     <button
                       className="event-button"
-                      onClick={() => buyLoading(event, isAuthenticated)}
+                      onClick={() => buyLoading(event, index)}
                     >
-                      {loadingBuy && <div>Buying Ticket...</div>}
-                      {!loadingBuy && <div>💸 Buy tickets</div>}
+                      {loadingBuy[index]
+                        ? "Buying Ticket... Please wait."
+                        : "💸 Buy tickets"}
                     </button>
-                    {purchaseSuccess && (
-                      <div className="success-message">Purchase finished</div>
-                    )}
-                    {errorMessage && (
-                      <div className="error-message">
-                        Error buying tickets. Please try again.
+                    {purchaseSuccess[index] && (
+                      <div className="success-message">
+                        Purchase finished successfully
                       </div>
-                    )}{" "}
-                    {/* Display error message */}
+                    )}
+                    {errorMessage[index] && (
+                      <div className="error-message">{errorMessage[index]}</div>
+                    )}
                   </div>
-                ) : (
-                  <Link to={"/login"}>
-                    <button className="event-button">💸 Buy tickets</button>
-                  </Link>
                 )}
               </div>
             </div>
