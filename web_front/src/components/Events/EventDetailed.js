@@ -27,15 +27,16 @@ const EventDetailed = () => {
     try {
       setLoadingBuy(true);
       setpurchaseSuccess(false);
-      setErrorMessage(""); // Clear any previous error message
+      setErrorMessage(false); // Clear any previous error message
 
       const result = await handleBuy(event, isAuthenticated); // Wait for the buying process to complete
 
       // Check the result of handleBuy to ensure it was successful
-      if (result && result.success) {
-        setpurchaseSuccess(true); // Set success to true only if the purchase completes successfully
+      if (result && !result.success) {
+        setErrorMessage(false);
+        // Set success to true only if the purchase completes successfully
       } else {
-        throw new Error("Purchase failed"); // Handle the case where handleBuy does not throw but purchase still fails
+        setpurchaseSuccess(true);
       }
     } catch (error) {
       console.error("Error buying tickets:", error);
@@ -229,11 +230,13 @@ const EventDetailed = () => {
               className="button"
               onClick={() => buyLoading(eventData, isAuthenticated)}
             >
-              {loadingBuy && <div>Buying Ticket...</div>}
+              {loadingBuy && <div>Buying Ticket... Please wait.</div>}
               {!loadingBuy && <div>💸 Buy tickets</div>}
             </button>
             {purchaseSuccess && (
-              <div className="success-message">Purchase finished</div>
+              <div className="success-message">
+                Purchase finished successfully
+              </div>
             )}
             {errorMessage && (
               <div className="error-message">
