@@ -6,7 +6,7 @@ import { MdOutlineFileUpload } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid"; // Importar uuid
 import useRequireAuth from "../../authenticate_utils.js";
 import Cookies from "js-cookie";
-import { SERVER_ADDRESS } from "../../constants.js";
+import { SERVER_ADDRESS, TRON_ADDRESS, EVENT_FEE } from "../../constants.js";
 function NewEvent() {
   const isAuthenticated = useRequireAuth();
   useEffect(() => {
@@ -38,6 +38,7 @@ function NewEvent() {
   const [resaleFee, setResaleFee] = useState("");
   const [image, setImage] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const [loadingBuy, setLoadingBuy] = useState(false);
   const navigate = useNavigate();
 
   const handleFileChange = (event) => {
@@ -53,7 +54,30 @@ function NewEvent() {
   };
 
   async function createEvent(eventData) {
+    const eventCreationFee = EVENT_FEE;
+
     try {
+      const tronWebInst = window.tronWeb;
+      const userAddress = tronWebInst.defaultAddress.base58;
+      const backendAddress = TRON_ADDRESS;
+
+      // Send the event creation fee to the backend address
+      const transaction = await tronWebInst.transactionBuilder.sendTrx(
+        backendAddress,
+        eventCreationFee,
+        userAddress
+      );
+
+      const signedTransaction = await tronWebInst.trx.sign(transaction);
+      const broadcast = await tronWebInst.trx.sendRawTransaction(
+        signedTransaction
+      );
+
+      if (!broadcast.result) {
+        throw new Error("Transaction failed");
+      }
+
+      // Proceed with the event creation process
       const response = await fetch(`${SERVER_ADDRESS}/events/createEvent`, {
         method: "POST",
         headers: {
@@ -62,18 +86,21 @@ function NewEvent() {
         },
         body: JSON.stringify(eventData),
       });
+
       const data = await response.json();
       console.log("CreateEvent response:", data);
+
       if (!response.ok) {
         throw new Error("Create event failed");
       }
+
       console.log("Event created successfully:", eventData);
       setEventSaved(true);
       navigate("/");
     } catch (error) {
       console.error("Error creating event:", error);
       setError(true);
-      setErrorMessage("Error creating event. Please try again."); // Establecer un mensaje de error genérico
+      setErrorMessage("Error creating event. Please try again.");
     }
   }
 
@@ -83,6 +110,8 @@ function NewEvent() {
     // Reset error state
     setError(false);
     setErrorMessage("");
+    setLoadingBuy(true); // Set loading state
+    setEventSaved(false); // Reset event saved state
 
     // Validation of fields
     if (
@@ -322,9 +351,20 @@ function NewEvent() {
               </div>
             </>
           )}
+          <p className="warning-message">
+            Transactions in TRON network cost money, in order to post your event
+            and deploy it as a new smart contract, we charge a fee of 500 TRX.
+            If you have any problems with the payment, send an email to
+            eventchaininfo@gmail.com{" "}
+          </p>
           <button className="button" type="submit" onClick={handleSaveEvent}>
-            Save Event
+            {loadingBuy && <div>Posting Event... Please wait.</div>}
+            {!loadingBuy && <div>Pay and post Event</div>}
           </button>
+          {eventSaved && (
+            <div className="success-message">Event created successfully.</div>
+          )}
+          {error && <div className="error-message">{errorMessage}</div>}
         </form>
       )}
     </div>

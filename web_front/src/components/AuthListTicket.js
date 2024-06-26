@@ -81,7 +81,11 @@ const AuthListTicket = () => {
           </button>
         </div>
       </form>
-      {loading && <p>Listing your ticket for resale, please wait...</p>}
+      {loading && (
+        <p className="warning-message">
+          Listing your ticket for resale, please wait...
+        </p>
+      )}
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       {successMessage && <p className="success-message">{successMessage}</p>}
     </div>
