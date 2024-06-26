@@ -14,10 +14,17 @@
 .error-message {
   color: red;
   margin-top: 10px;
+  font-weight: bold;
 }
 .success-message {
-  color: green;
+  color: #32cd32;
   margin-top: 10px;
+  font-weight: bold;
+}
+.warning-message {
+  color: yellow;
+  margin-top: 10px;
+  font-weight: bold;
 }
 .event-container,
 .event-container2 {
