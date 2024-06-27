@@ -207,7 +207,7 @@ const EventDetailed = () => {
         <p
           style={{ marginBottom: "10px", fontWeight: "bold", color: "#FFFF00" }}
         >
-          Blockchain address: {contractAddress}
+          Contract address: {contractAddress}
         </p>
         {eventData.allowResale && (
           <>
