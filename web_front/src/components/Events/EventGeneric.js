@@ -123,7 +123,7 @@ const EventGeneric = () => {
                     >
                       {loadingBuy[index]
                         ? "Buying Ticket... Please wait."
-                        : "💸 Buy tickets"}
+                        : "💸 Buy tickets with Tron Link"}
                     </button>
                     {purchaseSuccess[index] && (
                       <div className="success-message">

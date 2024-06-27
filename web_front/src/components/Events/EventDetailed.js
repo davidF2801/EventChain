@@ -218,7 +218,7 @@ const EventDetailed = () => {
                 color: "#33cccc",
               }}
             >
-              Resale Fee: {eventData.resaleFee}
+              Resale Fee: {eventData.resaleFee} %
             </p>
           </>
         )}
@@ -241,7 +241,7 @@ const EventDetailed = () => {
               onClick={() => buyLoading(eventData, isAuthenticated)}
             >
               {loadingBuy && <div>Buying Ticket... Please wait.</div>}
-              {!loadingBuy && <div>💸 Buy tickets</div>}
+              {!loadingBuy && <div>💸 Buy tickets with Tron Link</div>}
             </button>
             {purchaseSuccess && (
               <div className="success-message">

@@ -357,10 +357,10 @@ function NewEvent() {
             </>
           )}
           <p className="warning-message">
-            Transactions in TRON network cost money, in order to post your event
-            and deploy it as a new smart contract, we charge a fee of 500 TRX.
-            If you have any problems with the payment, send an email to
-            eventchaininfo@gmail.com{" "}
+            Posting an event and deploying it as a smart contract on the TRON
+            network incurs a 500 TRX fee. Please install the TronLink extension
+            to process the payment. For assistance, email us at
+            eventchaininfo@gmail.com.
           </p>
           <button className="button" type="submit" onClick={handleSaveEvent}>
             {loadingBuy && <div>Posting Event... Please wait.</div>}
