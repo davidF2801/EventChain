@@ -202,12 +202,12 @@ const EventDetailed = () => {
         <p
           style={{ marginBottom: "10px", fontWeight: "bold", color: "#ff3399" }}
         >
-          Number of Tickets: {eventData.nTickets} tickets
+          Number of Tickets Available: {eventData.nTickets} tickets
         </p>
         <p
           style={{ marginBottom: "10px", fontWeight: "bold", color: "#FFFF00" }}
         >
-          Contract address: {contractAddress}
+          Contract Address: {contractAddress}
         </p>
         {eventData.allowResale && (
           <>
