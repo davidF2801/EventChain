@@ -39,6 +39,7 @@ function NewEvent() {
   const [image, setImage] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const [loadingBuy, setLoadingBuy] = useState(false);
+  const [contractAddress, setContractAddress] = useState("");
   const navigate = useNavigate();
 
   const handleFileChange = (event) => {
@@ -93,10 +94,10 @@ function NewEvent() {
       if (!response.ok) {
         throw new Error("Create event failed");
       }
-
+      console.log(response);
+      setContractAddress(tronWebInst.address.fromHex(data.contractAddress));
       console.log("Event created successfully:", eventData);
       setEventSaved(true);
-      navigate("/");
     } catch (error) {
       console.error("Error creating event:", error);
       setError(true);
@@ -202,7 +203,11 @@ function NewEvent() {
   return (
     <div className="container">
       {!eventSaved && <h2 className="heading">New Event</h2>}
-      {eventSaved && <h2 className="saved">Event Saved Successfully</h2>}
+      {eventSaved && (
+        <h2 className="success-message">
+          Event created successfully at TRON address: {contractAddress}
+        </h2>
+      )}
       {error && <h3 className="failed">{errorMessage}</h3>}{" "}
       {/* Mostrar el mensaje de error */}
       {!eventSaved && (
@@ -362,7 +367,9 @@ function NewEvent() {
             {!loadingBuy && <div>Pay and post Event</div>}
           </button>
           {eventSaved && (
-            <div className="success-message">Event created successfully.</div>
+            <div className="success-message">
+              Event created successfully at the TRON address: {contractAddress}
+            </div>
           )}
           {error && <div className="error-message">{errorMessage}</div>}
         </form>

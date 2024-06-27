@@ -23,6 +23,7 @@ const EventDetailed = () => {
   const [errorMessage, setErrorMessage] = useState(false); // Add this state variable
   const [loadingBuy, setLoadingBuy] = useState(false);
   const [purchaseSuccess, setpurchaseSuccess] = useState(false);
+  const [contractAddress, setContractAddress] = useState("");
   const buyLoading = async (event, isAuthenticated) => {
     try {
       setLoadingBuy(true);
@@ -59,6 +60,10 @@ const EventDetailed = () => {
           throw new Error("Failed to fetch event details");
         }
         const eventData = await response.json();
+        const tronWebInst = window.tronWeb;
+        setContractAddress(
+          tronWebInst.address.fromHex(eventData.contractAddress)
+        );
         setEventData(eventData);
       } catch (error) {
         setError(error.message);
@@ -198,6 +203,11 @@ const EventDetailed = () => {
           style={{ marginBottom: "10px", fontWeight: "bold", color: "#ff3399" }}
         >
           Number of Tickets: {eventData.nTickets}
+        </p>
+        <p
+          style={{ marginBottom: "10px", fontWeight: "bold", color: "#FFFF00" }}
+        >
+          Blockchain address: {contractAddress}
         </p>
         {eventData.allowResale && (
           <>
