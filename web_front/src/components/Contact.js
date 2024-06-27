@@ -40,11 +40,11 @@ const Contact = () => {
             <h2 className="text-xl font-semibold mb-2">Contact Information</h2>
             <p className="mb-4 flex items-center text-blue-500">
               <CgPhone className="mr-2 text-3xl" />
-              +34 612345678
+              +34 648407050
             </p>
             <p className="mb-4 flex items-center text-blue-500">
               <CgMail className="mr-2 text-3xl" />
-              info@eventchain.com
+              eventchaininfo@gmail.com
             </p>
             <p className="mb-4 flex items-center text-blue-500">
               <AiOutlineEnvironment className="mr-2 text-3xl" />
