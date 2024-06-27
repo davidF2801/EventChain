@@ -197,12 +197,12 @@ const EventDetailed = () => {
         <p
           style={{ marginBottom: "10px", fontWeight: "bold", color: "#ff33cc" }}
         >
-          Price: {eventData.price}
+          Price: {eventData.price} TRX
         </p>
         <p
           style={{ marginBottom: "10px", fontWeight: "bold", color: "#ff3399" }}
         >
-          Number of Tickets: {eventData.nTickets}
+          Number of Tickets: {eventData.nTickets} tickets
         </p>
         <p
           style={{ marginBottom: "10px", fontWeight: "bold", color: "#FFFF00" }}
