@@ -26,9 +26,9 @@ import TronWeb from "tronweb";
 import TicketDetailed from "./components/TicketDetailed.js";
 import AuthSignature from "./components/AuthSignature.js";
 const mainOptions = {
-  fullNode: "https://api.shasta.trongrid.io/",
-  solidityNode: "https://api.shasta.trongrid.io/",
-  eventServer: "https://api.shasta.trongrid.io/",
+  fullNode: "https://api.trongrid.io/",
+  solidityNode: "https://api.trongrid.io/",
+  eventServer: "https://api.trongrid.io/",
 };
 
 const privateKey = "";
