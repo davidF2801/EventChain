@@ -64,10 +64,10 @@ const AuthListTicket = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1>Introduce your TRON wallet</h1>
+      <h1>Introduce New Ticket Price</h1>
       <form onSubmit={handleLogin} className="container mx-auto p-4">
         <div className="input-group">
-          <label htmlFor="newTicketPrice">New ticket price:</label>
+          <label htmlFor="newTicketPrice">New ticket price (TRX):</label>
           <input
             type="text"
             id="newTicketPrice"
